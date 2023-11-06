@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "720317693587",
+    "firebase_url": "https://pro1121-nhom3-default-rtdb.firebaseio.com",
+    "project_id": "pro1121-nhom3",
+    "storage_bucket": "pro1121-nhom3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720317693587:android:fe54175224f5a18f5a5766",
+        "android_client_info": {
+          "package_name": "com.example.pro1121_nhom3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtpk38YKuq01PndZaXQBWYKwJBTaXxkX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
