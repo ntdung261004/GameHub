@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="newsfeed"
+        android:id="@+id/nf"
+        android:icon="@drawable/newsfeed" />
+    <item
+        android:title="wishlist"
+        android:id="@+id/wl"
+        android:icon="@drawable/wishlist" />
+    <item
+        android:title="cart"
+        android:id="@+id/c"
+        android:icon="@drawable/cart" />
+    <item
+        android:title="profile"
+        android:id="@+id/pf"
+        android:icon="@drawable/profile" />
+</menu>
