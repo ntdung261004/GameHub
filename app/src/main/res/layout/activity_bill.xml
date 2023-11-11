@@ -7,40 +7,49 @@
     tools:context=".model.User"
     android:background="@color/black">
 
-    <RelativeLayout
-        android:id="@+id/user_bar"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bill_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="#565656">
+        android:background="#424242"
+        android:layout_height="50dp">
 
         <ImageView
-            android:id="@+id/back_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/back" />
+            android:id="@+id/ivMenuBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:src="@mipmap/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/user_text"
+            android:id="@+id/tvMenuBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="BILL"
+            android:text="MENU"
+            android:textSize="18dp"
+            android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivMenuAvt"
+            app:layout_constraintStart_toEndOf="@+id/ivMenuBack"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:src="@mipmap/avt2" />
-    </RelativeLayout>
+            android:id="@+id/ivMenuAvt"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/avt" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerviewuser"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/user_bar"/>
+        android:layout_below="@id/bill_bar"/>
 </RelativeLayout>
