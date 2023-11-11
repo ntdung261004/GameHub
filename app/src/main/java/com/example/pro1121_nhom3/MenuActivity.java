@@ -7,18 +7,11 @@ import android.os.Bundle;
 
 public class MenuActivity extends AppCompatActivity {
 
-    Toolbar toolbarMenu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        toolbarMenu = findViewById(R.id.toolbarMenu);
-        setSupportActionBar(toolbarMenu);
-        getSupportActionBar().setTitle("MENU");
-        getSupportActionBar().setLogo(R.mipmap.avt);
-
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
 
     }
 }
