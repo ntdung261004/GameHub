@@ -1,12 +1,10 @@
-package com.example.pro1121_nhom3.model;
+package com.example.pro1121_nhom3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.pro1121_nhom3.R;
-
-public class BILL extends AppCompatActivity {
+public class BillActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

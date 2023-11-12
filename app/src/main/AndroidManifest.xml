@@ -28,13 +28,13 @@
             android:name=".profile"
             android:exported="false" />
         <activity
-            android:name=".model.BILL"
+            android:name=".BillActivity"
             android:exported="false" />
         <activity
-            android:name=".model.Game"
+            android:name=".Game"
             android:exported="false" />
         <activity
-            android:name=".model.User"
+            android:name=".UserActivity"
             android:exported="false" />
         <activity
             android:name=".AdminActivity"

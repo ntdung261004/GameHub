@@ -1,4 +1,4 @@
-package com.example.pro1121_nhom3.model;
+package com.example.pro1121_nhom3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
