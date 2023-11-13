@@ -1,4 +1,4 @@
-package com.example.pro1121_nhom3;
+package com.example.pro1121_nhom3.fragment;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.adapter.gameAdapter;
 import com.example.pro1121_nhom3.dao.gameDAO;
 import com.example.pro1121_nhom3.model.game;
