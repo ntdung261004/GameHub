@@ -18,9 +18,7 @@
         <activity
             android:name=".MenuActivity"
             android:exported="true" />
-        <activity
-            android:name=".profile"
-            android:exported="false" />
+
         <activity
             android:name=".BillActivity"
             android:exported="false" />

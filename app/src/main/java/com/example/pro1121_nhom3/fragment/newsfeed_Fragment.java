@@ -46,7 +46,7 @@ public class newsfeed_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_newsfeed_, container, false);
 
         GameDAO = new gameDAO(getActivity());
-        rcvAllgame = view.findViewById(R.id.rcvAllGame);
+        //rcvAllgame = view.findViewById(R.id.rcvAllGame);
         listGame = new ArrayList<>();
 
         InitUI();
