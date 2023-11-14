@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#2b2b2b"
     android:orientation="vertical"
-    tools:context=".Wishlist">
+    tools:context=".fragment.cart_Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
