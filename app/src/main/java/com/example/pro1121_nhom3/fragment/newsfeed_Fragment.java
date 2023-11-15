@@ -2,6 +2,7 @@ package com.example.pro1121_nhom3.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,11 @@ import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.adapter.gameAdapter;
 import com.example.pro1121_nhom3.dao.gameDAO;
 import com.example.pro1121_nhom3.model.game;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.TooManyListenersException;
@@ -58,8 +64,9 @@ public class newsfeed_Fragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         rcvAllgame.setLayoutManager(linearLayoutManager);
-        gameAdapter allgameAdapter = new gameAdapter(listGame, getActivity());
+        gameAdapter allgameAdapter = new gameAdapter(listGame, getActivity(),R.layout.item_game);
         allgameAdapter.getAllGame(listGame);
         rcvAllgame.setAdapter(allgameAdapter);
     }
+
 }

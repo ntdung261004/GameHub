@@ -25,18 +25,20 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
 
     private ArrayList<game> listGame;
     private Context context;
+    private int layout;
 
-    public gameAdapter(ArrayList<game> listGame, Context context)
+    public gameAdapter(ArrayList<game> listGame, Context context, int layout)
     {
         this.listGame = listGame;
         this.context = context;
+        this.layout = layout;
     }
 
     @NonNull
     @Override
     public gameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_game, parent, false);
+        View view = inflater.inflate(layout, parent, false);
         return new gameViewHolder(view);
     }
 
@@ -71,13 +73,15 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
         private TextView nhaph;
         private TextView giaban;
         private TextView tenloai;
+        private TextView ngayph;
 
         public gameViewHolder(@NonNull View itemView) {
             super(itemView);
             tvten = itemView.findViewById(R.id.tvtengame);
             nhaph = itemView.findViewById(R.id.tvnph);
-            giaban = itemView.findViewById(R.id.tvgiaban);
             tenloai = itemView.findViewById(R.id.tvloaigame);
+            giaban = itemView.findViewById(R.id.tvgiaban);
+
         }
     }
 
@@ -106,6 +110,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
         });
 
     }
+
 
 
 }

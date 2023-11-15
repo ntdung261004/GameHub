@@ -26,28 +26,5 @@ public class gameDAO {
     }
 
 
-    public void getAllGame(ArrayList<game> listGame)
-    {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference("game");
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for(DataSnapshot data : snapshot.getChildren())
-                {
-                    game game1 = data.getValue(game.class);
-                    listGame.add(game1);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
 }
