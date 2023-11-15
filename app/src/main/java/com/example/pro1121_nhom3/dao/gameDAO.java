@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class gameDAO {
 
-    gameAdapter gameadt;
     Context context;
 
     public gameDAO(Context context)
@@ -31,7 +30,6 @@ public class gameDAO {
     {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference("game");
-        gameadt = new gameAdapter(listGame, context);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -39,11 +37,10 @@ public class gameDAO {
 
                 for(DataSnapshot data : snapshot.getChildren())
                 {
-                    game game = data.getValue(game.class);
-                    listGame.add(game);
+                    game game1 = data.getValue(game.class);
+                    listGame.add(game1);
                 }
 
-                gameadt.notifyDataSetChanged();
             }
 
             @Override

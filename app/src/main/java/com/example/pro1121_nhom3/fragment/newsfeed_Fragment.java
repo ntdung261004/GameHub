@@ -1,4 +1,4 @@
-package com.example.pro1121_nhom3;
+package com.example.pro1121_nhom3.fragment;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.adapter.gameAdapter;
 import com.example.pro1121_nhom3.dao.gameDAO;
 import com.example.pro1121_nhom3.model.game;
@@ -45,11 +46,10 @@ public class newsfeed_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_newsfeed_, container, false);
 
         GameDAO = new gameDAO(getActivity());
-        //rcvAllgame = view.findViewById(R.id.rcvAllGame);
+        rcvAllgame = view.findViewById(R.id.rcvAllgame);
         listGame = new ArrayList<>();
 
         InitUI();
-        GameDAO.getAllGame(listGame);
         return view;
     }
 
@@ -59,6 +59,7 @@ public class newsfeed_Fragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         rcvAllgame.setLayoutManager(linearLayoutManager);
         gameAdapter allgameAdapter = new gameAdapter(listGame, getActivity());
+        allgameAdapter.getAllGame(listGame);
         rcvAllgame.setAdapter(allgameAdapter);
     }
 }

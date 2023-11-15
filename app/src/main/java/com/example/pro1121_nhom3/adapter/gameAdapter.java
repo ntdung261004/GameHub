@@ -12,6 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.model.game;
+import com.example.pro1121_nhom3.model.nguoidung;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -74,4 +80,32 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
             tenloai = itemView.findViewById(R.id.tvloaigame);
         }
     }
+
+    public void getAllGame(ArrayList<game> listGame)
+    {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference("game");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot data : snapshot.getChildren())
+                {
+                    game game1 = data.getValue(game.class);
+                    listGame.add(game1);
+                }
+
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+
 }

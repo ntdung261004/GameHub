@@ -8,17 +8,21 @@ public class game {
     private float giaban;
     private int image;
     private loaigame loaigame;
+    private String mota;
+    private int likecount;
 
     public game() {
     }
 
-    public game(int magame, String tengame, String nph, float giaban, int image, loaigame loaigame) {
+    public game(int magame, String tengame, String nph, float giaban, int image, com.example.pro1121_nhom3.model.loaigame loaigame, String mota, int likecount) {
         this.magame = magame;
         this.tengame = tengame;
         this.nph = nph;
         this.giaban = giaban;
         this.image = image;
         this.loaigame = loaigame;
+        this.mota = mota;
+        this.likecount = likecount;
     }
 
     public int getMagame() {
@@ -61,23 +65,27 @@ public class game {
         this.image = image;
     }
 
-    public loaigame getLoaigame() {
+    public com.example.pro1121_nhom3.model.loaigame getLoaigame() {
         return loaigame;
     }
 
-    public void setLoaigame(loaigame loaigame) {
+    public void setLoaigame(com.example.pro1121_nhom3.model.loaigame loaigame) {
         this.loaigame = loaigame;
     }
 
-    @Override
-    public String toString() {
-        return "game{" +
-                "magame='" + magame + '\'' +
-                ", tengame='" + tengame + '\'' +
-                ", nph='" + nph + '\'' +
-                ", giaban=" + giaban +
-                ", image=" + image +
-                ", loaigame=" + loaigame +
-                '}';
+    public String getMota() {
+        return mota;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
+    }
+
+    public int getLikecount() {
+        return likecount;
+    }
+
+    public void setLikecount(int likecount) {
+        this.likecount = likecount;
     }
 }

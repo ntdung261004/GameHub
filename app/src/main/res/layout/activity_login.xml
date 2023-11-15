@@ -24,22 +24,24 @@
             android:textStyle="bold"/>
 
         <EditText
-            android:layout_gravity="center"
-            android:paddingStart="20dp"
+            android:id="@+id/etusername"
             android:layout_width="250dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:background="#CCCCCC"
-            android:text="Use name"
-            android:layout_marginTop="20dp"/>
+            android:paddingStart="20dp"
+            android:hint="Use name" />
 
         <EditText
-            android:layout_gravity="center"
-            android:paddingStart="20dp"
+            android:id="@+id/etpassword"
             android:layout_width="250dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:background="#CCCCCC"
-            android:text="Password"
-            android:layout_marginTop="30dp"/>
+            android:paddingStart="20dp"
+            android:hint="Password" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -60,10 +62,11 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btlogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Login"/>
+            android:text="Login" />
     </LinearLayout>
 
 
