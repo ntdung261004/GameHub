@@ -6,23 +6,23 @@ public class game {
     private String tengame;
     private String nph;
     private float giaban;
-    private int image;
+    private String img;
     private loaigame loaigame;
     private String mota;
     private int likecount;
+    private long sellcount;
 
     public game() {
     }
 
-    public game(int magame, String tengame, String nph, float giaban, int image, com.example.pro1121_nhom3.model.loaigame loaigame, String mota, int likecount) {
+    public game(int magame, String tengame, String nph, float giaban, String img, com.example.pro1121_nhom3.model.loaigame loaigame, String mota) {
         this.magame = magame;
         this.tengame = tengame;
         this.nph = nph;
         this.giaban = giaban;
-        this.image = image;
+        this.img = img;
         this.loaigame = loaigame;
         this.mota = mota;
-        this.likecount = likecount;
     }
 
     public int getMagame() {
@@ -57,12 +57,12 @@ public class game {
         this.giaban = giaban;
     }
 
-    public int getImage() {
-        return image;
+    public String getImg() {
+        return img;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public com.example.pro1121_nhom3.model.loaigame getLoaigame() {
@@ -88,4 +88,13 @@ public class game {
     public void setLikecount(int likecount) {
         this.likecount = likecount;
     }
+
+    public long getSellcount() {
+        return sellcount;
+    }
+
+    public void setSellcount(long sellcount) {
+        this.sellcount = sellcount;
+    }
+
 }
