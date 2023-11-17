@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
@@ -51,31 +52,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public boolean checkAccount(String etu, String etp)
-    {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference("nguoidung");
-        boolean check;
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot data : snapshot.getChildren())
-                {
-                    nguoidung nd = data.getValue(nguoidung.class);
-                    if(etu.equals(nd.getTendangnhap()) && etp.equals(nd.getMatkhau()))
-                    {
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    }else{
-                        Toast.makeText(LoginActivity.this, "Đăng nhập thât bại", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return false;
-    }
 }
