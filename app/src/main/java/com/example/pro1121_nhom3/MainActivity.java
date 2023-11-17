@@ -8,7 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.pro1121_nhom3.databinding.ActivityMainBinding;
+import com.example.pro1121_nhom3.fragment.cart_Fragment;
 import com.example.pro1121_nhom3.fragment.newsfeed_Fragment;
+import com.example.pro1121_nhom3.fragment.profile_Fragment;
+import com.example.pro1121_nhom3.fragment.wishlist_Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
