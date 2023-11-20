@@ -111,16 +111,14 @@ public class newsfeed_Fragment extends Fragment {
         rcvBestSellers.setAdapter(gameAdapter2);
         rcvBestSellers.setLayoutManager(linearLayoutManager2);
 
-        rcvBestSellers.setFocusable(false);
-        //set cho rcv khong the roll rieng duoc
-        rcvBestSellers.setNestedScrollingEnabled(false);
 
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         gameAdapter2 gameAdapter3 = new gameAdapter2(listGame3,getActivity());
         gameAdapter3.getAllGame(listGame3);
         rcvAllGame.setAdapter(gameAdapter3);
         rcvAllGame.setLayoutManager(linearLayoutManager3);
-
+        rcvAllGame.setFocusable(false);
+        rcvAllGame.setNestedScrollingEnabled(false);
 
 
 
