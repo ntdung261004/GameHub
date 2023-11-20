@@ -102,6 +102,10 @@ public class newsfeed_Fragment extends Fragment {
         rcvBestSellers.setAdapter(gameAdapter2);
         rcvBestSellers.setLayoutManager(linearLayoutManager2);
 
+        rcvBestSellers.setFocusable(false);
+        //set cho rcv khong the roll rieng duoc
+        rcvBestSellers.setNestedScrollingEnabled(false);
+
 
     }
 
