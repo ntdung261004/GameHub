@@ -24,6 +24,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPagerNews"
+                    android:layout_width="match_parent"
+                    android:contentDescription="5"
+                    android:layout_height="200dp" />
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/circleIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="30dp"
+                    />
+
                 <LinearLayout
                     android:id="@+id/linearFreeGame"
                     android:layout_width="match_parent"
@@ -66,9 +79,10 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearBestSellers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -79,9 +93,9 @@
                             android:id="@+id/textView13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:paddingStart="10dp"
                             android:text="BEST SELLERS"
-                            android:layout_weight="1"
                             android:textColor="@color/white"
                             android:textSize="22dp" />
 
@@ -89,22 +103,22 @@
                             android:id="@+id/textView14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
                             android:layout_weight="1"
-                            android:textColor="#2196F3"
-                            android:textSize="15dp"
                             android:gravity="right"
-                            android:text="Browse more" />
+                            android:paddingEnd="10dp"
+                            android:text="Browse more"
+                            android:textColor="#2196F3"
+                            android:textSize="15dp" />
 
                     </LinearLayout>
 
-                </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcvBestSellers"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcvBestSellers"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
