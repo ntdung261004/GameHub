@@ -1,9 +1,11 @@
 package com.example.pro1121_nhom3.fragment;
 
+import android.icu.text.UnicodeSetSpanner;
 import android.os.Bundle;
 
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -14,10 +16,13 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.Toast;
 
 
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.adapter.gameAdapter;
+import com.example.pro1121_nhom3.adapter.gameAdapter2;
 import com.example.pro1121_nhom3.adapter.newsAdapter;
 import com.example.pro1121_nhom3.dao.gameDAO;
 import com.example.pro1121_nhom3.model.game;
@@ -47,8 +52,8 @@ public class newsfeed_Fragment extends Fragment {
 
     }
 
-    RecyclerView rcvFreeGame, rcvBestSellers;
-    ArrayList<game> listGame1, listGame2;
+    RecyclerView rcvFreeGame, rcvBestSellers, rcvAllGame;
+    ArrayList<game> listGame1, listGame2, listGame3;
     ArrayList<news> newsList;
     gameDAO GameDAO;
     ViewPager newsSlideShow;
@@ -68,9 +73,11 @@ public class newsfeed_Fragment extends Fragment {
         GameDAO = new gameDAO(getActivity());
         rcvFreeGame = view.findViewById(R.id.rcvFreeGame);
         rcvBestSellers = view.findViewById(R.id.rcvBestSellers);
+        rcvAllGame = view.findViewById(R.id.rcvAllGame);
         newsList = new ArrayList<>();
         listGame1 = new ArrayList<>();
         listGame2 = new ArrayList<>();
+        listGame3 = new ArrayList<>();
 
 
         newsAdapter = new newsAdapter(getActivity(), newsList);
@@ -80,6 +87,8 @@ public class newsfeed_Fragment extends Fragment {
         newsAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
 
         newsAdapter.GetNewsList(newsList);
+
+
 
         TabGame();
         autoSliderShow();
@@ -105,6 +114,15 @@ public class newsfeed_Fragment extends Fragment {
         rcvBestSellers.setFocusable(false);
         //set cho rcv khong the roll rieng duoc
         rcvBestSellers.setNestedScrollingEnabled(false);
+
+        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        gameAdapter2 gameAdapter3 = new gameAdapter2(listGame3,getActivity());
+        gameAdapter3.getAllGame(listGame3);
+        rcvAllGame.setAdapter(gameAdapter3);
+        rcvAllGame.setLayoutManager(linearLayoutManager3);
+
+
+
 
 
     }

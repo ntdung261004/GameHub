@@ -1,22 +1,23 @@
 package com.example.pro1121_nhom3.model;
 
 public class loaigame {
-    private int maloai;
+
+    private String maloai;
     private String tenloai;
 
     public loaigame() {
     }
 
-    public loaigame(int maloai, String tenloai) {
+    public loaigame(String maloai, String tenloai) {
         this.maloai = maloai;
         this.tenloai = tenloai;
     }
 
-    public int getMaloai() {
+    public String getMaloai() {
         return maloai;
     }
 
-    public void setMaloai(int maloai) {
+    public void setMaloai(String maloai) {
         this.maloai = maloai;
     }
 
