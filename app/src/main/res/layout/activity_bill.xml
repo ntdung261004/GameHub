@@ -27,7 +27,7 @@
             android:id="@+id/tvMenuBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MENU"
+            android:text="BILL"
             android:textSize="18dp"
             android:textColor="@color/white"
             android:textStyle="bold"
