@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#444242"
+    android:padding="8dp"
+    tools:context=".UserActivity">
+
+            <ImageView
+                android:id="@+id/search_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@mipmap/avt" />
+
+            <TextView
+                android:id="@+id/searh_name"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="cyberpunk 2077"
+                android:textColor="#FFFFFF"
+                android:layout_height="64dp"
+                android:textStyle="bold"
+                android:textSize="40sp" />
+
+</LinearLayout>

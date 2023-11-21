@@ -1,0 +1,6 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#F0F0F0" /> <!-- Màu nền của thanh SearchView, ví dụ: xám nhạt -->
+    <corners android:radius="20dp" />
+    <!-- Bán kính của góc tròn -->
+
+</shape>

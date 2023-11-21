@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="10dp"
+        android:background="#A1FFF9C9"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtTieuDe"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD A GAME"
+            android:textAllCaps="true"
+            android:textColor="#FF0000"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/edtTenGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập tên game"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/edtTacGia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập nhà phát hành"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/edtGia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập giá"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/edtMaLoai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập mã loại"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:backgroundTint="#00CC00"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:backgroundTint="#FF0000"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
