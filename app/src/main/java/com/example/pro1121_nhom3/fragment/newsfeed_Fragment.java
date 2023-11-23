@@ -77,7 +77,7 @@ public class newsfeed_Fragment extends Fragment {
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         rcvSearch.addItemDecoration(itemDecoration);
 
-        rcvSearch.setVisibility(View.GONE); // Set initial visibility to GONE
+        rcvSearch.setVisibility(View.GONE);
 
         searchAdapter.setOnItemClickListener(new searchAdapter.OnItemClickListener() {
             @Override
@@ -87,7 +87,7 @@ public class newsfeed_Fragment extends Fragment {
                         break;
                     case 2:
                         startNewActivity(BuyGameActivity.class);
-                        // Thêm hoạt động tương ứng ở đây
+
                         break;
                     case 3:
                         break;

@@ -65,11 +65,11 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.searchview
         holder.searh_image.setImageResource(search.getImageResource());
         holder.search_name.setText(search.getName());
 
-        // Lắng nghe sự kiện click vào mỗi item
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Gửi sự kiện click và định danh duy nhất của mục đó
+
                 if (listener != null) {
                     listener.onItemClick(search);
                 }
