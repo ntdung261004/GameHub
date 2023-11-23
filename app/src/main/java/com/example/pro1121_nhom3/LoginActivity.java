@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     private void Login(){
         String user, pass;
         user = etuser.getText().toString();
-        pass = etuser.getText().toString();
+        pass = etpass.getText().toString();
         if(TextUtils.isEmpty(user)){
             Toast.makeText(this, "Vui lòng nhập Username", Toast.LENGTH_SHORT).show();
             return;
