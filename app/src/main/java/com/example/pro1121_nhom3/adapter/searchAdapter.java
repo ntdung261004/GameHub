@@ -16,15 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class searchAdapter extends RecyclerView.Adapter<searchAdapter.searchviewHolder> {
+
     private List<search> listsearch;
-    private List<search> originalList; // Danh sách search ban đầu (dùng để lọc)
+    private List<search> originalList;
+    private OnItemClickListener listener;
 
     public searchAdapter(List<search> listsearch) {
         this.listsearch = listsearch;
         this.originalList = new ArrayList<>(listsearch);
     }
 
-    // Thêm phương thức lọc danh sách search theo tên
+
     public void filterByName(String name) {
         listsearch.clear();
         if (name.isEmpty()) {
@@ -37,6 +39,14 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.searchview
             }
         }
         notifyDataSetChanged();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(search item);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -54,6 +64,17 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.searchview
         }
         holder.searh_image.setImageResource(search.getImageResource());
         holder.search_name.setText(search.getName());
+
+        // Lắng nghe sự kiện click vào mỗi item
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Gửi sự kiện click và định danh duy nhất của mục đó
+                if (listener != null) {
+                    listener.onItemClick(search);
+                }
+            }
+        });
     }
 
     @Override
@@ -72,4 +93,3 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.searchview
         }
     }
 }
-

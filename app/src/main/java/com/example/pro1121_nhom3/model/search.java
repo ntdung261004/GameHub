@@ -1,13 +1,14 @@
 package com.example.pro1121_nhom3.model;
 
-// File: Song.java
 public class search {
     private String name;
     private int imageResource;
+    private int itemId;
 
-    public search(String name, int imageResource) {
+    public search(String name, int imageResource, int itemId) {
         this.name = name;
         this.imageResource = imageResource;
+        this.itemId = itemId;
     }
 
     public String getName() {
@@ -25,5 +26,10 @@ public class search {
     public void setImageResource(int imageResource) {
         this.imageResource = imageResource;
     }
+
+    public int getItemId() {
+        return itemId;
+    }
 }
+
 

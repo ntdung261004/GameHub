@@ -1,11 +1,10 @@
 package com.example.pro1121_nhom3.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.pro1121_nhom3.BuyGameActivity;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.adapter.gameAdapter;
 import com.example.pro1121_nhom3.adapter.gameAdapter2;
@@ -23,12 +23,13 @@ import com.example.pro1121_nhom3.dao.gameDAO;
 import com.example.pro1121_nhom3.model.game;
 import com.example.pro1121_nhom3.model.news;
 import com.example.pro1121_nhom3.model.search;
-import me.relex.circleindicator.CircleIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class newsfeed_Fragment extends Fragment {
 
@@ -43,11 +44,6 @@ public class newsfeed_Fragment extends Fragment {
     private searchAdapter searchAdapter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_newsfeed_, container, false);
 
@@ -57,11 +53,12 @@ public class newsfeed_Fragment extends Fragment {
         rcvFreeGame = view.findViewById(R.id.rcvFreeGame);
         rcvBestSellers = view.findViewById(R.id.rcvBestSellers);
         rcvAllGame = view.findViewById(R.id.rcvAllGame);
+        rcvSearch = view.findViewById(R.id.rcvSearch);
+
         newsList = new ArrayList<>();
         listGame1 = new ArrayList<>();
         listGame2 = new ArrayList<>();
         listGame3 = new ArrayList<>();
-
 
         newsAdapter = new newsAdapter(getActivity(), newsList);
         newsSlideShow.setAdapter(newsAdapter);
@@ -70,8 +67,6 @@ public class newsfeed_Fragment extends Fragment {
         newsAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
 
         newsAdapter.GetNewsList(newsList);
-
-
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvSearch.setLayoutManager(linearLayoutManager);
@@ -82,19 +77,30 @@ public class newsfeed_Fragment extends Fragment {
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         rcvSearch.addItemDecoration(itemDecoration);
 
-        SearchView searchView = view.findViewById(R.id.searchView);
+        rcvSearch.setVisibility(View.GONE); // Set initial visibility to GONE
 
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
+        searchAdapter.setOnItemClickListener(new searchAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                // Hiển thị searchLayout khi nhấn vào searchView
-                rcvSearch.setVisibility(View.VISIBLE);
+            public void onItemClick(search item) {
+                switch (item.getItemId()) {
+                    case 1:
+                        break;
+                    case 2:
+                        startNewActivity(BuyGameActivity.class);
+                        // Thêm hoạt động tương ứng ở đây
+                        break;
+                    case 3:
+                        break;
+
+                }
             }
         });
+
+        SearchView searchView = view.findViewById(R.id.searchView);
+
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                // Ẩn searchLayout khi nút "X" được nhấn
                 rcvSearch.setVisibility(View.GONE);
                 return false;
             }
@@ -104,25 +110,30 @@ public class newsfeed_Fragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchAdapter.filterByName(newText);
+                if (newText.isEmpty()) {
+                    rcvSearch.setVisibility(View.GONE);
+                } else {
+                    rcvSearch.setVisibility(View.VISIBLE);
+                    searchAdapter.filterByName(newText);
+                }
                 return true;
             }
         });
-
-
 
         TabGame();
         autoSliderShow();
         return view;
     }
+
     private List<search> getListSearch() {
         List<search> list = new ArrayList<>();
-        list.add(new search("adofai", R.drawable.adofai));
-        list.add(new search("cs2", R.mipmap.cs2));
-        list.add(new search("apex", R.mipmap.apex));
-        list.add(new search("naraka", R.mipmap.naraka));
+        list.add(new search("adofai", R.drawable.adofai, 1));
+        list.add(new search("cs2", R.mipmap.cs2, 2));
+        list.add(new search("apex", R.mipmap.apex, 3));
+        list.add(new search("naraka", R.mipmap.naraka, 4));
         return list;
     }
 
@@ -146,7 +157,6 @@ public class newsfeed_Fragment extends Fragment {
         rcvAllGame.setLayoutManager(linearLayoutManager3);
         rcvAllGame.setFocusable(false);
         rcvAllGame.setNestedScrollingEnabled(false);
-
     }
 
     private void autoSliderShow() {
@@ -168,6 +178,11 @@ public class newsfeed_Fragment extends Fragment {
                 });
             }
         }, 0, 5000);
+    }
+
+    private void startNewActivity(Class<?> activityClass) {
+        Intent intent = new Intent(getActivity(), activityClass);
+        startActivity(intent);
     }
 
     @Override
