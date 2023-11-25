@@ -1,7 +1,10 @@
 package com.example.pro1121_nhom3;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,17 +13,64 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.pro1121_nhom3.adapter.AdminGameAdapter;
+import com.example.pro1121_nhom3.adapter.userAdapter;
+import com.example.pro1121_nhom3.model.game;
+import com.example.pro1121_nhom3.model.nguoidung;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
     ImageView ivMenuBack;
     FloatingActionButton floatAdd;
+
+    private ArrayList<game> listGame;
+    private RecyclerView recyclerviewgame;
+    private AdminGameAdapter adminGameAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         floatAdd = findViewById(R.id.floatAdd);
         ivMenuBack = findViewById(R.id.ivMenuBack);
+
+
+        recyclerviewgame = findViewById(R.id.recyclerviewgame);
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("game");
+        recyclerviewgame.setHasFixedSize(true);
+        recyclerviewgame.setLayoutManager(new LinearLayoutManager(this));
+        listGame = new ArrayList<>();
+        adminGameAdapter = new AdminGameAdapter(listGame, this);
+        recyclerviewgame.setAdapter(adminGameAdapter);
+
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    game adminGame = dataSnapshot.getValue(game.class);
+                    listGame.add(adminGame);
+                }
+                adminGameAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
         ivMenuBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

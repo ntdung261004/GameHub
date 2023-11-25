@@ -30,6 +30,7 @@
                 android:paddingLeft="16dp">
 
                 <TextView
+                    android:id="@+id/tvUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Peter Parker"
@@ -37,12 +38,14 @@
                     android:textColor="#FFFFFF" />
 
                 <TextView
+                    android:id="@+id/tvUserWallet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="wallet: 31321321"
                     android:textSize="14sp"
                     android:textColor="#AAAAAA" />
                 <TextView
+                    android:id="@+id/tvUserWishlist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Wishlist: 3"
@@ -50,6 +53,7 @@
                     android:textColor="#AAAAAA" />
 
                 <TextView
+                    android:id="@+id/tvUserGame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Games: 6"

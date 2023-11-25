@@ -48,7 +48,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recylerviewuser"
+        android:id="@+id/recyclerviewgame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/bill_bar"/>

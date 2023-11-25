@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".UserActivity"
-    >
+    tools:context=".UserActivity">
 
     <LinearLayout
+        android:background="#2b2b2b"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-        >
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,59 +25,76 @@
                 android:src="@mipmap/avt" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:paddingLeft="16dp">
-
                 <TextView
-                    android:id="@+id/tvtengame"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvAdminTengame"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="cyberpunk 2077"
+                    android:text="Cyberpunk"
+                    android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/tvloaigame"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="role-playing"
-                    android:textColor="#AAAAAA"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tvnph"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CD PROJEKT RED"
-                    android:textColor="#AAAAAA"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tvgiaban"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="990.000đ"
-                    android:textColor="#AAAAAA"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                    android:textSize="17sp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="120sp"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_sua" />
+                    android:orientation="vertical">
 
-                <ImageButton
+                    <TextView
+                        android:id="@+id/tvAdminLoaigame"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="role-playing"
+                        android:textColor="#AAAAAA"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvAdminNph"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CD PROJEKT RED"
+                        android:textColor="#AAAAAA"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvAdminGiaban"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="990.000đ"
+                        android:textColor="#AAAAAA"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_xoa" />
+                    android:layout_marginTop="15sp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivSua"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10sp"
+                        android:src="@drawable/ic_update" />
+
+                    <ImageView
+                        android:id="@+id/ivXoa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_delete" />
+                </LinearLayout>
+            </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
