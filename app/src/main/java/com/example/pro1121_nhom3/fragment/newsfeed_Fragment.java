@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,11 @@ import com.example.pro1121_nhom3.dao.gameDAO;
 import com.example.pro1121_nhom3.model.game;
 import com.example.pro1121_nhom3.model.news;
 import com.example.pro1121_nhom3.model.search;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +40,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class newsfeed_Fragment extends Fragment {
 
     private RecyclerView rcvFreeGame, rcvBestSellers, rcvAllGame, rcvSearch;
-    private ArrayList<game> listGame1, listGame2, listGame3;
+    private ArrayList<game> listGame1, listGame2, listGame3, listGame4;
     private ArrayList<news> newsList;
     private gameDAO GameDAO;
     private ViewPager newsSlideShow;
@@ -59,6 +65,7 @@ public class newsfeed_Fragment extends Fragment {
         listGame1 = new ArrayList<>();
         listGame2 = new ArrayList<>();
         listGame3 = new ArrayList<>();
+        listGame4 = new ArrayList<>();
 
         newsAdapter = new newsAdapter(getActivity(), newsList);
         newsSlideShow.setAdapter(newsAdapter);
@@ -71,7 +78,8 @@ public class newsfeed_Fragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvSearch.setLayoutManager(linearLayoutManager);
 
-        searchAdapter = new searchAdapter(getListSearch());
+
+        searchAdapter = new searchAdapter(listGame4, getActivity());
         rcvSearch.setAdapter(searchAdapter);
 
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
@@ -79,22 +87,7 @@ public class newsfeed_Fragment extends Fragment {
 
         rcvSearch.setVisibility(View.GONE);
 
-        searchAdapter.setOnItemClickListener(new searchAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(search item) {
-                switch (item.getItemId()) {
-                    case 1:
-                        break;
-                    case 2:
-                        startNewActivity(BuyGameActivity.class);
 
-                        break;
-                    case 3:
-                        break;
-
-                }
-            }
-        });
 
         SearchView searchView = view.findViewById(R.id.searchView);
 
@@ -128,14 +121,7 @@ public class newsfeed_Fragment extends Fragment {
         return view;
     }
 
-    private List<search> getListSearch() {
-        List<search> list = new ArrayList<>();
-        list.add(new search("adofai", R.drawable.adofai, 1));
-        list.add(new search("cs2", R.mipmap.cs2, 2));
-        list.add(new search("apex", R.mipmap.apex, 3));
-        list.add(new search("naraka", R.mipmap.naraka, 4));
-        return list;
-    }
+
 
     private void TabGame() {
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);

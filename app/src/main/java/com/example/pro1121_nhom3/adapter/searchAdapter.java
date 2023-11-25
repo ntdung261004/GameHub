@@ -1,5 +1,6 @@
 package com.example.pro1121_nhom3.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,21 +10,30 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.pro1121_nhom3.R;
+import com.example.pro1121_nhom3.model.game;
 import com.example.pro1121_nhom3.model.search;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class searchAdapter extends RecyclerView.Adapter<searchAdapter.searchviewHolder> {
 
-    private List<search> listsearch;
-    private List<search> originalList;
+    private List<game> listsearch;
+    private List<game> originalList;
+    private Context context;
     private OnItemClickListener listener;
 
-    public searchAdapter(List<search> listsearch) {
+    public searchAdapter(List<game> listsearch, Context context) {
         this.listsearch = listsearch;
         this.originalList = new ArrayList<>(listsearch);
+        this.context = context;
     }
 
 
@@ -32,8 +42,8 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.searchview
         if (name.isEmpty()) {
             listsearch.addAll(originalList);
         } else {
-            for (search search : originalList) {
-                if (search.getName().toLowerCase().contains(name.toLowerCase())) {
+            for (game search : originalList) {
+                if (search.getTengame().toLowerCase().contains(name.toLowerCase())) {
                     listsearch.add(search);
                 }
             }
@@ -42,7 +52,7 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.searchview
     }
 
     public interface OnItemClickListener {
-        void onItemClick(search item);
+        void onItemClick(game item);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -58,12 +68,12 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.searchview
 
     @Override
     public void onBindViewHolder(@NonNull searchviewHolder holder, int position) {
-        search search = listsearch.get(position);
+        game search = listsearch.get(position);
         if (search == null) {
             return;
         }
-        holder.searh_image.setImageResource(search.getImageResource());
-        holder.search_name.setText(search.getName());
+        Glide.with(context).load(search.getImg()).into(holder.searh_image);
+        holder.search_name.setText(search.getTengame());
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -92,4 +102,33 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.searchview
             searh_image = itemView.findViewById(R.id.search_image);
         }
     }
+
+    public void getAllGame(ArrayList<game> listGame)
+    {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference("game");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                listGame.clear();
+
+                for(DataSnapshot data : snapshot.getChildren())
+                {
+                    game game1 = data.getValue(game.class);
+                    listGame.add(game1);
+                }
+
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 }
