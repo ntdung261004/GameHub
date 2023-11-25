@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.model.game;
-import com.example.pro1121_nhom3.model.nguoidung;
+import com.example.pro1121_nhom3.model.search;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,16 +24,18 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder>{
 
-    private ArrayList<game> listGame;
+    private List<game> listGame;
     private Context context;
 
-    public gameAdapter(ArrayList<game> listGame, Context context)
+    public gameAdapter(List<game> listGame, Context context)
     {
         this.listGame = listGame;
         this.context = context;
+
     }
 
     @NonNull
@@ -54,7 +56,6 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
         {
             return;
         }
-
 
         holder.tvten.setText(gameindex.getTengame());
         Glide.with(context).load(gameindex.getImg()).into(holder.banner);
@@ -144,7 +145,4 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
         });
 
     }
-
-
-
 }

@@ -4,22 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
-
-import com.example.pro1121_nhom3.adapter.searchAdapter;
 import com.example.pro1121_nhom3.databinding.ActivityMainBinding;
 import com.example.pro1121_nhom3.fragment.cart_Fragment;
 import com.example.pro1121_nhom3.fragment.newsfeed_Fragment;
 import com.example.pro1121_nhom3.fragment.profile_Fragment;
 import com.example.pro1121_nhom3.fragment.wishlist_Fragment;
-import com.example.pro1121_nhom3.model.search;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,21 +27,24 @@ public class MainActivity extends AppCompatActivity {
             if(item.getItemId() == R.id.nf) replaceFragment(new newsfeed_Fragment());
             else if(item.getItemId() == R.id.wl) replaceFragment(new wishlist_Fragment());
             else if(item.getItemId() == R.id.c) replaceFragment(new cart_Fragment());
-            else if(item.getItemId() == R.id.pf) replaceFragment(new profile_Fragment());
-
-
+            else if(item.getItemId() == R.id.pf) replaceProfileFragment();
 
             return true;
         });
-
-
     }
 
-    private void replaceFragment(Fragment fragment)
-    {
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.framelayout, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void replaceProfileFragment() {
+        String userName = getIntent().getStringExtra("userName");
+        String userEmail = getIntent().getStringExtra("userEmail");
+        String userPass = getIntent().getStringExtra("userPassword");
+        int userWallet = getIntent().getIntExtra("userWallet", 0);
+        replaceFragment(profile_Fragment.newInstance(userName, userWallet,userEmail,userPass));
     }
 }
