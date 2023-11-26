@@ -2,7 +2,7 @@ package com.example.pro1121_nhom3.model;
 
 public class game {
 
-    private int magame;
+    private String magame;
     private String tengame;
     private String nph;
     private float giaban;
@@ -11,11 +11,12 @@ public class game {
     private String mota;
     private int likecount;
     private long sellcount;
+    private String ngayph;
 
     public game() {
     }
 
-    public game(int magame, String tengame, String nph, float giaban, String img, com.example.pro1121_nhom3.model.loaigame loaigame, String mota) {
+    public game(String magame, String tengame, String nph, float giaban, String img, com.example.pro1121_nhom3.model.loaigame loaigame, String mota) {
         this.magame = magame;
         this.tengame = tengame;
         this.nph = nph;
@@ -25,11 +26,11 @@ public class game {
         this.mota = mota;
     }
 
-    public int getMagame() {
+    public String getMagame() {
         return magame;
     }
 
-    public void setMagame(int magame) {
+    public void setMagame(String magame) {
         this.magame = magame;
     }
 
@@ -97,4 +98,11 @@ public class game {
         this.sellcount = sellcount;
     }
 
+    public String getNgayph() {
+        return ngayph;
+    }
+
+    public void setNgayph(String ngayph) {
+        this.ngayph = ngayph;
+    }
 }

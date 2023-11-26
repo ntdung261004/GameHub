@@ -1,6 +1,8 @@
 package com.example.pro1121_nhom3.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +41,8 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class newsfeed_Fragment extends Fragment {
 
+
+
     private RecyclerView rcvFreeGame, rcvBestSellers, rcvAllGame, rcvSearch;
     private ArrayList<game> listGame1, listGame2, listGame3, listGame4;
     private ArrayList<news> newsList;
@@ -52,6 +56,9 @@ public class newsfeed_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_newsfeed_, container, false);
+
+
+
 
         newsSlideShow = view.findViewById(R.id.viewPagerNews);
         circleIndicator = view.findViewById(R.id.circleIndicator);
@@ -69,22 +76,17 @@ public class newsfeed_Fragment extends Fragment {
 
         newsAdapter = new newsAdapter(getActivity(), newsList);
         newsSlideShow.setAdapter(newsAdapter);
-
         circleIndicator.setViewPager(newsSlideShow);
         newsAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
-
         newsAdapter.GetNewsList(newsList);
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvSearch.setLayoutManager(linearLayoutManager);
-
-
         searchAdapter = new searchAdapter(listGame4, getActivity());
         rcvSearch.setAdapter(searchAdapter);
-
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         rcvSearch.addItemDecoration(itemDecoration);
-
         rcvSearch.setVisibility(View.GONE);
 
 
