@@ -35,12 +35,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Ánh xạ các thành phần giao diện
         etuser = findViewById(R.id.edtUsername);
         etpass = findViewById(R.id.edtPassword);
         btlogin = findViewById(R.id.btlogin);
         btregister = findViewById(R.id.btregister);
         mAuth = FirebaseAuth.getInstance();
 
+        // Xử lý sự kiện khi nhấn nút đăng nhập
         btlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Xử lý sự kiện khi nhấn nút đăng ký
         btregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    // Phương thức xử lý đăng nhập
     private void login() {
         String user, pass;
         user = etuser.getText().toString();
@@ -83,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    // Phương thức để lấy dữ liệu người dùng từ Realtime Database
     private void fetchUserData(String userEmail) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
         Query query = databaseReference.orderByChild("email").equalTo(userEmail);
@@ -92,10 +97,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        // Lấy thông tin người dùng từ snapshot
                         String userName = userSnapshot.child("tennd").getValue(String.class);
                         String userEmail = userSnapshot.child("email").getValue(String.class);
                         int userWallet = userSnapshot.child("wallet").getValue(Integer.class);
                         String userPass = userSnapshot.child("matkhau").getValue(String.class);
+
                         // Chuyển đến MainActivity và truyền dữ liệu
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("userName", userName);
@@ -106,9 +113,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Xử lý lỗi
+                // Xử lý lỗi nếu có
             }
         });
     }
