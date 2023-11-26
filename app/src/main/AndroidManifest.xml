@@ -15,17 +15,14 @@
         android:theme="@style/Theme.PRO1121_Nhom3"
         tools:targetApi="31">
         <activity
-            android:name=".WalletActivity"
-            android:exported="false" />
-        <activity
-            android:name=".walletActivity"
-            android:exported="false" />
-        <activity
-            android:name=".wallet_Activity"
-            android:exported="false" />
-        <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".Wishlist"
             android:exported="true" />
@@ -44,23 +41,30 @@
         <activity
             android:name=".AdminActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.PRO1121_Nhom3" />
+            android:theme="@style/Theme.PRO1121_Nhom3">
+
+        </activity>
+
+
         <activity
             android:name=".LoginActivity"
-            android:exported="true" />
+            android:exported="true">
+
+        </activity>
+
         <activity
             android:name=".BuyGameActivity"
-            android:exported="true" />
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".WelcomeActivity"
             android:exported="true" />
