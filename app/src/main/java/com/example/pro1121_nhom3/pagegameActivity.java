@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class pagegameActivity extends AppCompatActivity {
 
-    TextView tvten, tvngayph, tvsellcount, tvmota;
+    TextView tvten, tvngayph, tvsellcount, tvmota, tvloaigame;
     Button btbuy;
     ImageView banner;
     game GameIndex;
@@ -39,6 +39,7 @@ public class pagegameActivity extends AppCompatActivity {
         tvngayph = findViewById(R.id.tvngayphpage);
         tvsellcount = findViewById(R.id.tvsellcountpage);
         tvmota = findViewById(R.id.tvmotapage);
+        tvloaigame = findViewById(R.id.tvloaigamepage);
         banner = findViewById(R.id.bannergamepage);
         btbuy = findViewById(R.id.btbuynowpage);
         GameIndex = new game();
@@ -58,6 +59,7 @@ public class pagegameActivity extends AppCompatActivity {
                         tvngayph.setText(GameIndex.getNgayph());
                         tvsellcount.setText("Đã bán " + GameIndex.getSellcount() + " bản");
                         tvmota.setText(GameIndex.getMota());
+                        tvloaigame.setText("Category: " + GameIndex.getLoaigame().getTenloai());
                         Glide.with(pagegameActivity.this).load(GameIndex.getImg()).into(banner);
                         if(GameIndex.getGiaban()==0)
                         {

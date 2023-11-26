@@ -47,8 +47,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:textSize="20dp"
-                    android:textStyle="italic"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
                     android:textColor="#9C9C9C"
                     android:layout_weight="1"
                     android:text="TextView" />
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="italic"
                     android:textColor="#9C9C9C" />
             </LinearLayout>
