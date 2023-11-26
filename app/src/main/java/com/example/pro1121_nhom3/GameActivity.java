@@ -11,7 +11,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.pro1121_nhom3.adapter.AdminGameAdapter;
 import com.example.pro1121_nhom3.adapter.userAdapter;
@@ -98,5 +101,31 @@ public class GameActivity extends AppCompatActivity {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.setCancelable(false);
         alertDialog.show();
+
+        EditText edtTenGame = view.findViewById(R.id.edtTenGame);
+        EditText edtMaLoai = view.findViewById(R.id.edtMaLoai);
+        EditText edtNPH = view.findViewById(R.id.edtNPH);
+        EditText edtGia = view.findViewById(R.id.edtGia);
+        Button btnAdd = view.findViewById(R.id.btnAdd);
+        Button btnCancel = view.findViewById(R.id.btnCancel);
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtTenGame.getText().toString();
+                edtMaLoai.getText().toString();
+                edtNPH.getText().toString();
+                edtGia.getText().toString();
+            }
+        });
     }
+
+
 }

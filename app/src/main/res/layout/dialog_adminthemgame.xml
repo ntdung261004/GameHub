@@ -31,7 +31,16 @@
             android:textColor="@color/white"/>
 
         <EditText
-            android:id="@+id/edtTacGia"
+            android:id="@+id/edtMaLoai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập mã loại"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edtNPH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nhập nhà phát hành"
@@ -48,14 +57,6 @@
             android:layout_marginBottom="10dp"
             android:textColor="@color/white"/>
 
-        <EditText
-            android:id="@+id/edtMaLoai"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nhập mã loại"
-            android:background="@drawable/custom_edt"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/white"/>
 
 
         <LinearLayout

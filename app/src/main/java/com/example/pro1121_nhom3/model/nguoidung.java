@@ -4,16 +4,19 @@ public class nguoidung{
     private String email;
     private game game;
     private String matkhau;
-//    private String tendangnhap;
+    private String tendangnhap;
     private int role;
     private String tennd;
     private float wallet;
 
-    public nguoidung(String email, com.example.pro1121_nhom3.model.game game, String matkhau, int role, String tennd, float wallet) {
+    public nguoidung() {
+    }
+
+    public nguoidung(String email, com.example.pro1121_nhom3.model.game game, String matkhau, String tendangnhap, int role, String tennd, float wallet) {
         this.email = email;
         this.game = game;
         this.matkhau = matkhau;
-//        this.tendangnhap = tendangnhap;
+        this.tendangnhap = tendangnhap;
         this.role = role;
         this.tennd = tennd;
         this.wallet = wallet;
@@ -43,13 +46,13 @@ public class nguoidung{
         this.matkhau = matkhau;
     }
 
-//    public String getTendangnhap() {
-//        return tendangnhap;
-//    }
-//
-//    public void setTendangnhap(String tendangnhap) {
-//        this.tendangnhap = tendangnhap;
-//    }
+    public String getTendangnhap() {
+        return tendangnhap;
+    }
+
+    public void setTendangnhap(String tendangnhap) {
+        this.tendangnhap = tendangnhap;
+    }
 
     public String getTennd() {
         return tennd;
