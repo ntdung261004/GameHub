@@ -1,35 +1,30 @@
 package com.example.pro1121_nhom3.model;
 
 public class search {
-    private String name;
-    private int imageResource;
-    private int itemId;
+    private String tengame;
+    private String img;
 
-    public search(String name, int imageResource, int itemId) {
-        this.name = name;
-        this.imageResource = imageResource;
-        this.itemId = itemId;
+    public search() {
     }
 
-    public String getName() {
-        return name;
+    public search(String tengame, String img) {
+        this.tengame = tengame;
+        this.img = img;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTengame() {
+        return tengame;
     }
 
-    public int getImageResource() {
-        return imageResource;
+    public void setTengame(String tengame) {
+        this.tengame = tengame;
     }
 
-    public void setImageResource(int imageResource) {
-        this.imageResource = imageResource;
+    public String getImg() {
+        return img;
     }
 
-    public int getItemId() {
-        return itemId;
+    public void setImg(String img) {
+        this.img = img;
     }
 }
-
-

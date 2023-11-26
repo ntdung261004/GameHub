@@ -1,8 +1,6 @@
 package com.example.pro1121_nhom3.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +9,10 @@ import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.pro1121_nhom3.BuyGameActivity;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.adapter.gameAdapter;
 import com.example.pro1121_nhom3.adapter.gameAdapter2;
@@ -41,24 +37,21 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class newsfeed_Fragment extends Fragment {
 
-
-
     private RecyclerView rcvFreeGame, rcvBestSellers, rcvAllGame, rcvSearch;
     private ArrayList<game> listGame1, listGame2, listGame3, listGame4;
     private ArrayList<news> newsList;
+    private ArrayList<search> searchList;
+    private SearchView searchView;
     private gameDAO GameDAO;
     private ViewPager newsSlideShow;
     private CircleIndicator circleIndicator;
     private newsAdapter newsAdapter;
-    private Timer timer;
     private searchAdapter searchAdapter;
+    private Timer timer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_newsfeed_, container, false);
-
-
-
 
         newsSlideShow = view.findViewById(R.id.viewPagerNews);
         circleIndicator = view.findViewById(R.id.circleIndicator);
@@ -67,12 +60,13 @@ public class newsfeed_Fragment extends Fragment {
         rcvBestSellers = view.findViewById(R.id.rcvBestSellers);
         rcvAllGame = view.findViewById(R.id.rcvAllGame);
         rcvSearch = view.findViewById(R.id.rcvSearch);
-
+        searchView = view.findViewById(R.id.searchView);
         newsList = new ArrayList<>();
         listGame1 = new ArrayList<>();
         listGame2 = new ArrayList<>();
         listGame3 = new ArrayList<>();
         listGame4 = new ArrayList<>();
+        searchList = new ArrayList<>();
 
         newsAdapter = new newsAdapter(getActivity(), newsList);
         newsSlideShow.setAdapter(newsAdapter);
@@ -80,50 +74,35 @@ public class newsfeed_Fragment extends Fragment {
         newsAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
         newsAdapter.GetNewsList(newsList);
 
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        rcvSearch.setLayoutManager(linearLayoutManager);
-        searchAdapter = new searchAdapter(listGame4, getActivity());
+        searchAdapter = new searchAdapter(searchList, getActivity());
+        rcvSearch.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rcvSearch.setAdapter(searchAdapter);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        rcvSearch.addItemDecoration(itemDecoration);
         rcvSearch.setVisibility(View.GONE);
-
-
-
-        SearchView searchView = view.findViewById(R.id.searchView);
-
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                rcvSearch.setVisibility(View.GONE);
-                return false;
-            }
-        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                // Handle the search query submission if needed
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                // Show/hide the RecyclerView based on whether there is text in the search view
                 if (newText.isEmpty()) {
                     rcvSearch.setVisibility(View.GONE);
                 } else {
                     rcvSearch.setVisibility(View.VISIBLE);
-                    searchAdapter.filterByName(newText);
+                    // Perform filtering or loading data based on the search query (newText)
+                    filterSearchResults(newText);
                 }
                 return true;
             }
         });
-
         TabGame();
         autoSliderShow();
+        loadSearchDataFromFirebase();
         return view;
     }
-
-
 
     private void TabGame() {
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -168,6 +147,32 @@ public class newsfeed_Fragment extends Fragment {
         }, 0, 5000);
     }
 
+    private void loadSearchDataFromFirebase() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("game");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                searchList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    DataSnapshot loaiGameSnapshot = snapshot.child("loaigame");
+                    String tengame = snapshot.child("tengame").getValue(String.class);
+                    String img = snapshot.child("img").getValue(String.class);
+
+                    if (tengame != null && img != null) {
+                        searchList.add(new search(tengame, img));
+                    }
+                }
+                searchAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Xử lý lỗi nếu có
+            }
+        });
+    }
+
+
     private void startNewActivity(Class<?> activityClass) {
         Intent intent = new Intent(getActivity(), activityClass);
         startActivity(intent);
@@ -180,4 +185,19 @@ public class newsfeed_Fragment extends Fragment {
             timer.cancel();
         }
     }
+    private void filterSearchResults(String query) {
+        // Assuming searchList is your original list of all games
+        List<search> filteredList = new ArrayList<>();
+
+        for (search game : searchList) {
+            // Filter logic: Check if the game name contains the search query
+            if (game.getTengame().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(game);
+            }
+        }
+
+        // Update the searchAdapter with the filtered results
+        searchAdapter.setFilter(filteredList);
+    }
+
 }
