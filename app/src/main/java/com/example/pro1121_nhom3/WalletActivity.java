@@ -23,7 +23,7 @@ public class WalletActivity extends AppCompatActivity {
 
     private TextView sodu;
     private EditText nhaptien;
-    private CardView momo_cardview;
+    private CardView momo_cardview,atm_cardview,visa_cardview;
     ImageView btnBack;
 
     @Override
@@ -35,6 +35,8 @@ public class WalletActivity extends AppCompatActivity {
         nhaptien = findViewById(R.id.nhaptien);
         momo_cardview = findViewById(R.id.momo_cardview);
         btnBack=findViewById(R.id.btnBack);
+        atm_cardview =findViewById(R.id.atm_cardview);
+        visa_cardview=findViewById(R.id.visa_cardview);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +47,18 @@ public class WalletActivity extends AppCompatActivity {
         fetchUserWallet();
 
         momo_cardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleCustomAmount(); // Xử lý số tiền nhập tùy ý
+            }
+        });
+        visa_cardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleCustomAmount(); // Xử lý số tiền nhập tùy ý
+            }
+        });
+        atm_cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handleCustomAmount(); // Xử lý số tiền nhập tùy ý
