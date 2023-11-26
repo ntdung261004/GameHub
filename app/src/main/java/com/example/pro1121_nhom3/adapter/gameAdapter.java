@@ -2,11 +2,14 @@ package com.example.pro1121_nhom3.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -16,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.model.game;
 import com.example.pro1121_nhom3.model.search;
+import com.example.pro1121_nhom3.pagegameActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -62,7 +66,20 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
         if(gameindex.getGiaban() !=0) holder.giaban.setText((int)gameindex.getGiaban()+" vnd");
         else holder.giaban.setText("Free to Play");
 
+        holder.cardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPref = context.getSharedPreferences("infogame", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("magame", gameindex.getMagame());
+                editor.apply();
+                context.startActivity(new Intent(context, pagegameActivity.class));
+            }
+        });
+
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -78,14 +95,14 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
         private TextView tvten;
         private ImageView banner;
         private TextView giaban;
-
+        private CardView cardview;
 
         public gameViewHolder(@NonNull View itemView) {
             super(itemView);
             tvten = itemView.findViewById(R.id.tvtengame1);
             banner = itemView.findViewById(R.id.ivgame1);
             giaban = itemView.findViewById(R.id.tvgiaban1);
-
+            cardview = itemView.findViewById(R.id.cvgame1);
 
         }
     }
@@ -104,6 +121,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
                 for(DataSnapshot data : snapshot.getChildren())
                 {
                     game game1 = data.getValue(game.class);
+                    game1.setMagame(data.getKey());
                     if(game1.getGiaban()== 0) listGame.add(game1);
                 }
 
@@ -132,6 +150,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
                 for(DataSnapshot data : snapshot.getChildren())
                 {
                     game game1 = data.getValue(game.class);
+                    game1.setMagame(data.getKey());
                     listGame.add(game1);
                 }
 
