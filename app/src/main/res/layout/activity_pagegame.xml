@@ -25,6 +25,7 @@
                 android:layout_height="220dp" />
 
             <TextView
+                android:fontFamily="@font/goldmanregular"
                 android:id="@+id/tvtengamepage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,6 +44,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:fontFamily="@font/inriasansbold"
                     android:id="@+id/tvngayphpage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -54,6 +56,7 @@
                     android:text="TextView" />
 
                 <TextView
+                    android:fontFamily="@font/inriasansbold"
                     android:id="@+id/tvsellcountpage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,6 +80,7 @@
                 android:text="Category: FPS" />
 
             <TextView
+                android:fontFamily="@font/inriasansbold"
                 android:id="@+id/textView20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,6 +90,7 @@
                 android:textSize="22dp" />
 
             <TextView
+                android:fontFamily="@font/goldmanregular"
                 android:id="@+id/tvmotapage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

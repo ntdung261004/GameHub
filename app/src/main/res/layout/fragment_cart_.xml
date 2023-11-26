@@ -15,6 +15,7 @@
         >
 
         <EditText
+            android:fontFamily="@font/inter_r"
             android:id="@+id/editTextText"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
@@ -41,6 +42,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:fontFamily="@font/inter_r"
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,6 +52,7 @@
             android:text="MENU" />
 
         <TextView
+            android:fontFamily="@font/inter_r"
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,6 +61,7 @@
             android:text="WISTLIST" />
 
         <TextView
+            android:fontFamily="@font/inter_r"
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,6 +84,7 @@
             android:src="@drawable/img" />
 
         <TextView
+            android:fontFamily="@font/inter_r"
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -91,6 +96,7 @@
     </LinearLayout>
 
     <EditText
+        android:fontFamily="@font/inter_r"
         android:id="@+id/editTextText3"
         android:layout_width="370dp"
         android:layout_marginLeft="20dp"
@@ -139,6 +145,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:fontFamily="@font/inter_r"
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -148,6 +155,7 @@
             android:text="Tong tien" />
 
         <TextView
+            android:fontFamily="@font/inter_r"
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

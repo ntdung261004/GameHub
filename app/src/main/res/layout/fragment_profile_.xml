@@ -35,6 +35,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:fontFamily="@font/inter_r"
                     android:id="@+id/tvtenuser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,15 +45,6 @@
                     android:text="Peter Parker"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
-
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="18dp"
-                    android:textColor="@color/white"
-                    android:text="Bao ne" />
             </LinearLayout>
         </LinearLayout>
 
@@ -62,6 +54,7 @@
             android:background="#DCDCDC">
 
             <TextView
+                android:fontFamily="@font/inter_r"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -71,6 +64,7 @@
                 android:textSize="30sp" />
 
             <TextView
+                android:fontFamily="@font/inter_r"
                 android:id="@+id/wallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,6 +96,7 @@
             android:layout_marginTop="100dp">
 
             <TextView
+                android:fontFamily="@font/inter_r"
                 android:id="@+id/edtemail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -116,6 +111,7 @@
 
 
             <EditText
+                android:fontFamily="@font/inter_r"
                 android:id="@+id/edttennguoidung"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -126,6 +122,7 @@
                 android:textColorHint="#FFFFFF" />
 
             <EditText
+                android:fontFamily="@font/inter_r"
                 android:id="@+id/edtpasswaord"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
