@@ -19,13 +19,8 @@
             android:exported="false" />
         <activity
             android:name=".WalletActivity"
-            android:exported="false" />
-        <activity
-            android:name=".walletActivity"
-            android:exported="false" />
-        <activity
-            android:name=".wallet_Activity"
-            android:exported="false" />
+            android:exported="true" />
+
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />

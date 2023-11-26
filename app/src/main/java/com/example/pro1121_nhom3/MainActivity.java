@@ -20,19 +20,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Thay thế fragment mặc định bằng fragment newsfeed_Fragment khi activity được tạo
         replaceFragment(new newsfeed_Fragment());
 
+        // Xử lý sự kiện khi chọn mục trên BottomNavigationView
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            // Kiểm tra mục được chọn và thay thế fragment tương ứng
+            if (item.getItemId() == R.id.nf) replaceFragment(new newsfeed_Fragment());
+            else if (item.getItemId() == R.id.wl) replaceFragment(new wishlist_Fragment());
+            else if (item.getItemId() == R.id.c) replaceFragment(new cart_Fragment());
+            else if (item.getItemId() == R.id.pf) replaceProfileFragment();
 
-            if(item.getItemId() == R.id.nf) replaceFragment(new newsfeed_Fragment());
-            else if(item.getItemId() == R.id.wl) replaceFragment(new wishlist_Fragment());
-            else if(item.getItemId() == R.id.c) replaceFragment(new cart_Fragment());
-            else if(item.getItemId() == R.id.pf) replaceProfileFragment();
-
-            return true;
+            return true; // Trả về true để báo hiệu rằng sự kiện đã được xử lý
         });
     }
 
+    // Phương thức để thay thế fragment hiện tại
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -40,11 +44,15 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    // Phương thức để thay thế fragment profile_Fragment với truyền tham số
     private void replaceProfileFragment() {
+        // Lấy thông tin người dùng từ Intent
         String userName = getIntent().getStringExtra("userName");
         String userEmail = getIntent().getStringExtra("userEmail");
         String userPass = getIntent().getStringExtra("userPassword");
         int userWallet = getIntent().getIntExtra("userWallet", 0);
-        replaceFragment(profile_Fragment.newInstance(userName, userWallet,userEmail,userPass));
+
+        // Thay thế fragment profile_Fragment và truyền tham số
+        replaceFragment(profile_Fragment.newInstance(userName, userWallet, userEmail, userPass));
     }
 }
