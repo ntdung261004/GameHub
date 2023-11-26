@@ -38,12 +38,12 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         search searchItem = searchList.get(position);
 
-        // Load image using Picasso (you can use Glide as well)
+
         String imgUrl = searchItem.getImg();
         if (imgUrl != null && !imgUrl.isEmpty()) {
             Picasso.get().load(imgUrl).into(holder.search_image);
         } else {
-            // Xử lý khi ảnh không tải được hoặc không có đường dẫn ảnh
+
         }
 
         // Set the game name
@@ -51,7 +51,7 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.ViewHolder
 
         // Handle item click if needed
         holder.itemView.setOnClickListener(v -> {
-            // Handle item click action, e.g., open game details
+
         });
     }
 
@@ -66,8 +66,8 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            search_image = itemView.findViewById(R.id.search_image); // Thay thế bằng ID thực của ImageView
-            search_name = itemView.findViewById(R.id.searh_name); // Thay thế bằng ID thực của TextView
+            search_image = itemView.findViewById(R.id.search_image);
+            search_name = itemView.findViewById(R.id.searh_name);
         }
     }
     public void setFilter(List<search> searchList) {

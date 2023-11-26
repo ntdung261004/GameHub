@@ -81,18 +81,18 @@ public class newsfeed_Fragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // Handle the search query submission if needed
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Show/hide the RecyclerView based on whether there is text in the search view
+
                 if (newText.isEmpty()) {
                     rcvSearch.setVisibility(View.GONE);
                 } else {
                     rcvSearch.setVisibility(View.VISIBLE);
-                    // Perform filtering or loading data based on the search query (newText)
+
                     filterSearchResults(newText);
                 }
                 return true;
@@ -167,7 +167,7 @@ public class newsfeed_Fragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Xử lý lỗi nếu có
+
             }
         });
     }
@@ -186,17 +186,17 @@ public class newsfeed_Fragment extends Fragment {
         }
     }
     private void filterSearchResults(String query) {
-        // Assuming searchList is your original list of all games
+
         List<search> filteredList = new ArrayList<>();
 
         for (search game : searchList) {
-            // Filter logic: Check if the game name contains the search query
+
             if (game.getTengame().toLowerCase().contains(query.toLowerCase())) {
                 filteredList.add(game);
             }
         }
 
-        // Update the searchAdapter with the filtered results
+
         searchAdapter.setFilter(filteredList);
     }
 
