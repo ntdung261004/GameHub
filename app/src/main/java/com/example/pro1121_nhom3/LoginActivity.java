@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +28,8 @@ import org.jetbrains.annotations.NotNull;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etuser, etpass;
-    private Button btlogin, btregister;
+    private Button btlogin;
+    private TextView txtregister;
     private FirebaseAuth mAuth;
 
     @Override
@@ -39,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         etuser = findViewById(R.id.edtUsername);
         etpass = findViewById(R.id.edtPassword);
         btlogin = findViewById(R.id.btlogin);
-        btregister = findViewById(R.id.btregister);
+        txtregister = findViewById(R.id.txtregister);
         mAuth = FirebaseAuth.getInstance();
 
         // Xử lý sự kiện khi nhấn nút đăng nhập
@@ -51,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Xử lý sự kiện khi nhấn nút đăng ký
-        btregister.setOnClickListener(new View.OnClickListener() {
+        txtregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
