@@ -8,10 +8,12 @@ public class loaigame {
     public loaigame() {
     }
 
+
     public loaigame(String maloai, String tenloai) {
         this.maloai = maloai;
         this.tenloai = tenloai;
     }
+
 
     public String getMaloai() {
         return maloai;

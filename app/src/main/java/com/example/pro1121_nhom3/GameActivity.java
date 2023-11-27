@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.pro1121_nhom3.adapter.AdminGameAdapter;
 import com.example.pro1121_nhom3.adapter.userAdapter;
 import com.example.pro1121_nhom3.model.game;
+import com.example.pro1121_nhom3.model.loaigame;
 import com.example.pro1121_nhom3.model.nguoidung;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class GameActivity extends AppCompatActivity {
     ImageView ivMenuBack;
@@ -54,21 +56,22 @@ public class GameActivity extends AppCompatActivity {
         recyclerviewgame.setAdapter(adminGameAdapter);
 
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    game adminGame = dataSnapshot.getValue(game.class);
-                    listGame.add(adminGame);
-                }
-                adminGameAdapter.notifyDataSetChanged();
-            }
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                    game adminGame = dataSnapshot.getValue(game.class);
+//                    listGame.add(adminGame);
+//                }
+//                adminGameAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
 
 
@@ -119,13 +122,56 @@ public class GameActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtTenGame.getText().toString();
-                edtMaLoai.getText().toString();
-                edtNPH.getText().toString();
-                edtGia.getText().toString();
+                String tengame = edtTenGame.getText().toString().trim();
+                String tenloai = edtMaLoai.getText().toString().trim();
+                String nph = edtNPH.getText().toString().trim();
+                float giaban = Float.parseFloat(edtGia.getText().toString().trim());
+
+                // Create a new game object
+                game GAME = new game(tengame,tenloai,nph,giaban);
+
+                // Call the method to add the new game
+                onClickAddGame(GAME, alertDialog);
+            }
+
             }
         });
+
+    //Lấy tên loại game từ loại game
+    private String getTenLoaiById(String loaiId) {
+        Set<String> loaiGameKeys = getLoaiGameKeys();
+
+        for (String id : loaiGameKeys) {
+            if (id.equals(loaiId)) {
+                return loaigame.get(id).get("tenloai");
+            }
+        }
+        return "";
+
+
+    }
+}
+
+    private void onClickAddGame(game GAME, AlertDialog alertDialog){
+        // Assuming that the game ID needs to be generated dynamically
+        String newGameId = "id" + (listGame.size() + 1);
+
+        // Create a new game entry
+        game newGame = new game(
+                GAME.getTengame(),
+                GAME.getLoaigame(),
+                GAME.getNph(),
+                GAME.getGiaban(),
+                newGameId // Set the dynamically generated game ID
+        );
+
+        //Add the new game to the list
+        listGame.add(newGame);
+
+        // Notify the adapter that the dataset has changed
+        adminGameAdapter.notifyDataSetChanged();
+
+        // Close the dialog
+        alertDialog.dismiss();
     }
 
-
-}
