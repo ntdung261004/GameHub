@@ -1,20 +1,20 @@
 package com.example.pro1121_nhom3.model;
 
-public class nguoidung{
+public class nguoidung {
     private String email;
-    private game game;
+    private game userGame;
     private String matkhau;
     private String tendangnhap;
     private int role;
     private String tennd;
-    private float wallet;
+    private double wallet;
 
     public nguoidung() {
     }
 
-    public nguoidung(String email, com.example.pro1121_nhom3.model.game game, String matkhau, String tendangnhap, int role, String tennd, float wallet) {
+    public nguoidung(String email, game userGame, String matkhau, String tendangnhap, int role, String tennd, double wallet) {
         this.email = email;
-        this.game = game;
+        this.userGame = userGame;
         this.matkhau = matkhau;
         this.tendangnhap = tendangnhap;
         this.role = role;
@@ -30,12 +30,12 @@ public class nguoidung{
         this.email = email;
     }
 
-    public com.example.pro1121_nhom3.model.game getGame() {
-        return game;
+    public game getUserGame() {
+        return userGame;
     }
 
-    public void setGame(com.example.pro1121_nhom3.model.game game) {
-        this.game = game;
+    public void setUserGame(game userGame) {
+        this.userGame = userGame;
     }
 
     public String getMatkhau() {
@@ -54,14 +54,6 @@ public class nguoidung{
         this.tendangnhap = tendangnhap;
     }
 
-    public String getTennd() {
-        return tennd;
-    }
-
-    public void setTennd(String tennd) {
-        this.tennd = tennd;
-    }
-
     public int getRole() {
         return role;
     }
@@ -70,11 +62,19 @@ public class nguoidung{
         this.role = role;
     }
 
-    public float getWallet() {
+    public String getTennd() {
+        return tennd;
+    }
+
+    public void setTennd(String tennd) {
+        this.tennd = tennd;
+    }
+
+    public double getWallet() {
         return wallet;
     }
 
-    public void setWallet(float wallet) {
+    public void setWallet(double wallet) {
         this.wallet = wallet;
     }
 }

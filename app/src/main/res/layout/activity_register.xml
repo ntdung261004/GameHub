@@ -25,7 +25,16 @@
         android:layout_marginTop="20dp"
         android:background="#CCCCCC"
         android:paddingStart="20dp"
-        android:hint="Use name" />
+        android:hint="user login" />
+    <EditText
+        android:id="@+id/edttennd"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#CCCCCC"
+        android:paddingStart="20dp"
+        android:hint="user name" />
     <EditText
         android:id="@+id/edtGmail"
         android:layout_width="350dp"
