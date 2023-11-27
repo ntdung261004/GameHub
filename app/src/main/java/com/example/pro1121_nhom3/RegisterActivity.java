@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,8 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText edtUsername, edttennd, edtGmail, edtPassword, edtenterpassword;
-    private Button btRegister;
-
+    private Button btSignIn;
+    private TextView tvLogin;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
@@ -38,9 +39,15 @@ public class RegisterActivity extends AppCompatActivity {
         edtGmail = findViewById(R.id.edtGmail);
         edtPassword = findViewById(R.id.edtPassword);
         edtenterpassword = findViewById(R.id.edtenterpassword);
-        btRegister = findViewById(R.id.btlogin);
-
-        btRegister.setOnClickListener(new View.OnClickListener() {
+        btSignIn = findViewById(R.id.btSignIn);
+        tvLogin=findViewById(R.id.tvLogin);
+        tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        btSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Gọi hàm đăng ký khi người dùng click nút đăng ký
