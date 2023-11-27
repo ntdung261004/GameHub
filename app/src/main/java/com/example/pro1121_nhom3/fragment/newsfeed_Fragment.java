@@ -157,9 +157,10 @@ public class newsfeed_Fragment extends Fragment {
                     DataSnapshot loaiGameSnapshot = snapshot.child("loaigame");
                     String tengame = snapshot.child("tengame").getValue(String.class);
                     String img = snapshot.child("img").getValue(String.class);
+                    String magame = snapshot.getKey();
 
                     if (tengame != null && img != null) {
-                        searchList.add(new search(tengame, img));
+                        searchList.add(new search(tengame, img,magame));
                     }
                 }
                 searchAdapter.notifyDataSetChanged();

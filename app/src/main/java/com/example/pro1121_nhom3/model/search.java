@@ -4,13 +4,7 @@ public class search {
     private String tengame;
     private String img;
 
-    public search() {
-    }
-
-    public search(String tengame, String img) {
-        this.tengame = tengame;
-        this.img = img;
-    }
+    private String magame;
 
     public String getTengame() {
         return tengame;
@@ -27,4 +21,23 @@ public class search {
     public void setImg(String img) {
         this.img = img;
     }
+
+    public String getMagame() {
+        return magame;
+    }
+
+    public void setMagame(String magame) {
+        this.magame = magame;
+    }
+
+    public search(String tengame, String img, String magame) {
+        this.tengame = tengame;
+        this.img = img;
+        this.magame = magame;
+    }
+
+    public search() {
+    }
 }
+
+
