@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,18 +19,21 @@ import com.bumptech.glide.Glide;
 import com.example.pro1121_nhom3.model.game;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class pagegameActivity extends AppCompatActivity {
 
-    TextView tvten, tvngayph, tvsellcount, tvmota, tvloaigame;
+    TextView tvten, tvngayph, tvsellcount, tvmota, tvloaigame, tvnph;
     Button btbuy;
     ImageView banner;
-    game GameIndex;
+    game gameIndex;
 
 
     @Override
@@ -42,7 +47,8 @@ public class pagegameActivity extends AppCompatActivity {
         tvloaigame = findViewById(R.id.tvloaigamepage);
         banner = findViewById(R.id.bannergamepage);
         btbuy = findViewById(R.id.btbuynowpage);
-        GameIndex = new game();
+        tvnph =findViewById(R.id.tvnphpage);
+        gameIndex = new game();
         SharedPreferences sharedPref = getSharedPreferences("infogame", Context.MODE_PRIVATE);
         String magame = sharedPref.getString("magame", "null");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -54,19 +60,21 @@ public class pagegameActivity extends AppCompatActivity {
                 {
                     if(data.getKey().equals(magame))
                     {
-                        GameIndex = data.getValue(game.class);
-                        tvten.setText(GameIndex.getTengame());
-                        tvngayph.setText(GameIndex.getNgayph());
-                        tvsellcount.setText("Đã bán " + GameIndex.getSellcount() + " bản");
-                        tvmota.setText(GameIndex.getMota());
-                        tvloaigame.setText("Category: " + GameIndex.getLoaigame().getTenloai());
-                        Glide.with(pagegameActivity.this).load(GameIndex.getImg()).into(banner);
-                        if(GameIndex.getGiaban()==0)
-                        {
-                            btbuy.setText("FREE TO PLAY");
+                        gameIndex = data.getValue(game.class);
+                        tvten.setText(gameIndex.getTengame());
+                        tvloaigame.setText("Category: " + gameIndex.getLoaigame().getTenloai());
+                        tvngayph.setText(gameIndex.getNgayph());
+                        tvmota.setText(gameIndex.getMota());
+                        tvnph.setText(gameIndex.getNph());
+                        tvsellcount.setText(gameIndex.getSellcount() + " copies sold");
+                        Glide.with(pagegameActivity.this).load(gameIndex.getImg()).into(banner);
+
+                        if(gameIndex.getGiaban()==0){
+                            btbuy.setText("Free to Play");
                         }else{
-                            btbuy.setText((int)GameIndex.getGiaban() + " VND");
+                            btbuy.setText((int)gameIndex.getGiaban()+ " VND");
                         }
+
                     }
                 }
             }
@@ -77,9 +85,39 @@ public class pagegameActivity extends AppCompatActivity {
             }
         });
 
+        btbuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if(currentUser != null)
+                {
+                    String userEmail = currentUser.getEmail();
 
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
+                    Query query = databaseReference.orderByChild("email").equalTo(userEmail);
+
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                                    userSnapshot.getRef().child("cart").push().setValue(magame);
+                                    Toast.makeText(pagegameActivity.this, "Đã thêm vào giỏ hàng! Hãy chuyển qua trang giỏ hàng để thanh toán", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // Xử lý lỗi nếu có
+                        }
+                    });
+                }
+            }
+        });
 
 
     }
+
 
 }

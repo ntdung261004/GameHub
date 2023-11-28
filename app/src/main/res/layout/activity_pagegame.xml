@@ -59,6 +59,7 @@
                     android:fontFamily="@font/inriasansbold"
                     android:id="@+id/tvsellcountpage"
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
@@ -67,17 +68,35 @@
                     android:textColor="#9C9C9C" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvloaigamepage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="60dp"
-                android:textSize="18dp"
-                android:padding="10dp"
-                android:background="#4C4C4C"
-                android:textColor="#959595"
-                android:text="Category: FPS" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvloaigamepage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="60dp"
+                    android:background="#4C4C4C"
+                    android:padding="10dp"
+                    android:text="Category: FPS"
+                    android:textColor="#959595"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tvnphpage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="60dp"
+                    android:background="#4C4C4C"
+                    android:padding="10dp"
+                    android:text="Mangnon Studio"
+                    android:textColor="#959595"
+                    android:textSize="18dp" />
+            </LinearLayout>
 
             <TextView
                 android:fontFamily="@font/inriasansbold"
