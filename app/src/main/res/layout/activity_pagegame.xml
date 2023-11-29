@@ -18,8 +18,7 @@
         android:layout_height="20dp"
         app:icon="@android:drawable/ic_menu_revert"
         android:backgroundTint="#686868"
-        app:shapeAppearance="@drawable/btbuypagegame"
-        app:shapeAppearanceOverlay="@drawable/btbuypagegame"
+
         />
 
     <LinearLayout
