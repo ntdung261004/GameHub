@@ -71,7 +71,17 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="25dp"
-                android:text="100 VNĐ"
+                android:text="100"
+                android:textColor="#939393"
+                android:textSize="30sp" />
+            <TextView
+                android:fontFamily="@font/inter_r"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="50dp"
+                android:text="VNĐ"
                 android:textColor="#939393"
                 android:textSize="30sp" />
 
