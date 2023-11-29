@@ -4,6 +4,9 @@ import static android.app.PendingIntent.getActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,9 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.pro1121_nhom3.databinding.ActivityPagegameBinding;
+import com.example.pro1121_nhom3.fragment.cart_Fragment;
 import com.example.pro1121_nhom3.model.game;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -101,8 +107,38 @@ public class pagegameActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
                                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                                    userSnapshot.getRef().child("cart").push().setValue(magame);
-                                    Toast.makeText(pagegameActivity.this, "Đã thêm vào giỏ hàng! Hãy chuyển qua trang giỏ hàng để thanh toán", Toast.LENGTH_SHORT).show();
+                                    DatabaseReference gameref = FirebaseDatabase.getInstance().getReference("game");
+                                    gameref.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for(DataSnapshot gamesnap : snapshot.getChildren())
+                                            {
+                                                if(gamesnap.getKey().equals(magame))
+                                                {
+                                                    game game1 = gamesnap.getValue(game.class);
+                                                    game1.setMagame(magame);
+
+                                                    userSnapshot.getRef().child("cart").child(magame).setValue(game1);
+                                                    Snackbar.make(findViewById(R.id.pagegameview), "Đã thêm vào giỏ hàng!", Snackbar.LENGTH_LONG).setAction("Thanh toán", new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            Intent intent = new Intent(pagegameActivity.this, MainActivity.class);
+                                                            intent.putExtra("okok",1);
+                                                            startActivity(intent);
+                                                        }
+                                                    }).show();
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+
+
                                 }
                             }
                         }

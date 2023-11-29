@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.example.pro1121_nhom3.databinding.ActivityMainBinding;
 import com.example.pro1121_nhom3.fragment.cart_Fragment;
 import com.example.pro1121_nhom3.fragment.newsfeed_Fragment;
@@ -21,8 +23,13 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Thay thế fragment mặc định bằng fragment newsfeed_Fragment khi activity được tạo
-        replaceFragment(new newsfeed_Fragment());
+
+        if(getIntent().getIntExtra("okok",0)==1){
+            replaceFragment(new cart_Fragment());
+        }else{
+            replaceFragment(new newsfeed_Fragment());
+        }
+
 
         // Xử lý sự kiện khi chọn mục trên BottomNavigationView
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -37,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Phương thức để thay thế fragment hiện tại
-    private void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.framelayout, fragment);

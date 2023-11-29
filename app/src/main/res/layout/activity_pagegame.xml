@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pagegameview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
@@ -25,12 +26,12 @@
                 android:layout_height="220dp" />
 
             <TextView
-                android:fontFamily="@font/goldmanregular"
                 android:id="@+id/tvtengamepage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/goldmanregular"
                 android:paddingBottom="0dp"
                 android:text="Naraka: Minecraft"
                 android:textColor="@color/white"
@@ -44,28 +45,28 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:fontFamily="@font/inriasansbold"
                     android:id="@+id/tvngayphpage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:textSize="24dp"
-                    android:textStyle="bold"
-                    android:textColor="#9C9C9C"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:fontFamily="@font/inriasansbold"
+                    android:text="TextView"
+                    android:textColor="#9C9C9C"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:fontFamily="@font/inriasansbold"
                     android:id="@+id/tvsellcountpage"
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:fontFamily="@font/inriasansbold"
                     android:text="TextView"
+                    android:textColor="#9C9C9C"
                     android:textSize="18dp"
-                    android:textStyle="italic"
-                    android:textColor="#9C9C9C" />
+                    android:textStyle="italic" />
             </LinearLayout>
 
             <LinearLayout
@@ -99,21 +100,21 @@
             </LinearLayout>
 
             <TextView
-                android:fontFamily="@font/inriasansbold"
                 android:id="@+id/textView20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:fontFamily="@font/inriasansbold"
                 android:text="ABOUT GAME"
                 android:textColor="@color/white"
                 android:textSize="22dp" />
 
             <TextView
-                android:fontFamily="@font/goldmanregular"
                 android:id="@+id/tvmotapage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/goldmanregular"
                 android:gravity="fill"
                 android:text="kamtkn3oirnai3n ảoi3nrioan3ionf oănnraown an ưefnaweknf ănefl ăel nflakwen flka nưelkfnawlkenflka"
                 android:textSize="22dp" />
@@ -133,16 +134,16 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="5"
-            android:textColor="#FFEB3B"
             android:background="@drawable/gradientbuy"
-            android:text="BUY NOW" />
+            android:text="BUY NOW"
+            android:textColor="#FFEB3B" />
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:src="@drawable/wishlist" />
 
     </LinearLayout>
