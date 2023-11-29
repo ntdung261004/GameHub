@@ -20,35 +20,34 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import org.jetbrains.annotations.NotNull;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etuser, etpass;
     private Button btlogin;
-    private TextView txtregister;
     private FirebaseAuth mAuth;
+    private TextView txtregister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Ánh xạ các thành phần giao diện
+        // Initialize Firebase Authentication
+        mAuth = FirebaseAuth.getInstance();
+
+        // Map UI elements
         etuser = findViewById(R.id.edtUsername);
         etpass = findViewById(R.id.edtPassword);
         btlogin = findViewById(R.id.btlogin);
         txtregister = findViewById(R.id.txtregister);
-        mAuth = FirebaseAuth.getInstance();
-
-        // Xử lý sự kiện khi nhấn nút đăng nhập
+        // Set OnClickListener for the login button
         btlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
             }
         });
-
         // Xử lý sự kiện khi nhấn nút đăng ký
         txtregister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,62 +58,57 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    // Phương thức xử lý đăng nhập
+    // Method to handle login
     private void login() {
-        String input = etuser.getText().toString();
-        String pass = etpass.getText().toString();
+        String input = etuser.getText().toString().trim();
+        String pass = etpass.getText().toString().trim();
 
         if (TextUtils.isEmpty(input) || TextUtils.isEmpty(pass)) {
             Toast.makeText(this, "Vui lòng nhập Email/Key và Password", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Kiểm tra xem input có phải là email hay key
+        // Check if the input is a valid email
         if (isValidEmail(input)) {
-            // Đăng nhập bằng email
+            // Login with email
             mAuth.signInWithEmailAndPassword(input, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
-                public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                        // Thêm code để lấy dữ liệu từ Realtime Database và chuyển sang MainActivity
-                        fetchUserData(input); // Sử dụng email để lấy dữ liệu
+                        fetchUserData(input);
                     } else {
                         Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         } else {
-            // Đăng nhập bằng key
+            // Login with key
             loginWithKey(input, pass);
         }
     }
 
-    // Phương thức kiểm tra xem chuỗi có phải là email hay không
+    // Method to check if the input is a valid email
     private boolean isValidEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    // Phương thức đăng nhập bằng key
+    // Method to login with key
     private void loginWithKey(String key, String password) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
 
-        // Kiểm tra xem key có tồn tại trong cơ sở dữ liệu hay không
         databaseReference.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    // Lấy email được liên kết với key
                     String userEmail = snapshot.child("email").getValue(String.class);
 
-                    // Thực hiện xác thực Firebase với email và mật khẩu
                     mAuth.signInWithEmailAndPassword(userEmail, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
-                                public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                                public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                        // Lấy thông tin người dùng sau khi đăng nhập thành công
                                         fetchUserData(userEmail);
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
@@ -128,12 +122,13 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Xử lý lỗi từ cơ sở dữ liệu
+                // Handle database error
             }
         });
     }
 
-    // Phương thức để lấy dữ liệu người dùng từ Realtime Database
+    // Method to fetch user data from Realtime Database
+    // Trong phương thức fetchUserData
     private void fetchUserData(String userEmail) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
         Query query = databaseReference.orderByChild("email").equalTo(userEmail);
@@ -142,26 +137,31 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                        // Lấy thông tin người dùng từ snapshot
-                        String userName = userSnapshot.child("tennd").getValue(String.class);
-                        String userEmail = userSnapshot.child("email").getValue(String.class);
-                        int userWallet = userSnapshot.child("wallet").getValue(Integer.class);
-                        String userPass = userSnapshot.child("matkhau").getValue(String.class);
+                        Intent intent;
+                        if (userSnapshot.child("role").getValue(Integer.class) == 2) {
+                            // Redirect to AdminActivity
+                            intent = new Intent(LoginActivity.this, AdminActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        } else {
+                            intent = new Intent(LoginActivity.this, MainActivity.class);
+                            // Truyền dữ liệu cần thiết nếu có
+                            intent.putExtra("userName", userSnapshot.child("tennd").getValue(String.class));
+                            intent.putExtra("userWallet", userSnapshot.child("wallet").getValue(Integer.class));
+                        }
 
-                        // Chuyển đến MainActivity và truyền dữ liệu
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("userName", userName);
-                        intent.putExtra("userWallet", userWallet);
                         intent.putExtra("userEmail", userEmail);
-                        intent.putExtra("userPassword", userPass);
+                        intent.putExtra("userPassword", userSnapshot.child("matkhau").getValue(String.class));
                         startActivity(intent);
+                        finish();
                     }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Xử lý lỗi nếu có
+                // Handle database error
             }
         });
     }
