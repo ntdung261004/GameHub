@@ -24,6 +24,7 @@ import com.example.pro1121_nhom3.fragment.cart_Fragment;
 import com.example.pro1121_nhom3.model.game;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,7 +38,9 @@ import com.google.firebase.database.ValueEventListener;
 public class pagegameActivity extends AppCompatActivity {
 
     TextView tvten, tvngayph, tvsellcount, tvmota, tvloaigame, tvnph;
+    String magame;
     Button btbuy;
+    ExtendedFloatingActionButton btback;
     ImageView banner;
     game gameIndex;
 
@@ -53,13 +56,16 @@ public class pagegameActivity extends AppCompatActivity {
         tvloaigame = findViewById(R.id.tvloaigamepage);
         banner = findViewById(R.id.bannergamepage);
         btbuy = findViewById(R.id.btbuynowpage);
+        btback = findViewById(R.id.btBackpagegame);
         tvnph =findViewById(R.id.tvnphpage);
         gameIndex = new game();
+        checkIfUserHas();
         SharedPreferences sharedPref = getSharedPreferences("infogame", Context.MODE_PRIVATE);
-        String magame = sharedPref.getString("magame", "null");
+        magame = sharedPref.getString("magame", "null");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("game");
-        myRef.addValueEventListener(new ValueEventListener() {
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot data : snapshot.getChildren())
@@ -152,8 +158,61 @@ public class pagegameActivity extends AppCompatActivity {
             }
         });
 
+        btback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
     }
 
+    private void checkIfUserHas()
+    {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null)
+        {
+            String userEmail = currentUser.getEmail();
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
+            Query query = databaseReference.orderByChild("email").equalTo(userEmail);
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                            userSnapshot.child("game").getRef().addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for(DataSnapshot game : snapshot.getChildren())
+                                    {
+                                        if(magame.equals(game.getKey()))
+                                        {
+                                            btbuy.setEnabled(false);
+                                            btbuy.setText("Đã sở hữu");
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Xử lý lỗi nếu có
+                }
+            });
+        }
+    }
 
 }
