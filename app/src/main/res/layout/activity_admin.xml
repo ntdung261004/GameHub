@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context=".AdminActivity"
-    android:background="@color/black"
+    android:background="#9A9A9A"
     android:orientation="vertical"
     >
 
@@ -26,14 +26,14 @@
                 android:id="@+id/ivAdminUser"
                 android:layout_width="200dp"
                 android:layout_height="100dp"
-                android:src="@mipmap/logouser"
+                android:src="@drawable/user"
                 >
             </ImageView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="USER"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold">
 
@@ -51,7 +51,7 @@
                 android:id="@+id/ivAdminBill"
                 android:layout_width="200dp"
                 android:layout_height="100dp"
-                android:src="@mipmap/logobill">
+                android:src="@drawable/bill">
 
             </ImageView>
 
@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="BILL"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold">
 
@@ -82,14 +82,14 @@
                 android:id="@+id/ivAdminGame"
                 android:layout_width="200dp"
                 android:layout_height="100dp"
-                android:src="@mipmap/logogame"
+                android:src="@drawable/icongamee"
                 >
             </ImageView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GAME"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold">
 

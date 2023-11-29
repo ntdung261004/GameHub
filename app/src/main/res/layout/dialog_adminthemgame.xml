@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:padding="10dp"
-        android:background="#1C1C1C"
+        android:background="#474646"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="ADD A GAME"
             android:textAllCaps="true"
-            android:textColor="#FF0000"
+            android:textColor="#2196F3"
             android:textSize="30sp"
             android:textStyle="bold"/>
 
@@ -70,7 +70,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Add"
-                android:backgroundTint="#00CC00"
+                android:backgroundTint="#2196F3"
                 android:layout_marginRight="10dp"/>
 
             <Button
@@ -78,7 +78,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Cancel"
-                android:backgroundTint="#FF0000"
+                android:backgroundTint="#960000"
                 android:layout_marginLeft="10dp"/>
         </LinearLayout>
     </LinearLayout>

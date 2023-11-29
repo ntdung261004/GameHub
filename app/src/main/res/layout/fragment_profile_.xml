@@ -7,149 +7,156 @@
     tools:context=".fragment.profile_Fragment">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#424141"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-33dp">
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:background="#3C3B3B"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="15dp"
-                android:src="@mipmap/avt" />
+            android:layout_height="wrap_content"
+            android:background="#424141"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-33dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_height="130dp"
+                android:background="#3C3B3B"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@mipmap/avt" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvtenuser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="35dp"
+                        android:fontFamily="@font/inter_r"
+                        android:text="Peter Parker"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#DCDCDC">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="150dp"
+                    android:fontFamily="@font/inter_r"
+                    android:text="Wallet: "
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="25dp"
+                    android:fontFamily="@font/inter_r"
+                    android:text="100"
+                    android:textColor="#939393"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/inter_r"
+                    android:text="VNĐ"
+                    android:textColor="#939393"
+                    android:textSize="30sp" />
+
+                <ImageButton
+                    android:id="@+id/btnWallet"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end|center_horizontal"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/wallet" />
+
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:layout_marginTop="100dp"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/edtemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="16dp"
+                    android:background="#8A8A8A"
+                    android:focusable="true"
+
+                    android:focusableInTouchMode="true"
                     android:fontFamily="@font/inter_r"
-                    android:id="@+id/tvtenuser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginLeft="10dp"
-                    android:textStyle="bold"
-                    android:text="Peter Parker"
+                    android:gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="30sp" />
+                    android:textColorHint="#FFFFFF" />
+
+
+                <EditText
+                    android:id="@+id/edttennguoidung"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="16dp"
+                    android:background="#8A8A8A"
+                    android:fontFamily="@font/inter_r"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textColorHint="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/edtpasswaord"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="16dp"
+                    android:background="#8A8A8A"
+                    android:fontFamily="@font/inter_r"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textColorHint="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="#AFAFAF"
+                    android:text="Update"
+                    android:textColor="#000000" />
             </LinearLayout>
         </LinearLayout>
+    </ScrollView>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="#DCDCDC">
-
-            <TextView
-                android:fontFamily="@font/inter_r"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="150dp"
-                android:text="Wallet: "
-                android:textSize="30sp" />
-
-            <TextView
-                android:fontFamily="@font/inter_r"
-                android:id="@+id/wallet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="25dp"
-                android:text="100"
-                android:textColor="#939393"
-                android:textSize="30sp" />
-            <TextView
-                android:fontFamily="@font/inter_r"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="50dp"
-                android:text="VNĐ"
-                android:textColor="#939393"
-                android:textSize="30sp" />
-
-            <ImageButton
-                android:id="@+id/btnWallet"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="end|center_horizontal"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/wallet" />
-
-
-        </FrameLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="100dp">
-
-            <TextView
-                android:fontFamily="@font/inter_r"
-                android:id="@+id/edtemail"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="16dp"
-                android:background="#8A8A8A"
-
-                android:textColor="@color/white"
-                android:textColorHint="#FFFFFF"
-                android:gravity="center"
-                android:focusable="true"
-                android:focusableInTouchMode="true" />
-
-
-            <EditText
-                android:fontFamily="@font/inter_r"
-                android:id="@+id/edttennguoidung"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="16dp"
-                android:background="#8A8A8A"
-                android:textColor="@color/white"
-                android:gravity="center"
-                android:textColorHint="#FFFFFF" />
-
-            <EditText
-                android:fontFamily="@font/inter_r"
-                android:id="@+id/edtpasswaord"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="16dp"
-                android:background="#8A8A8A"
-                android:textColor="@color/white"
-                android:gravity="center"
-                android:textColorHint="#FFFFFF" />
-
-            <Button
-                android:id="@+id/btnUpdate"
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:backgroundTint="#AFAFAF"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:text="Update"
-                android:textColor="#000000" />
-        </LinearLayout>
-    </LinearLayout>
 </LinearLayout>
