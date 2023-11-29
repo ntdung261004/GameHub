@@ -193,7 +193,8 @@ public class cart_Fragment extends Fragment {
                                                     for(DataSnapshot gamesnap1 : snapshot.getChildren())
                                                     {
                                                         game game1 = gamesnap1.getValue(game.class);
-                                                        ref2.setValue(game1);
+                                                        game1.setMagame(gamesnap1.getKey());
+                                                        ref2.child(game1.getMagame()).setValue(game1);
                                                     }
 
                                                 }
