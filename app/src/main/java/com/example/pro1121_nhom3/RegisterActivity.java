@@ -76,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Lưu thông tin người dùng vào Database với username làm khóa chính
                                 DatabaseReference currentUserDb = mDatabase.child(username);
+                                currentUserDb.child("avatar").setValue("https://firebasestorage.googleapis.com/v0/b/pro1121-nhom3.appspot.com/o/gamer.png?alt=media&token=1d44fceb-e564-4400-b18c-c122f9dacf7c");
                                 currentUserDb.child("email").setValue(email);
                                 currentUserDb.child("tennd").setValue(tennd);
                                 currentUserDb.child("role").setValue(1);

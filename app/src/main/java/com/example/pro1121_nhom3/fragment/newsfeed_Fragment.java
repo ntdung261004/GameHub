@@ -42,7 +42,6 @@ public class newsfeed_Fragment extends Fragment {
     private ArrayList<news> newsList;
     private ArrayList<search> searchList;
     private SearchView searchView;
-    private gameDAO GameDAO;
     private ViewPager newsSlideShow;
     private CircleIndicator circleIndicator;
     private newsAdapter newsAdapter;
@@ -55,7 +54,6 @@ public class newsfeed_Fragment extends Fragment {
 
         newsSlideShow = view.findViewById(R.id.viewPagerNews);
         circleIndicator = view.findViewById(R.id.circleIndicator);
-        GameDAO = new gameDAO(getActivity());
         rcvFreeGame = view.findViewById(R.id.rcvFreeGame);
         rcvBestSellers = view.findViewById(R.id.rcvBestSellers);
         rcvAllGame = view.findViewById(R.id.rcvAllGame);

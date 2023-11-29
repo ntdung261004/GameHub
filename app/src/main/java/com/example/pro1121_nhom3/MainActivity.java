@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(getIntent().getIntExtra("okok",0)==1){
             replaceFragment(new cart_Fragment());
+            binding.bottomNavigationView.setSelectedItemId(R.id.c);
         }else{
             replaceFragment(new newsfeed_Fragment());
         }

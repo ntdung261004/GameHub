@@ -1,6 +1,8 @@
 package com.example.pro1121_nhom3.model;
 
 public class nguoidung {
+
+    private String avatar;
     private String email;
     private game userGame;
     private String matkhau;
@@ -20,6 +22,14 @@ public class nguoidung {
         this.role = role;
         this.tennd = tennd;
         this.wallet = wallet;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getEmail() {
