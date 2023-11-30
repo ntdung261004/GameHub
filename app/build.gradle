@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.firebase:firebase-database:20.3.0'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
+    implementation 'com.google.firebase:firebase-storage:20.1.0'
     constraints {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
             because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
@@ -62,4 +63,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.firebaseui:firebase-ui-database:7.1.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.orhanobut:dialogplus:1.11@aar'
 }

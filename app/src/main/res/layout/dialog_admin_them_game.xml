@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="10dp"
+        android:background="#1C1C1C"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtTieuDe"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD A GAME"
+            android:textAllCaps="true"
+            android:textColor="#FF0000"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="20dp">
+                <ImageView
+                    android:id="@+id/ivSanPhamMoi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/avt"
+                    android:scaleType="centerCrop"
+                    />
+            </androidx.cardview.widget.CardView>
+
+
+            <Button
+                android:id="@+id/btnThemHinhAnhSP"
+                android:layout_gravity="center"
+                android:layout_width="115dp"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="#2b2b2b"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Thêm ảnh" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edtTenGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập tên game"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"/>
+
+        <Spinner
+            android:id="@+id/SpnMaLoai"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Nhập mã loại"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edtNPH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập nhà phát hành"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edtNgayPH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập ngày phát hành"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edtMoTa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập mô tả"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edtLikeCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập like count"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edtSellCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập sell count"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edtGia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập giá"
+            android:background="@drawable/custom_edt"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:backgroundTint="#2b2b2b"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:backgroundTint="#2b2b2b"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
