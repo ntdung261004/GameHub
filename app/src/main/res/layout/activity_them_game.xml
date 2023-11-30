@@ -63,7 +63,7 @@
             android:textColor="@color/white"/>
 
         <Spinner
-            android:id="@+id/SpnMaLoai"
+            android:id="@+id/SpnMaLoaiActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"

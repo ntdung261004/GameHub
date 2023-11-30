@@ -8,16 +8,16 @@ public class hoadon {
     private String nguoidung_tendangnhap;
     private float thanhtien;
 
-    private List<game> listGame;
+    private ArrayList<game> game;
 
     public hoadon() {
     }
 
-    public hoadon(String ngaymua, String nguoidung_tendangnhap, float thanhtien, List<game> listGame) {
+    public hoadon(String ngaymua, String nguoidung_tendangnhap, float thanhtien, ArrayList<game> listGame) {
         this.ngaymua = ngaymua;
         this.nguoidung_tendangnhap = nguoidung_tendangnhap;
         this.thanhtien = thanhtien;
-        this.listGame = listGame;
+        this.game = listGame;
     }
 
     public String getNgaymua() {
@@ -46,11 +46,11 @@ public class hoadon {
         this.nguoidung_tendangnhap = nguoidung_tendangnhap;
     }
 
-    public List<game> getListGame() {
-        return listGame;
+    public ArrayList<game> getListGame() {
+        return game;
     }
 
-    public void setListGame(List<game> listGame) {
-        this.listGame = listGame;
+    public void setListGame(ArrayList<game> listGame) {
+        this.game = listGame;
     }
 }

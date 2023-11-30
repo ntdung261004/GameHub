@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,7 +41,7 @@ public class ThemGameActivity extends AppCompatActivity {
         ImageView ivSanPhamMoi = findViewById(R.id.ivSanPhamMoi);
         Button btnThemHinhAnhSP = findViewById(R.id.btnThemHinhAnhSP);
         EditText edtTenGame = findViewById(R.id.edtTenGame);
-        Spinner SpnMaLoai = findViewById(R.id.SpnMaLoai);
+        SpnMaLoai = findViewById(R.id.SpnMaLoaiActivity);
         EditText edtNPH = findViewById(R.id.edtNPH);
         EditText edtGia = findViewById(R.id.edtGia);
         EditText edtNgayPH = findViewById(R.id.edtNgayPH);
@@ -50,6 +51,7 @@ public class ThemGameActivity extends AppCompatActivity {
 
         Button btnAdd = findViewById(R.id.btnAdd);
         Button btnCancel = findViewById(R.id.btnCancel);
+
 
 
 //        databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -122,7 +124,6 @@ public class ThemGameActivity extends AppCompatActivity {
                     loaigame category = snapshot.getValue(loaigame.class);
                     listLoaiGame.add(category);
                 }
-
                 // Populate Spinner with categories
                 populateSpinner();
             }
@@ -140,10 +141,15 @@ public class ThemGameActivity extends AppCompatActivity {
         for (loaigame category : listLoaiGame) {
             categoryNames.add(category.getTenloai());
         }
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        SpnMaLoai.setAdapter(adapter);
+        try {
+            SpnMaLoai.setAdapter(adapter);
+        }
+        catch (Exception e){
+            //log de biet bi loi gi
+            Log.d("MYLOG","Loi: "+ e);
+        }
     }
 
 }
