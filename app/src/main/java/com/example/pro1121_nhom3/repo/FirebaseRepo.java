@@ -40,8 +40,11 @@ public class FirebaseRepo {
 
                     GenericTypeIndicator<ArrayList<game>> genericTypeIndicator =
                             new GenericTypeIndicator<ArrayList<game>>(){};
-
+                    Log.d("MYLOG","list: "+ ds.child("game").getValue());
+                    //ds.child("game").toString()
                     hd.setListGame(ds.child("game").getValue(genericTypeIndicator));
+
+
                     listBill.add(hd);
                 }
                 onRealTimeDbTaskComplete.onSuccess(listBill);
