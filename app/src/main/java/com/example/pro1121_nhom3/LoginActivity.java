@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etuser, etpass;
     private Button btlogin;
     private FirebaseAuth mAuth;
-    private TextView txtregister;
+    private TextView txtregister,txtForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         etpass = findViewById(R.id.edtPassword);
         btlogin = findViewById(R.id.btlogin);
         txtregister = findViewById(R.id.txtregister);
+        txtForgotPassword=findViewById(R.id.txtForgotPassword);
         // Set OnClickListener for the login button
         btlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +57,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+            }
+        });
     }
-
     // Method to handle login
     private void login() {
         String input = etuser.getText().toString().trim();
@@ -150,7 +156,6 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra("userName", userSnapshot.child("tennd").getValue(String.class));
                             intent.putExtra("userWallet", userSnapshot.child("wallet").getValue(Integer.class));
                         }
-
                         intent.putExtra("userEmail", userEmail);
                         intent.putExtra("userPassword", userSnapshot.child("matkhau").getValue(String.class));
                         startActivity(intent);
