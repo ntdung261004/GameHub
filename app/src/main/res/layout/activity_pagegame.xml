@@ -39,6 +39,7 @@
 
                 <ImageView
                     android:id="@+id/bannergamepage"
+                    android:tag="unlike"
                     android:layout_width="match_parent"
                     android:layout_height="220dp" />
 
@@ -84,6 +85,32 @@
                         android:textColor="#9C9C9C"
                         android:textSize="18dp"
                         android:textStyle="italic" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/heart1" />
+
+                    <TextView
+                        android:id="@+id/tvlikecountpagegame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:fontFamily="@font/inriasansbold"
+                        android:text="0"
+                        android:textColor="#FF0000"
+                        android:textSize="18dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -156,11 +183,11 @@
                 android:textColor="#FFEB3B" />
 
             <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/btlikepagegame"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_margin="10dp"
                 android:src="@drawable/wishlist" />
 
         </LinearLayout>

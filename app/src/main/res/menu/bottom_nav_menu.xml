@@ -5,7 +5,7 @@
         android:id="@+id/nf"
         android:icon="@drawable/newsfeed" />
     <item
-        android:title="wishlist"
+        android:title="library"
         android:id="@+id/wl"
         android:icon="@drawable/wishlist" />
     <item

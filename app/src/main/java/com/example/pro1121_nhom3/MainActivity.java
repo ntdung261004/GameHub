@@ -5,13 +5,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.pro1121_nhom3.databinding.ActivityMainBinding;
 import com.example.pro1121_nhom3.fragment.cart_Fragment;
 import com.example.pro1121_nhom3.fragment.newsfeed_Fragment;
 import com.example.pro1121_nhom3.fragment.profile_Fragment;
-import com.example.pro1121_nhom3.fragment.wishlist_Fragment;
+import com.example.pro1121_nhom3.fragment.library_Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             // Kiểm tra mục được chọn và thay thế fragment tương ứng
             if (item.getItemId() == R.id.nf) replaceFragment(new newsfeed_Fragment());
-            else if (item.getItemId() == R.id.wl) replaceFragment(new wishlist_Fragment());
+            else if (item.getItemId() == R.id.wl) replaceFragment(new library_Fragment());
             else if (item.getItemId() == R.id.c) replaceFragment(new cart_Fragment());
             else if (item.getItemId() == R.id.pf) replaceFragment(new profile_Fragment());
 

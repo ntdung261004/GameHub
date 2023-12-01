@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".WalletActivity"
+    android:padding="10dp"
     android:background="#333333"
     android:orientation="vertical">
     <ImageView
@@ -48,6 +49,8 @@
     <EditText
         android:id="@+id/nhaptien"
         android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
         android:layout_height="40dp"
         android:ems="10"
         android:background="@color/white"

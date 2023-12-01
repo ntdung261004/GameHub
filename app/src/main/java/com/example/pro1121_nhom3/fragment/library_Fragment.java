@@ -10,19 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.pro1121_nhom3.LibraryActivity;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.adapter.gameLibAdapter;
 import com.example.pro1121_nhom3.model.game;
 
 import java.util.ArrayList;
 
-public class wishlist_Fragment extends Fragment {
+public class library_Fragment extends Fragment {
 
     RecyclerView rcvLib;
     ArrayList<game> listgame;
 
-    public wishlist_Fragment() {
+    public library_Fragment() {
         // Required empty public constructor
     }
 
@@ -33,7 +32,7 @@ public class wishlist_Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_wishlist_, container, false);
+        View view = inflater.inflate(R.layout.fragment_library_, container, false);
         rcvLib = view.findViewById(R.id.rcvwishlist);
         listgame = new ArrayList<>();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 4);

@@ -16,12 +16,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.pro1121_nhom3.FilterActivity;
 import com.example.pro1121_nhom3.R;
+import com.example.pro1121_nhom3.adapter.categoryAdapter;
 import com.example.pro1121_nhom3.adapter.gameAdapter;
 import com.example.pro1121_nhom3.adapter.gameAdapter2;
 import com.example.pro1121_nhom3.adapter.newsAdapter;
 import com.example.pro1121_nhom3.adapter.searchAdapter;
 import com.example.pro1121_nhom3.dao.gameDAO;
 import com.example.pro1121_nhom3.model.game;
+import com.example.pro1121_nhom3.model.loaigame;
 import com.example.pro1121_nhom3.model.news;
 import com.example.pro1121_nhom3.model.search;
 import com.google.firebase.database.DataSnapshot;
@@ -39,9 +41,10 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class newsfeed_Fragment extends Fragment {
 
-    private RecyclerView rcvFreeGame, rcvBestSellers, rcvAllGame, rcvSearch;
+    private RecyclerView rcvFreeGame, rcvBestSellers, rcvAllGame, rcvSearch, rcvCategory;
     private ArrayList<game> listGame1, listGame2, listGame3, listGame4;
     private ArrayList<news> newsList;
+    private ArrayList<loaigame> categoryList;
     private ArrayList<search> searchList;
     private SearchView searchView;
     private ViewPager newsSlideShow;
@@ -61,6 +64,7 @@ public class newsfeed_Fragment extends Fragment {
         rcvBestSellers = view.findViewById(R.id.rcvBestSellers);
         rcvAllGame = view.findViewById(R.id.rcvAllGame);
         rcvSearch = view.findViewById(R.id.rcvSearch);
+        rcvCategory = view.findViewById(R.id.rcvCategorytopnf);
         searchView = view.findViewById(R.id.searchView);
         tvBrowseMore1 = view.findViewById(R.id.tvBrowse1nf);
         tvBrowseMore2 = view.findViewById(R.id.tvBrowse2nf);
@@ -70,6 +74,15 @@ public class newsfeed_Fragment extends Fragment {
         listGame3 = new ArrayList<>();
         listGame4 = new ArrayList<>();
         searchList = new ArrayList<>();
+        categoryList = new ArrayList<>();
+
+
+
+        categoryAdapter categoryAdapter = new categoryAdapter(categoryList, getActivity());
+        rcvCategory.setAdapter(categoryAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        rcvCategory.setLayoutManager(linearLayoutManager);
+        categoryAdapter.getAllCategory(categoryList);
 
         newsAdapter = new newsAdapter(getActivity(), newsList);
         newsSlideShow.setAdapter(newsAdapter);
@@ -105,7 +118,18 @@ public class newsfeed_Fragment extends Fragment {
         tvBrowseMore1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), FilterActivity.class));
+                Intent i = new Intent(getActivity(), FilterActivity.class);
+                i.putExtra("priceindex", 1);
+                startActivity(i);
+            }
+        });
+
+        tvBrowseMore2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), FilterActivity.class);
+                i.putExtra("filterindex", 1);
+                startActivity(i);
             }
         });
 
