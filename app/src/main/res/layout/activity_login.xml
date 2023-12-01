@@ -97,9 +97,16 @@
             android:textSize="20dp"
             android:textStyle="bold"/>
     </LinearLayout>
-
-
-
-
+    <TextView
+        android:id="@+id/txtForgotPassword"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Quên mật khẩu?"
+        android:textColor="#9C9C9C"
+        android:clickable="true"
+        android:layout_gravity="center"
+        />
 
 </LinearLayout>

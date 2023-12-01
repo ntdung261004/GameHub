@@ -136,7 +136,7 @@
                     android:textColor="@color/white"
                     android:textColorHint="#FFFFFF" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtpasswaord"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -144,6 +144,7 @@
                     android:background="#8A8A8A"
                     android:fontFamily="@font/inter_r"
                     android:gravity="center"
+                    android:inputType="textPassword"
                     android:textColor="@color/white"
                     android:textColorHint="#FFFFFF" />
 

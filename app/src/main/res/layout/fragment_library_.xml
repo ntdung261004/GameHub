@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#2b2b2b"
     android:orientation="vertical"
-    tools:context=".fragment.wishlist_Fragment">
+    tools:context=".fragment.library_Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,18 +14,6 @@
         android:layout_height="wrap_content"
         >
 
-        <EditText
-            android:fontFamily="@font/inter_r"
-            android:id="@+id/editTextText"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:drawableLeft="@drawable/baseline_search_24"
-            android:ems="10"
-            android:inputType="text"
-            android:padding="10dp"
-            android:hint="Find some games..." />
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -85,7 +73,7 @@
 
         <TextView
             android:fontFamily="@font/inter_r"
-            android:id="@+id/textView9"
+            android:id="@+id/tvuserlib"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="40dp"
@@ -95,19 +83,15 @@
             android:text="Bao Ne" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/editTextText3"
-        android:layout_width="370dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#444242"
-        android:ems="10"
-        android:fontFamily="@font/inter_r"
-        android:inputType="text"
-        android:paddingLeft="20dp"
-        android:hint="Seach by name or tag"
-        android:textColor="#707070" />
+        android:hint="Search..."
+        app:iconifiedByDefault="false"
+        android:background="@drawable/custom_search"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
