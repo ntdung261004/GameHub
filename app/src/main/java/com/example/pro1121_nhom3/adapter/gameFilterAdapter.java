@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +27,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class gameFilterAdapter extends RecyclerView.Adapter<gameFilterAdapter.gameViewHolder> {
@@ -106,17 +108,19 @@ public class gameFilterAdapter extends RecyclerView.Adapter<gameFilterAdapter.ga
         Query bestseller = gameRef.orderByChild("sellcount");
         Query mostliked = gameRef.orderByChild("likecount");
         Query pricedown = gameRef.orderByChild("giaban");
+        Query priceup = gameRef.orderByChild("giaban");
         switch (filter)
         {
-            case 0 : dothequery(abc, price, dsgame, gameRef); break;
-            case 1 : dothequery(abc, price, dsgame, bestseller); break;
-            case 2 : dothequery(abc, price, dsgame, mostliked); break;
-            case 3 : dothequery(abc, price, dsgame, pricedown); break;
+            case 0 : dothequery(abc, price, dsgame, gameRef, true); break;
+            case 1 : dothequery(abc, price, dsgame, bestseller, true); break;
+            case 2 : dothequery(abc, price, dsgame, mostliked, true); break;
+            case 3 : dothequery(abc, price, dsgame, pricedown, true); break;
+            case 4 : dothequery(abc, price, dsgame, priceup, false); break;
         }
 
     }
 
-    public void dothequery(String abc, String price, ArrayList<game> dsgame, Query query)
+    public void dothequery(String abc, String price, ArrayList<game> dsgame, Query query, boolean reverse)
     {
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -151,6 +155,8 @@ public class gameFilterAdapter extends RecyclerView.Adapter<gameFilterAdapter.ga
                         }
                     }
                 }
+                if(reverse) Collections.reverse(listGame);
+
                 notifyDataSetChanged();
             }
 

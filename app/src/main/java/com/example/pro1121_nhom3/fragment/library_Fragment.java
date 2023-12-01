@@ -40,6 +40,8 @@ public class library_Fragment extends Fragment {
         libAdapter.getLibList(listgame);
         rcvLib.setAdapter(libAdapter);
         rcvLib.setLayoutManager(gridLayoutManager);
+        rcvLib.setFocusable(false);
+        rcvLib.setNestedScrollingEnabled(false);
 
 
 

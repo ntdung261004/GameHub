@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class FilterActivity extends AppCompatActivity {
     TextView title;
     ArrayList<loaigame> listLoaiGame;
     ArrayList<game> listGame;
+    Button btback;
 
     public String getPrice = "all", getCategory = "All";
     public int filterID = 0;
@@ -48,6 +50,7 @@ public class FilterActivity extends AppCompatActivity {
         spinnerFilter1 = findViewById(R.id.spinnerFilter1);
         spinnerFilter2 = findViewById(R.id.spinnerFilter2);
         spinnerFilter3 = findViewById(R.id.spinnerFilter3);
+        btback = findViewById(R.id.btbackfilter);
         rcvFilter = findViewById(R.id.rcvFilter);
         Bundle bundle = getIntent().getExtras();
         listGame = new ArrayList<>();
@@ -117,6 +120,13 @@ public class FilterActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        btback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
