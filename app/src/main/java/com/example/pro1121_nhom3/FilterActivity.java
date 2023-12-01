@@ -1,6 +1,7 @@
 package com.example.pro1121_nhom3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Spinner;
 
 import com.example.pro1121_nhom3.adapter.spinnerAdapter;
 import com.example.pro1121_nhom3.model.category;
+import com.example.pro1121_nhom3.model.loaigame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.Locale;
 public class FilterActivity extends AppCompatActivity {
 
     Spinner spinnerFilter1, spinnerFilter2;
+    RecyclerView rcvFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,7 @@ public class FilterActivity extends AppCompatActivity {
 
         spinnerFilter1 = findViewById(R.id.spinnerFilter1);
         spinnerFilter2 = findViewById(R.id.spinnerFilter2);
+        rcvFilter = findViewById(R.id.rcvFilter);
 
         spinnerAdapter spinnerAdapter = new spinnerAdapter(this, R.layout.itemspinner_selected, getListCategory());
         spinnerFilter1.setAdapter(spinnerAdapter);
@@ -41,11 +45,10 @@ public class FilterActivity extends AppCompatActivity {
         });
     }
 
-    private List<category> getListCategory()
+    private List<loaigame> getListCategory()
     {
-        List<category> list  = new ArrayList<>();
-        list.add(new category("haha"));
-        list.add(new category("hehe"));
+        List<loaigame> list  = new ArrayList<>();
+
 
         return list;
     }

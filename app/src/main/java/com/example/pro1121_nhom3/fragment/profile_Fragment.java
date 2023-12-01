@@ -8,12 +8,29 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+import com.example.pro1121_nhom3.MainActivity;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.WalletActivity;
+import com.example.pro1121_nhom3.model.game;
+import com.example.pro1121_nhom3.model.nguoidung;
+import com.example.pro1121_nhom3.pagegameActivity;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class profile_Fragment extends Fragment {
 
@@ -23,37 +40,15 @@ public class profile_Fragment extends Fragment {
     private EditText edtpasswaord;
     private Button btnUpdate;
     private ImageButton btnWallet;
+    private ImageView avatar;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private static final String ARG_PARAM3 = "param3";
-    private static final String ARG_PARAM4 = "param4";
-    private String mParam1, mParam3, mParam4;
-    private int mParam2;
 
     public profile_Fragment() {
-    }
-
-    public static profile_Fragment newInstance(String userName, int userWallet, String userEmail, String userPassword) {
-        profile_Fragment fragment = new profile_Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, userName);
-        args.putString(ARG_PARAM3, userEmail);
-        args.putInt(ARG_PARAM2, userWallet);
-        args.putString(ARG_PARAM4, userPassword);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getInt(ARG_PARAM2);
-            mParam3 = getArguments().getString(ARG_PARAM3);
-            mParam4 = getArguments().getString(ARG_PARAM4);
-        }
     }
 
     @Override
@@ -68,15 +63,39 @@ public class profile_Fragment extends Fragment {
         edtpasswaord = view.findViewById(R.id.edtpasswaord);
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnWallet = view.findViewById(R.id.btnWallet);
+        avatar = view.findViewById(R.id.avtuser);
 
-        // Lấy dữ liệu từ Bundle và cập nhật giao diện
-        Bundle args = getArguments();
-        if (args != null) {
-            String userName = args.getString(ARG_PARAM1);
-            int userWallet = args.getInt(ARG_PARAM2);
-            String userEmail = args.getString(ARG_PARAM3);
-            String userPassword = args.getString(ARG_PARAM4);
-            updateUI(userName, userWallet, userEmail, userPassword);
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null)
+        {
+            String userEmail = currentUser.getEmail();
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
+            Query query = databaseReference.orderByChild("email").equalTo(userEmail);
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                            nguoidung nguoidung1 = userSnapshot.getValue(nguoidung.class);
+                            Glide.with(getActivity()).load(nguoidung1.getAvatar()).into(avatar);
+                            tvtenuser.setText(nguoidung1.getTennd());
+                            wallet.setText(nguoidung1.getWallet()+"");
+
+                            edtemail.setText(nguoidung1.getEmail());
+                            edttennguoidung.setText(nguoidung1.getTennd());
+                            edtpasswaord.setText(nguoidung1.getMatkhau());
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Xử lý lỗi nếu có
+                }
+            });
         }
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -99,16 +118,6 @@ public class profile_Fragment extends Fragment {
         return view;
     }
 
-    // Hàm cập nhật giao diện với dữ liệu người dùng
-    public void updateUI(String userName, int userWallet, String userEmail, String userPassword) {
-        tvtenuser.setText(userName);
-        wallet.setText(String.valueOf(userWallet));
-        edtemail.setText(userEmail);
-        edttennguoidung.setText(userName);
-        edtpasswaord.setText(userPassword);
-    }
-
-    // Hàm xử lý kết quả trả về từ WalletActivity
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

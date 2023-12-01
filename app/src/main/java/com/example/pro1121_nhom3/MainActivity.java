@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.nf) replaceFragment(new newsfeed_Fragment());
             else if (item.getItemId() == R.id.wl) replaceFragment(new wishlist_Fragment());
             else if (item.getItemId() == R.id.c) replaceFragment(new cart_Fragment());
-            else if (item.getItemId() == R.id.pf) replaceProfileFragment();
+            else if (item.getItemId() == R.id.pf) replaceFragment(new profile_Fragment());
 
             return true; // Trả về true để báo hiệu rằng sự kiện đã được xử lý
         });
@@ -52,15 +52,4 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    // Phương thức để thay thế fragment profile_Fragment với truyền tham số
-    private void replaceProfileFragment() {
-        // Lấy thông tin người dùng từ Intent
-        String userName = getIntent().getStringExtra("userName");
-        String userEmail = getIntent().getStringExtra("userEmail");
-        String userPass = getIntent().getStringExtra("userPassword");
-        int userWallet = getIntent().getIntExtra("userWallet", 0);
-
-        // Thay thế fragment profile_Fragment và truyền tham số
-        replaceFragment(profile_Fragment.newInstance(userName, userWallet, userEmail, userPass));
-    }
 }
