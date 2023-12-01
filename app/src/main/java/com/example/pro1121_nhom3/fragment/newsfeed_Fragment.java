@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.pro1121_nhom3.FilterActivity;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.adapter.gameAdapter;
 import com.example.pro1121_nhom3.adapter.gameAdapter2;
@@ -47,6 +49,7 @@ public class newsfeed_Fragment extends Fragment {
     private newsAdapter newsAdapter;
     private searchAdapter searchAdapter;
     private Timer timer;
+    private TextView tvBrowseMore1, tvBrowseMore2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +62,8 @@ public class newsfeed_Fragment extends Fragment {
         rcvAllGame = view.findViewById(R.id.rcvAllGame);
         rcvSearch = view.findViewById(R.id.rcvSearch);
         searchView = view.findViewById(R.id.searchView);
+        tvBrowseMore1 = view.findViewById(R.id.tvBrowse1nf);
+        tvBrowseMore2 = view.findViewById(R.id.tvBrowse2nf);
         newsList = new ArrayList<>();
         listGame1 = new ArrayList<>();
         listGame2 = new ArrayList<>();
@@ -96,6 +101,14 @@ public class newsfeed_Fragment extends Fragment {
                 return true;
             }
         });
+
+        tvBrowseMore1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), FilterActivity.class));
+            }
+        });
+
         TabGame();
         autoSliderShow();
         loadSearchDataFromFirebase();

@@ -53,6 +53,9 @@
             android:name=".LoginActivity"
             android:exported="true" />
         <activity
+            android:name=".FilterActivity"
+            android:exported="true" />
+        <activity
             android:name=".BuyGameActivity"
             android:exported="true" />
         <activity
