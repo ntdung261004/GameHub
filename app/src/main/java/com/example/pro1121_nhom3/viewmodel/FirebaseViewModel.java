@@ -12,11 +12,11 @@ import java.util.List;
 
 public class FirebaseViewModel extends ViewModel implements FirebaseRepo.OnRealTimeDbTaskComplete {
 
-    private MutableLiveData<List<hoadon>> BillMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<hoadon>> BillMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<DatabaseError> databaseErrorMutableLiveData = new MutableLiveData<>();
     private FirebaseRepo firebaseRepo;
 
-    public MutableLiveData<List<hoadon>> getBillMutableLiveData() {
+    public MutableLiveData<ArrayList<hoadon>> getBillMutableLiveData() {
         return BillMutableLiveData;
     }
 
@@ -34,7 +34,7 @@ public class FirebaseViewModel extends ViewModel implements FirebaseRepo.OnRealT
 
 
     @Override
-    public void onSuccess(List<hoadon> listBill) {
+    public void onSuccess(ArrayList<hoadon> listBill) {
         BillMutableLiveData.setValue(listBill);
     }
 

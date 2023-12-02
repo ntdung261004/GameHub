@@ -21,9 +21,9 @@ import java.util.List;
 
 public class BillConAdapter extends RecyclerView.Adapter<BillConAdapter.adminBillConViewHolder> {
 
-    private List<game> listGame;
+    private ArrayList<game> listGame;
 
-    public void setListGame(List<game> listGame){
+    public void setListGame(ArrayList<game> listGame){
         this.listGame = listGame;
         this.listGame.removeAll(Collections.singleton(null));
     }

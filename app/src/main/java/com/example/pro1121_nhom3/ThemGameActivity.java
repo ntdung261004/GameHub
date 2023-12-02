@@ -145,6 +145,7 @@ public class ThemGameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Map<String,Object> map = new HashMap<>();
 
+                map.put("img", img.toString());
                 map.put("tengame",edtTenGame.getText().toString());
                 map.put("loaigame",SpnMaLoai.getSelectedItem().toString());
                 map.put("nph", edtNPH.getText().toString());
