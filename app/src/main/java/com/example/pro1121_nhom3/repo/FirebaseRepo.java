@@ -31,7 +31,7 @@ public class FirebaseRepo {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<hoadon> listBill = new ArrayList<>();
+                ArrayList<hoadon> listBill = new ArrayList<>();
                 for(DataSnapshot ds : snapshot.getChildren()){
                     hoadon hd = new hoadon();
                     hd.setNguoidung_tendangnhap(ds.child("nguoidung_tendangnhap").getValue(String.class));
@@ -58,7 +58,7 @@ public class FirebaseRepo {
     }
 
     public interface OnRealTimeDbTaskComplete{
-        void onSuccess(List<hoadon> listBill);
+        void onSuccess(ArrayList<hoadon> listBill);
         void onFailure(DatabaseError error);
     }
 }

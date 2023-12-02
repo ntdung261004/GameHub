@@ -29,9 +29,9 @@ import java.util.List;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.adminBillViewHolder> {
 
-    private List<hoadon> listBill;
+    private ArrayList<hoadon> listBill;
 
-    public void setListBill(List<hoadon> listBill){
+    public void setListBill(ArrayList<hoadon> listBill){
         this.listBill = listBill;
     }
 

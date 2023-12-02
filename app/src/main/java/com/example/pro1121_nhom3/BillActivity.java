@@ -51,9 +51,9 @@ public class BillActivity extends AppCompatActivity {
 
         firebaseViewModel = new ViewModelProvider(this).get(FirebaseViewModel.class);
         firebaseViewModel.getAllData();
-        firebaseViewModel.getBillMutableLiveData().observe(this, new Observer<List<hoadon>>() {
+        firebaseViewModel.getBillMutableLiveData().observe(this, new Observer<ArrayList<hoadon>>() {
             @Override
-            public void onChanged(List<hoadon> listBill) {
+            public void onChanged(ArrayList<hoadon> listBill) {
                 billAdapter.setListBill(listBill);
                 billAdapter.notifyDataSetChanged();
             }
