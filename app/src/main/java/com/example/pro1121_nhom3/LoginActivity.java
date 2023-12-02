@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
                 } else {
-                    Toast.makeText(LoginActivity.this, "Key không tồn tại", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
@@ -156,7 +156,6 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra("userWallet", userSnapshot.child("wallet").getValue(Integer.class));
                         }
                         intent.putExtra("userEmail", userEmail);
-                        intent.putExtra("userPassword", userSnapshot.child("matkhau").getValue(String.class));
                         startActivity(intent);
                         finish();
                     }
