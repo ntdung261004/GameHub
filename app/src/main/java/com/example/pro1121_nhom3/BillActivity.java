@@ -1,6 +1,5 @@
 package com.example.pro1121_nhom3;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,17 +13,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.pro1121_nhom3.adapter.BillAdapter;
-import com.example.pro1121_nhom3.model.game;
 import com.example.pro1121_nhom3.model.hoadon;
 import com.example.pro1121_nhom3.viewmodel.FirebaseViewModel;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BillActivity extends AppCompatActivity {
     ImageView ivMenuBack;
@@ -39,18 +32,32 @@ public class BillActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill);
-        ivMenuBack = findViewById(R.id.ivMenuBack);
+        ivMenuBack = findViewById(R.id.ivMenuBackBill);
         recyclerviewbill = findViewById(R.id.recyclerviewbill);
 
-//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//        DatabaseReference databaseReference = firebaseDatabase.getReference("hoadon");
+
         recyclerviewbill.setHasFixedSize(true);
         recyclerviewbill.setLayoutManager(new LinearLayoutManager(this));
         billAdapter = new BillAdapter();
-        recyclerviewbill.setAdapter(billAdapter);
+        try {
+            recyclerviewbill.setAdapter(billAdapter);
+        }catch (Exception e){
+            Log.d("MYLOG","FAIL set adapter: " + e);
+        }
+        try {
+            firebaseViewModel = new ViewModelProvider(this).get(FirebaseViewModel.class);
+        }catch (Exception e){
+            Log.d("MYLOG","FAIL viewmodel: " + e);
+        }
 
-        firebaseViewModel = new ViewModelProvider(this).get(FirebaseViewModel.class);
-        firebaseViewModel.getAllData();
+        try {
+            firebaseViewModel.getAllData();
+        }catch (Exception e){
+            Log.d("MYLOG","FAIL getall: " + e);
+        }
+
+
+
         firebaseViewModel.getBillMutableLiveData().observe(this, new Observer<ArrayList<hoadon>>() {
             @Override
             public void onChanged(ArrayList<hoadon> listBill) {

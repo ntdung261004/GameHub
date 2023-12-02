@@ -149,5 +149,12 @@ public class AddGameActivity extends AppCompatActivity {
 
             }
         });
+
+        btcancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }
