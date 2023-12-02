@@ -2,6 +2,7 @@ package com.example.pro1121_nhom3;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -99,7 +100,7 @@ public class changespassword extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // TODO: Add code to navigate back to the login screen
-                        // For example, you can use Intent to start LoginActivity
+                        startActivity(new Intent(changespassword.this, LoginActivity.class));
                     }
                 })
                 .setNegativeButton("Không", new DialogInterface.OnClickListener() {
