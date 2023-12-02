@@ -52,7 +52,7 @@ public class profile_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_, container, false);
 
-        tvtenuser = view.findViewById(R.id.tvtenuser);
+        tvtenuser = view.findViewById(R.id.tvtenuserbill);
         wallet = view.findViewById(R.id.wallet);
         edtemail = view.findViewById(R.id.edtemail);
         edttennguoidung = view.findViewById(R.id.edttennguoidung);

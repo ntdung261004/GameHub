@@ -25,6 +25,7 @@ import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.adapter.gameAdapter;
 import com.example.pro1121_nhom3.adapter.gameCartAdapter;
 import com.example.pro1121_nhom3.model.game;
+import com.example.pro1121_nhom3.model.hoadon;
 import com.example.pro1121_nhom3.model.nguoidung;
 import com.example.pro1121_nhom3.pagegameActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,7 +40,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class cart_Fragment extends Fragment {
 
@@ -174,9 +179,11 @@ public class cart_Fragment extends Fragment {
 
                             String userEmail = currentUser.getEmail();
 
+                            DatabaseReference hoadonRef = FirebaseDatabase.getInstance().getReference("hoadon");
+
+
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
                             Query query = databaseReference.orderByChild("email").equalTo(userEmail);
-
                             query.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -190,11 +197,19 @@ public class cart_Fragment extends Fragment {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     DatabaseReference ref2 = userSnapshot.child("game").getRef();
-                                                    for(DataSnapshot gamesnap1 : snapshot.getChildren())
+                                                    for(DataSnapshot cartgamesnap1 : snapshot.getChildren())
                                                     {
-                                                        game game1 = gamesnap1.getValue(game.class);
-                                                        game1.setMagame(gamesnap1.getKey());
+                                                        game game1 = cartgamesnap1.getValue(game.class);
+                                                        game1.setMagame(cartgamesnap1.getKey());
                                                         ref2.child(game1.getMagame()).setValue(game1);
+
+                                                        Date c = Calendar.getInstance().getTime();
+                                                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                                                        String homnay = df.format(c);
+                                                        game1.setMagame(cartgamesnap1.getKey());
+                                                        nguoidung1.setTendangnhap(userSnapshot.getKey());
+                                                        hoadon newhd = new hoadon(game1, nguoidung1, homnay);
+                                                        hoadonRef.push().setValue(newhd);
                                                     }
 
                                                 }

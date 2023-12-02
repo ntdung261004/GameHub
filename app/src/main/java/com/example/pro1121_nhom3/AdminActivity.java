@@ -31,7 +31,7 @@ public class AdminActivity extends AppCompatActivity {
         ivAdminBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AdminActivity.this, BillActivity.class);
+                Intent i = new Intent(AdminActivity.this, hoadonActivity.class);
                 startActivity(i);
             }
         });

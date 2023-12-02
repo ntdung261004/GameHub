@@ -4,20 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class hoadon {
+    private game game;
+    private nguoidung nguoidung;
     private String ngaymua;
-    private String nguoidung_tendangnhap;
-    private float thanhtien;
-
-    private ArrayList<game> listGame;
+    private String mabill;
 
     public hoadon() {
     }
 
-    public hoadon(String ngaymua, String nguoidung_tendangnhap, float thanhtien, ArrayList<game> listGame) {
+    public hoadon(com.example.pro1121_nhom3.model.game game, com.example.pro1121_nhom3.model.nguoidung nguoidung, String ngaymua) {
+        this.game = game;
+        this.nguoidung = nguoidung;
         this.ngaymua = ngaymua;
-        this.nguoidung_tendangnhap = nguoidung_tendangnhap;
-        this.thanhtien = thanhtien;
-        this.listGame = listGame;
+    }
+
+    public String getMabill() {
+        return mabill;
+    }
+
+    public void setMabill(String mabill) {
+        this.mabill = mabill;
+    }
+
+    public com.example.pro1121_nhom3.model.game getGame() {
+        return game;
+    }
+
+    public void setGame(com.example.pro1121_nhom3.model.game game) {
+        this.game = game;
+    }
+
+    public com.example.pro1121_nhom3.model.nguoidung getNguoidung() {
+        return nguoidung;
+    }
+
+    public void setNguoidung(com.example.pro1121_nhom3.model.nguoidung nguoidung) {
+        this.nguoidung = nguoidung;
     }
 
     public String getNgaymua() {
@@ -26,31 +48,5 @@ public class hoadon {
 
     public void setNgaymua(String ngaymua) {
         this.ngaymua = ngaymua;
-    }
-
-
-
-    public float getThanhtien() {
-        return thanhtien;
-    }
-
-    public void setThanhtien(float thanhtien) {
-        this.thanhtien = thanhtien;
-    }
-
-    public String getNguoidung_tendangnhap() {
-        return nguoidung_tendangnhap;
-    }
-
-    public void setNguoidung_tendangnhap(String nguoidung_tendangnhap) {
-        this.nguoidung_tendangnhap = nguoidung_tendangnhap;
-    }
-
-    public ArrayList<game> getListGame() {
-        return listGame;
-    }
-
-    public void setListGame(ArrayList<game> listGame) {
-        this.listGame = listGame;
     }
 }
