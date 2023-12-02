@@ -25,7 +25,7 @@
             android:exported="false" />
         <activity
             android:name=".pagegameActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".WalletActivity"
             android:exported="true" />
@@ -72,6 +72,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".changespassword"
+            android:label="Đổi Mật Khẩu">
         </activity>
     </application>
 

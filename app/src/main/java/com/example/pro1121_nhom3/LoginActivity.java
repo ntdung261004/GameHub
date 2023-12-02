@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,10 +25,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etuser, etpass;
+    private EditText etuser;
     private Button btlogin;
     private FirebaseAuth mAuth;
     private TextView txtregister,txtForgotPassword;
+    private TextInputLayout edtPasswordLayout,edtPasswordLayout1;
+    private TextInputEditText etpass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,8 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
-
+        edtPasswordLayout = findViewById(R.id.edtPasswordLayout);
+        edtPasswordLayout1 = findViewById(R.id.edtPasswordLayout1);
         // Map UI elements
         etuser = findViewById(R.id.edtUsername);
         etpass = findViewById(R.id.edtPassword);

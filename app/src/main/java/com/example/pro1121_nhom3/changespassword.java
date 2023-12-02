@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.pro1121_nhom3.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,9 +26,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class changespassword extends AppCompatActivity {
 
-    private EditText etOldPassword, etNewPassword,etConfirmPassword;
+    private EditText etOldPassword;
     private Button changePasswordButton;
     private FirebaseAuth mAuth;
+    private TextInputLayout edtPasswordLayout,edtPasswordLayout1,edtPasswordLayout2;
+    private TextInputEditText  etNewPassword,etConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,9 @@ public class changespassword extends AppCompatActivity {
         setContentView(R.layout.activity_changespassword);
 
         mAuth = FirebaseAuth.getInstance();
-
+        edtPasswordLayout=findViewById(R.id.edtPasswordLayout);
+        edtPasswordLayout1=findViewById(R.id.edtPasswordLayout1);
+        edtPasswordLayout2=findViewById(R.id.edtPasswordLayout2);
         etOldPassword = findViewById(R.id.etOldPassword);
         etNewPassword = findViewById(R.id.etNewPassword);
         changePasswordButton = findViewById(R.id.changePasswordButton);
