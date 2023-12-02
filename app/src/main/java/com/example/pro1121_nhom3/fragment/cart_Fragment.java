@@ -45,8 +45,8 @@ public class cart_Fragment extends Fragment {
 
     ArrayList<game> listgame;
     RecyclerView rcvcart;
-    TextView tvtongtien, tvwallet, tvtenuser;
-    ImageView avtuser;
+    TextView tvtongtien, tvwallet, tvtenusercart;
+    ImageView imgusercart;
     Button btbuy;
 
     public cart_Fragment() {
@@ -67,8 +67,8 @@ public class cart_Fragment extends Fragment {
 
         tvtongtien = view.findViewById(R.id.tvtongcongcart);
         tvwallet = view.findViewById(R.id.tvwalletcart);
-        avtuser = view.findViewById(R.id.imgusercart);
-        tvtenuser = view.findViewById(R.id.tvtenusercart);
+        imgusercart = view.findViewById(R.id.imgusercart);
+        tvtenusercart = view.findViewById(R.id.tvtenusercart);
         btbuy = view.findViewById(R.id.btbuycart);
         rcvcart = view.findViewById(R.id.rcvcart);
         listgame = new ArrayList<game>();
@@ -100,8 +100,8 @@ public class cart_Fragment extends Fragment {
                             nguoidung nguoidung1 = userSnapshot.getValue(nguoidung.class);
                             nguoidung1.setTendangnhap(userSnapshot.getKey());
 
-                            tvtenuser.setText(nguoidung1.getTennd());
-                            Glide.with(getActivity()).load(nguoidung1.getAvatar()).into(avtuser);
+                            tvtenusercart.setText(nguoidung1.getTennd());
+                            Glide.with(getActivity()).load(nguoidung1.getAvatar()).into(imgusercart);
                             DatabaseReference walletref = userSnapshot.child("wallet").getRef();
                             walletref.addValueEventListener(new ValueEventListener() {
                                 @Override

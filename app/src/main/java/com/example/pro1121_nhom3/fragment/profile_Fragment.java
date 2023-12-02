@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import android.text.method.PasswordTransformationMethod;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.pro1121_nhom3.LoginActivity;
-import com.example.pro1121_nhom3.MainActivity;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.WalletActivity;
 import com.example.pro1121_nhom3.model.nguoidung;
@@ -77,7 +76,7 @@ public class profile_Fragment extends Fragment {
                         for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                             nguoidung nguoidung1 = userSnapshot.getValue(nguoidung.class);
                             String avatarUrl = nguoidung1.getAvatar();
-                            Glide.with(getActivity()).load(avatarUrl).into(avatar);
+                            Glide.with(requireActivity()).load(avatarUrl).into(avatar);
                             tvtenuser.setText(nguoidung1.getTennd());
                             wallet.setText(String.valueOf(nguoidung1.getWallet()));
                             edtemail.setText(nguoidung1.getEmail());
@@ -89,9 +88,12 @@ public class profile_Fragment extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle the error
+                    Toast.makeText(requireContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,53 +120,37 @@ public class profile_Fragment extends Fragment {
                                     }
 
                                     if (!newPassword.isEmpty() && !newPassword.equals(userSnapshot.child("matkhau").getValue(String.class))) {
+                                        userSnapshot.getRef().child("matkhau").setValue(newPassword);
                                         isPasswordChanged = true;
                                     }
                                 }
 
-                                if (isUsernameChanged || isPasswordChanged) {
-                                    boolean finalIsUsernameChanged = isUsernameChanged;
-                                    boolean finalIsPasswordChanged = isPasswordChanged;
-                                    new AlertDialog.Builder(getActivity())
-                                            .setTitle("Xác nhận thay đổi")
-                                            .setMessage("Bạn có chắc chắn muốn thay đổi?")
-                                            .setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    // Update is confirmed, proceed with the changes
-                                                    if (finalIsUsernameChanged) {
-                                                        Snackbar.make(getView(), "Bạn đã thay đổi tên người dùng thành công.", Snackbar.LENGTH_SHORT).show();
-                                                    }
-                                                    if (finalIsPasswordChanged) {
-                                                        FirebaseAuth.getInstance().signOut();
-                                                        Intent intent = new Intent(getActivity(), LoginActivity.class);
-                                                        startActivity(intent);
-                                                        getActivity().finish();
-                                                    }
-                                                }
-                                            })
-                                            .setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    // User clicked "Không," do not save changes
-                                                    // You can choose to dismiss the dialog or leave it open
-                                                    dialog.dismiss();
-                                                }
-                                            })
-                                            .show();
+                                if (isUsernameChanged && isPasswordChanged) {
+                                    // Both username and password are changed
+                                    showConfirmationDialog("Bạn đã thay đổi tên người dùng và mật khẩu. Vui lòng đăng nhập lại?");
+                                } else if (isUsernameChanged) {
+                                    // Only username is changed
+                                    showSnackbar("Bạn đã thay đổi tên người dùng thành công.");
+                                } else if (isPasswordChanged) {
+                                    // Only password is changed
+                                    showConfirmationDialog("Mật khẩu đã thay đổi. Vui lòng đăng nhập lại?");
                                 } else {
-                                    Snackbar.make(getView(), "Không có thay đổi nào được thực hiện.", Snackbar.LENGTH_SHORT).show();
+                                    // No changes
+                                    showSnackbar("Không có thay đổi nào được thực hiện.");
                                 }
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
+                            // Handle the error
+                            Toast.makeText(requireContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
             }
         });
+
         edtpassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -189,67 +175,103 @@ public class profile_Fragment extends Fragment {
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Thay đổi Avatar");
-                builder.setMessage("Bạn có muốn thay đổi avatar không?");
+                showAvatarChangeDialog();
+            }
+        });
 
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+        btnWallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), WalletActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+
+        return view;
+    }
+
+    private void showConfirmationDialog(String message) {
+        new AlertDialog.Builder(requireActivity())
+                .setTitle("Xác nhận thay đổi")
+                .setMessage(message)
+                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final EditText input = new EditText(getActivity());
-                        input.setInputType(InputType.TYPE_CLASS_TEXT);
-                        input.setHint("Nhập URL hình ảnh mới");
-                        builder.setView(input);
+                        // Update is confirmed, proceed with the changes
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(requireActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        requireActivity().finish();
+                    }
+                })
+                .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // User clicked "Không," do not save changes
+                        // You can choose to dismiss the dialog or leave it open
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
 
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String newAvatarUrl = input.getText().toString().trim();
-                                if (!newAvatarUrl.isEmpty()) {
-                                    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                                    if (currentUser != null) {
-                                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
-                                        Query query = databaseReference.orderByChild("email").equalTo(currentUser.getEmail());
+    private void showSnackbar(String message) {
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show();
+    }
 
-                                        query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                if (snapshot.exists()) {
-                                                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                                                        userSnapshot.getRef().child("avatar").setValue(newAvatarUrl);
-                                                    }
+    private void showAvatarChangeDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setTitle("Thay đổi Avatar");
+        builder.setMessage("Bạn có muốn thay đổi avatar không?");
 
-                                                    // Hiển thị Snackbar khi thay đổi avatar thành công
-                                                    Snackbar.make(getView(), "Thay đổi avatar thành công", Snackbar.LENGTH_SHORT).show();
-                                                }
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final EditText input = new EditText(requireActivity());
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                input.setHint("Nhập URL hình ảnh mới");
+                builder.setView(input);
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newAvatarUrl = input.getText().toString().trim();
+                        if (!newAvatarUrl.isEmpty()) {
+                            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (currentUser != null) {
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
+                                Query query = databaseReference.orderByChild("email").equalTo(currentUser.getEmail());
+
+                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+                                            for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                                                userSnapshot.getRef().child("avatar").setValue(newAvatarUrl);
                                             }
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-                                            }
-                                        });
+                                            // Hiển thị Snackbar khi thay đổi avatar thành công
+                                            showSnackbar("Thay đổi avatar thành công");
+                                        }
                                     }
 
-                                    // Load hình ảnh mới vào ImageView sử dụng Glide
-                                    Glide.with(getActivity()).load(newAvatarUrl).into(avatar);
-                                } else {
-                                    Snackbar.make(getView(), "Vui lòng nhập URL hình ảnh", Snackbar.LENGTH_SHORT).show();
-                                }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        // Handle the error
+                                        Toast.makeText(requireContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
-                        });
 
-                        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-
-                        builder.show();
+                            // Load hình ảnh mới vào ImageView sử dụng Glide
+                            Glide.with(requireActivity()).load(newAvatarUrl).into(avatar);
+                        } else {
+                            showSnackbar("Vui lòng nhập URL hình ảnh");
+                        }
                     }
                 });
 
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -259,15 +281,15 @@ public class profile_Fragment extends Fragment {
                 builder.show();
             }
         });
-        btnWallet.setOnClickListener(new View.OnClickListener() {
+
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WalletActivity.class);
-                startActivityForResult(intent, 1);
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
             }
         });
 
-        return view;
+        builder.show();
     }
 
     @Override

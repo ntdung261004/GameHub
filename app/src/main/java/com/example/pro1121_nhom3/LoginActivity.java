@@ -93,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
             loginWithKey(input, pass);
         }
     }
-
     // Method to check if the input is a valid email
     private boolean isValidEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
