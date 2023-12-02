@@ -2,7 +2,9 @@ package com.example.pro1121_nhom3.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pro1121_nhom3.R;
+import com.example.pro1121_nhom3.UpdateGameActivity;
 import com.example.pro1121_nhom3.model.game;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,8 +40,11 @@ public class AdminGameAdapter extends FirebaseRecyclerAdapter<game, AdminGameAda
      *
      * @param options
      */
-    public AdminGameAdapter(@NonNull FirebaseRecyclerOptions<game> options) {
+
+    private Context c;
+    public AdminGameAdapter(@NonNull FirebaseRecyclerOptions<game> options, Context c) {
         super(options);
+        this.c = c;
     }
 
     @Override
@@ -51,7 +57,7 @@ public class AdminGameAdapter extends FirebaseRecyclerAdapter<game, AdminGameAda
         }
 
         holder.tvAdminTengame.setText(model.getTengame());
-        holder.tvAdminLoaigame.setText(model.getLoaigame().getTenloai());
+//        holder.tvAdminLoaigame.setText(model.getLoaigame().getTenloai());
         holder.tvAdminNph.setText(model.getNph());
         holder.tvAdminGiaban.setText(model.getGiaban() + "đ");
 
@@ -80,74 +86,93 @@ public class AdminGameAdapter extends FirebaseRecyclerAdapter<game, AdminGameAda
             }
         });
 
-
         holder.ivSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                final DialogPlus dialogPlus = DialogPlus.newDialog(holder.imgGame.getContext())
-                        .setContentHolder(new ViewHolder(R.layout.dialog_admin_sua_game))
-                        .setExpanded(true, 650)
-                        .setCancelable(false)
-                        .create();
-                View v = dialogPlus.getHolderView();
-
-                TextView txtTieuDe = v.findViewById(R.id.txtTieuDe);
-                EditText edtTenGame = v.findViewById(R.id.edtTenGame);
-                EditText edtMaLoai = v.findViewById(R.id.edtMaLoai);
-                EditText edtNPH = v.findViewById(R.id.edtNPH);
-                EditText edtGia = v.findViewById(R.id.edtGia);
-                Button btnUpdate = v.findViewById(R.id.btnAdd);
-                Button btnCancel = v.findViewById(R.id.btnCancel);
-
-                txtTieuDe.setText("UPDATE A GAME");
-                btnUpdate.setText("Update");
-
-                edtTenGame.setText(model.getTengame());
-                edtMaLoai.setText(model.getLoaigame().getTenloai());
-                edtNPH.setText(model.getNph());
-                edtGia.setText(String.valueOf(model.getGiaban()));
-
-                dialogPlus.show();
-
-                btnUpdate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Map<String,Object> map = new HashMap<>();
-                        map.put("tengame",edtTenGame.getText().toString());
-//                        map.put("loaigame",edtMaLoai.getText().toString());
-                        map.put("nph",Float.parseFloat(edtGia.getText().toString()));
-                        map.put("giaban",edtGia.getText().toString());
-
-                        FirebaseDatabase.getInstance().getReference().child("game")
-                                .child(getRef(position).getKey()).updateChildren(map)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(holder.tvAdminTengame.getContext(), "Game Updated Successfully!", Toast.LENGTH_SHORT).show();
-                                        dialogPlus.dismiss();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(holder.tvAdminTengame.getContext(), "Error while Updating", Toast.LENGTH_SHORT).show();
-                                        dialogPlus.dismiss();
-                                    }
-                                });
-                    }
-                });
-
-                btnCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialogPlus.dismiss();
-                    }
-                });
+                Intent i = new Intent(c, UpdateGameActivity.class);
+                i.putExtra("img", model.getImg());
+                i.putExtra("tengame", model.getTengame());
+//                i.putExtra("", model.getTengame());
+                i.putExtra("ngayph", model.getNgayph());
+                i.putExtra("nph", model.getNph());
+                i.putExtra("giaban", model.getGiaban());
+                i.putExtra("mota", model.getMota());
 
 
+
+
+                c.startActivity(i);
             }
         });
+
+
+//        holder.ivSua.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                final DialogPlus dialogPlus = DialogPlus.newDialog(holder.imgGame.getContext())
+//                        .setContentHolder(new ViewHolder(R.layout.dialog_admin_sua_game))
+//                        .setExpanded(true, 650)
+//                        .setCancelable(false)
+//                        .create();
+//                View v = dialogPlus.getHolderView();
+//
+//                TextView txtTieuDe = v.findViewById(R.id.txtTieuDe);
+//                EditText edtTenGame = v.findViewById(R.id.edtTenGame);
+//                EditText edtMaLoai = v.findViewById(R.id.edtMaLoai);
+//                EditText edtNPH = v.findViewById(R.id.edtNPH);
+//                EditText edtGia = v.findViewById(R.id.edtGia);
+//                Button btnUpdate = v.findViewById(R.id.btnAdd);
+//                Button btnCancel = v.findViewById(R.id.btnCancel);
+//
+//                txtTieuDe.setText("UPDATE A GAME");
+//                btnUpdate.setText("Update");
+//
+//                edtTenGame.setText(model.getTengame());
+//                edtMaLoai.setText(model.getLoaigame().getTenloai());
+//                edtNPH.setText(model.getNph());
+//                edtGia.setText(String.valueOf(model.getGiaban()));
+//
+//                dialogPlus.show();
+
+//                btnUpdate.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Map<String,Object> map = new HashMap<>();
+//                        map.put("tengame",edtTenGame.getText().toString());
+////                        map.put("loaigame",edtMaLoai.getText().toString());
+//                        map.put("nph",Float.parseFloat(edtGia.getText().toString()));
+//                        map.put("giaban",edtGia.getText().toString());
+//
+//                        FirebaseDatabase.getInstance().getReference().child("game")
+//                                .child(getRef(position).getKey()).updateChildren(map)
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void unused) {
+//                                        Toast.makeText(holder.tvAdminTengame.getContext(), "Game Updated Successfully!", Toast.LENGTH_SHORT).show();
+//                                        dialogPlus.dismiss();
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        Toast.makeText(holder.tvAdminTengame.getContext(), "Error while Updating", Toast.LENGTH_SHORT).show();
+//                                        dialogPlus.dismiss();
+//                                    }
+//                                });
+//                    }
+//                });
+
+//                btnCancel.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        dialogPlus.dismiss();
+//                    }
+//                });
+//
+//
+//            }
+//        });
     }
 
     @NonNull

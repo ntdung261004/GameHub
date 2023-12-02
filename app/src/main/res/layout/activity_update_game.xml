@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddGameActivity"
+    tools:context=".UpdateGameActivity"
     android:backgroundTint="#2b2b2b">
 
 
@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="ADD A GAME"
+                android:text="Update A GAME"
                 android:textAllCaps="true"
                 android:textColor="#FF0000"
                 android:textSize="30sp"
@@ -42,7 +42,7 @@
                     android:layout_marginBottom="10dp">
 
                     <ImageView
-                        android:id="@+id/bannerpreaddgame"
+                        android:id="@+id/bannerpreupdategame"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop" />
@@ -55,16 +55,17 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/eturlbanneraddgame"
+                        android:id="@+id/eturlbannerupdategame"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="60dp"
                         android:ems="10"
                         android:hint="URL HÌNH ẢNH"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:textColor="@color/white"/>
 
                     <Button
-                        android:id="@+id/btpreviewaddgame"
+                        android:id="@+id/btpreviewupdategame"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -76,7 +77,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/ettengameaddgame"
+                android:id="@+id/ettengameupdategame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -87,7 +88,7 @@
                 android:textColorHint="#959595" />
 
             <Spinner
-                android:id="@+id/spinnerloaigameaddgame"
+                android:id="@+id/spinnerloaigameupdategame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -96,13 +97,13 @@
                 android:textColor="@color/white" />
 
             <LinearLayout
-                android:id="@+id/linearaddloaiaddgame"
+                android:id="@+id/linearaddloaiupdategame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/etnewtenloaiaddgame"
+                    android:id="@+id/etnewtenloaiupdategame"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -114,7 +115,7 @@
                     android:textColorHint="#959595" />
 
                 <Button
-                    android:id="@+id/btaddloaiaddgame"
+                    android:id="@+id/btaddloaiupdategame"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_gravity="top"
@@ -129,7 +130,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/etngayphaddgame"
+                    android:id="@+id/etngayphupdategame"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -159,7 +160,7 @@
                 android:textStyle="italic" />
 
             <EditText
-                android:id="@+id/etnphaddgame"
+                android:id="@+id/etnphupdategame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -170,7 +171,7 @@
                 android:textColorHint="#959595" />
 
             <EditText
-                android:id="@+id/etgiabanaddgame"
+                android:id="@+id/etgiabanupdategame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -181,7 +182,7 @@
                 android:textColorHint="#959595" />
 
             <EditText
-                android:id="@+id/etmotaaddgame"
+                android:id="@+id/etmotaupdategame"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:background="@drawable/custom_edt"
@@ -198,15 +199,15 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btaddaddgame"
+                    android:id="@+id/btupdategame"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:backgroundTint="#2b2b2b"
-                    android:text="Add" />
+                    android:text="Update" />
 
                 <Button
-                    android:id="@+id/btcanceladdgame"
+                    android:id="@+id/btcancelupdategame"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"

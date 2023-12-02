@@ -37,8 +37,11 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userViewHolder
     @Override
     public void onBindViewHolder(@NonNull userViewHolder holder, int position) {
 
-        holder.tvUserName.setText(listUser.get(position).getTennd());
-        holder.tvUserWallet.setText(listUser.get(position).getWallet() + "đ");
+        nguoidung user = listUser.get(position);
+
+
+        holder.tvUserName.setText(user.getTennd());
+        holder.tvUserWallet.setText(user.getWallet() + "đ");
     }
 
     @Override

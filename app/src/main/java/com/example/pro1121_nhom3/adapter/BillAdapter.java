@@ -48,7 +48,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.adminBillViewH
 
         holder.titleBill.setText(gameBill.getNguoidung_tendangnhap());
         holder.date.setText(gameBill.getNgaymua());
-        //holder.tvBillQuantity.setText(listGame.size());
+//        holder.tvBillQuantity.setText(listGame.size());
         holder.tvBillTotal.setText(gameBill.getThanhtien()+"đ");
 
 

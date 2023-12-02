@@ -1,48 +1,20 @@
 package com.example.pro1121_nhom3;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.pro1121_nhom3.adapter.AdminGameAdapter;
 import com.example.pro1121_nhom3.model.game;
-import com.example.pro1121_nhom3.model.loaigame;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.auth.api.signin.internal.Storage;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class GameActivity extends AppCompatActivity {
     ImageView ivMenuBack;
@@ -66,7 +38,7 @@ public class GameActivity extends AppCompatActivity {
                 .setQuery(FirebaseDatabase.getInstance().getReference().child("game"), game.class)
                 .build();
 
-        adminGameAdapter = new AdminGameAdapter(options);
+        adminGameAdapter = new AdminGameAdapter(options, this);
         recyclerviewgame.setAdapter(adminGameAdapter);
 
 
@@ -82,7 +54,7 @@ public class GameActivity extends AppCompatActivity {
         floatAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(GameActivity.this, ThemGameActivity.class);
+                Intent i = new Intent(GameActivity.this, AddGameActivity.class);
                 startActivity(i);
             }
         });
