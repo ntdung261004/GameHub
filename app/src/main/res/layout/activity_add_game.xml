@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddGameActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="ADD A GAME"
+                android:textAllCaps="true"
+                android:textColor="#FF0000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="200dp"
+                    android:layout_height="150dp"
+                    app:cardCornerRadius="20dp">
+
+                    <ImageView
+                        android:id="@+id/bannerpreaddgame"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/eturlbanneraddgame"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="60dp"
+                        android:ems="10"
+                        android:hint="URL HÌNH ẢNH"
+                        android:inputType="text" />
+
+                    <Button
+                        android:id="@+id/btpreviewaddgame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#2b2b2b"
+                        android:text="Xem trước ảnh"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/ettengameaddgame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/custom_edt"
+                android:hint="Nhập tên game"
+                android:paddingStart="20dp"
+                android:textColor="@color/white"
+                android:textColorHint="#959595" />
+
+            <Spinner
+                android:id="@+id/spinnerloaigameaddgame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/custom_edt"
+                android:paddingStart="20dp"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/linearaddloaiaddgame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etnewtenloaiaddgame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edt"
+                    android:hint="Nhập tên loại mới"
+                    android:paddingStart="20dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="#959595" />
+
+                <Button
+                    android:id="@+id/btaddloaiaddgame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top"
+                    android:layout_marginHorizontal="10dp"
+                    android:backgroundTint="#3C3F41"
+                    android:text="Thêm" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etngayphaddgame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edt"
+                    android:hint="Nhập ngày phát hành"
+                    android:paddingStart="20dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="#959595" />
+
+                <Button
+                    android:id="@+id/btgetngayph"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top"
+                    android:layout_marginHorizontal="10dp"
+                    android:backgroundTint="#3C3F41"
+                    android:text="Hôm nay" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Nhập theo định dạng dd/mm/yyyy"
+                android:textStyle="italic" />
+
+            <EditText
+                android:id="@+id/etnphaddgame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/custom_edt"
+                android:hint="Nhập nhà phát hành"
+                android:paddingStart="20dp"
+                android:textColor="@color/white"
+                android:textColorHint="#959595" />
+
+            <EditText
+                android:id="@+id/etgiabanaddgame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/custom_edt"
+                android:hint="Nhập giá"
+                android:paddingStart="20dp"
+                android:textColor="@color/white"
+                android:textColorHint="#959595" />
+
+            <EditText
+                android:id="@+id/etmotaaddgame"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@drawable/custom_edt"
+                android:gravity="top|left"
+                android:hint="Mô tả về sản phẩm..."
+                android:paddingStart="20dp"
+                android:textColor="@color/white"
+                android:textColorHint="#959595" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btaddaddgame"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="#2b2b2b"
+                    android:text="Add" />
+
+                <Button
+                    android:id="@+id/btcanceladdgame"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="#2b2b2b"
+                    android:text="Cancel" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.cardview.widget.CardView>

@@ -16,11 +16,11 @@ public class game {
     public game() {
     }
 
-    public game(String magame, String tengame, String nph, float giaban, String img, com.example.pro1121_nhom3.model.loaigame loaigame, String mota) {
-        this.magame = magame;
+    public game(String tengame, String nph, float giaban, String img, String ngayph, com.example.pro1121_nhom3.model.loaigame loaigame, String mota) {
         this.tengame = tengame;
         this.nph = nph;
         this.giaban = giaban;
+        this.ngayph = ngayph;
         this.img = img;
         this.loaigame = loaigame;
         this.mota = mota;
