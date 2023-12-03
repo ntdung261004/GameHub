@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             etuser.setText(isLoginWithEmail ? savedEmail : savedKey);
             etpass.setText(savedPassword);
             checkboxrem.setChecked(true);
+            login();
         }
 
         // Map UI elements
@@ -160,6 +161,7 @@ public class LoginActivity extends AppCompatActivity {
                             });
                 } else {
                     // Handle the case where the key does not exist
+                    Toast.makeText(LoginActivity.this, "Tên đăng nhập không tồn tại!", Toast.LENGTH_SHORT).show();
                 }
             }
 
