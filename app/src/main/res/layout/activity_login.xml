@@ -58,6 +58,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <CheckBox
+            android:id="@+id/checkboxrem"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginLeft="30dp"
