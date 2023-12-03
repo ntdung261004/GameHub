@@ -52,10 +52,12 @@
                         android:textSize="30sp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <ImageButton
                     android:id="@+id/btnout"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:backgroundTint="#3A3A3A"
                     android:layout_margin="10dp"
                     android:src="@drawable/baseline_logout_24"></ImageButton>
             </LinearLayout>`
