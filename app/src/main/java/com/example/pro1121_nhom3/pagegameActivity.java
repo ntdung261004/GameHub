@@ -91,7 +91,7 @@ public class pagegameActivity extends AppCompatActivity {
                         tvngayph.setText(gameIndex.getNgayph());
                         tvmota.setText(gameIndex.getMota());
                         tvnph.setText(gameIndex.getNph());
-                        tvsellcount.setText((int)gameIndex.getSellcount());
+                        tvsellcount.setText((int)gameIndex.getSellcount() + " VND");
                         tvlikecount.setText(gameIndex.getLikecount()+"");
                         Glide.with(pagegameActivity.this).load(gameIndex.getImg()).into(banner);
 
