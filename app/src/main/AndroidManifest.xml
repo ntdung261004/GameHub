@@ -18,6 +18,9 @@
             android:name=".hoadonActivity"
             android:exported="true" />
         <activity
+            android:name=".UpdateGameActivity"
+            android:exported="true" />
+        <activity
             android:name=".AddGameActivity"
             android:exported="true" />
         <activity

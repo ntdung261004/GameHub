@@ -43,6 +43,8 @@ public class AdminGameAdapter extends FirebaseRecyclerAdapter<game, AdminGameAda
 
     @Override
     protected void onBindViewHolder(@NonNull admingameViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull game model) {
+        String key = getSnapshots().getSnapshot(position).getKey();
+        model.setMagame(key);
         String imgGame = model.getImg();
         if (imgGame != null && !imgGame.isEmpty()) {
             Picasso.get().load(imgGame).into(holder.imgGame);
@@ -84,17 +86,14 @@ public class AdminGameAdapter extends FirebaseRecyclerAdapter<game, AdminGameAda
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(c, UpdateGameActivity.class);
+                i.putExtra("magameadmin", model.getMagame());
                 i.putExtra("img", model.getImg());
                 i.putExtra("tengame", model.getTengame());
-//                i.putExtra("", model.getTengame());
+                i.putExtra("tenloai", model.getLoaigame().getTenloai());
                 i.putExtra("ngayph", model.getNgayph());
                 i.putExtra("nph", model.getNph());
                 i.putExtra("giaban", model.getGiaban());
                 i.putExtra("mota", model.getMota());
-
-
-
-
                 c.startActivity(i);
             }
         });

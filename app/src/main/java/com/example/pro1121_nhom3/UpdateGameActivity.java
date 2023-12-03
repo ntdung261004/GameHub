@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.pro1121_nhom3.adapter.spinnerAdapterAddgame;
+import com.example.pro1121_nhom3.model.game;
 import com.example.pro1121_nhom3.model.loaigame;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -63,19 +65,46 @@ public class UpdateGameActivity extends AppCompatActivity {
         spinAdapter.getCategory(loaigameList);
 
 
-//        // Nhận Intent từ activity gửi
-//        Intent intent = getIntent();
-//
-//        // Kiểm tra xem có dữ liệu được đính kèm hay không
-//        if (intent != null) {
-//            // Lấy dữ liệu từ Intent
-//            String hinhgame = intent.getStringExtra("img");
-//            String tengame = intent.getStringExtra("tengame");
-////            String loaigame = intent.getStringExtra("");
-//            String ngayph = intent.getStringExtra("ngayph");
-//            String nph = intent.getStringExtra("nph");
-//            String mota = intent.getStringExtra("mota");
-//            float gia = intent.getFloatExtra("giaban", 0);
+        // Nhận Intent từ activity gửi
+        Intent intent = getIntent();
+
+        // Kiểm tra xem có dữ liệu được đính kèm hay không
+        if (intent != null) {
+            // Lấy dữ liệu từ Intent
+            String hinhgame = intent.getStringExtra("img");
+            String tengame = intent.getStringExtra("tengame");
+            String loaigame = intent.getStringExtra("tenloai");
+            String ngayph = intent.getStringExtra("ngayph");
+            String nph = intent.getStringExtra("nph");
+            String mota = intent.getStringExtra("mota");
+            String magameindex = intent.getStringExtra("magameadmin");
+            float gia = intent.getFloatExtra("giaban", 0);
+            Toast.makeText(this, ""+ magameindex, Toast.LENGTH_SHORT).show();
+
+            eturl.setText(hinhgame);
+            Glide.with(UpdateGameActivity.this).load(eturl.getText().toString()).into(bannerpreview);
+            etten.setText(tengame);
+            etngayph.setText(ngayph);
+            etnph.setText(nph);
+            etmota.setText(mota);
+            etgiaban.setText((int)gia+"");
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    for(int i = 0; i < spinAdapter.getCount(); i++)
+                    {
+                        if(spinAdapter.getItem(i).getTenloai().equals(loaigame))
+                        {
+                            spinnerloaigame.setSelection(i);
+                            break;
+                        }
+                    }
+                }
+            }, 1000);
+
+
 
 
             btpreview.setOnClickListener(new View.OnClickListener() {
@@ -131,5 +160,31 @@ public class UpdateGameActivity extends AppCompatActivity {
                 }
             });
 
+            btupdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DatabaseReference gameRef = FirebaseDatabase.getInstance().getReference("game");
+
+
+                    String tengame = etten.getText().toString();
+                    String nph = etnph.getText().toString();
+                    String ngayph = etngayph.getText().toString();
+                    float gia = Float.parseFloat(etgiaban.getText().toString());
+                    String mota = etmota.getText().toString();
+                    String img = eturl.getText().toString();
+                    loaigame loaigame1 = new loaigame(maloai, tenloai);
+
+                    game newgame = new game(tengame, nph, gia, img, ngayph, loaigame1, mota);
+                    gameRef.child(magameindex).setValue(newgame).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(UpdateGameActivity.this, "Đã sửa!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                }
+            });
+
         }
     }
+}
