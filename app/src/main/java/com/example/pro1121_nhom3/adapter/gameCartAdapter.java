@@ -23,8 +23,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class gameCartAdapter extends RecyclerView.Adapter<gameCartAdapter.gameViewHolder> {
     private List<game> listGame;
@@ -54,7 +56,9 @@ public class gameCartAdapter extends RecyclerView.Adapter<gameCartAdapter.gameVi
         }
         Glide.with(context).load(gameindex.getImg()).into(holder.imgCart);
         holder.tvtengame.setText(gameindex.getTengame());
-        holder.tvgiaban.setText(gameindex.getGiaban()+"");
+
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        holder.tvgiaban.setText(format.format(gameindex.getGiaban()));
 
         holder.icdelete.setOnClickListener(new View.OnClickListener() {
             @Override

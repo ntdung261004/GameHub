@@ -38,6 +38,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class pagegameActivity extends AppCompatActivity {
 
     TextView tvten, tvngayph, tvsellcount, tvmota, tvloaigame, tvnph, tvlikecount;
@@ -88,14 +91,15 @@ public class pagegameActivity extends AppCompatActivity {
                         tvngayph.setText(gameIndex.getNgayph());
                         tvmota.setText(gameIndex.getMota());
                         tvnph.setText(gameIndex.getNph());
-                        tvsellcount.setText(gameIndex.getSellcount() + " copies sold");
+                        tvsellcount.setText((int)gameIndex.getSellcount() + " VND");
                         tvlikecount.setText(gameIndex.getLikecount()+"");
                         Glide.with(pagegameActivity.this).load(gameIndex.getImg()).into(banner);
 
+                        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
                         if(gameIndex.getGiaban()==0){
                             btbuy.setText("Free to Play");
                         }else{
-                            btbuy.setText((int)gameIndex.getGiaban()+ " VND");
+                            btbuy.setText(format.format((int)gameIndex.getGiaban()));
                         }
 
                     }
