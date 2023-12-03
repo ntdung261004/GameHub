@@ -38,6 +38,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -189,11 +190,11 @@ public class cart_Fragment extends Fragment {
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if (snapshot.exists()) {
                                         for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                                            DatabaseReference ref = userSnapshot.child("cart").getRef();
+                                            DatabaseReference cartRef = userSnapshot.child("cart").getRef();
                                             nguoidung nguoidung1 = userSnapshot.getValue(nguoidung.class);
                                             userSnapshot.child("wallet").getRef().setValue(uleft);
                                             tvwallet.setText(nguoidung1.getWallet()+"");
-                                            ref.addValueEventListener(new ValueEventListener() {
+                                            cartRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     DatabaseReference ref2 = userSnapshot.child("game").getRef();
@@ -210,6 +211,16 @@ public class cart_Fragment extends Fragment {
                                                         nguoidung1.setTendangnhap(userSnapshot.getKey());
                                                         hoadon newhd = new hoadon(game1, nguoidung1, homnay);
                                                         hoadonRef.push().setValue(newhd);
+
+                                                        Boolean checkifCounted = false;
+                                                        if(!checkifCounted)
+                                                        {
+                                                            DatabaseReference gameRef = FirebaseDatabase.getInstance().getReference("game");
+                                                            gameRef.child(game1.getMagame()).child("sellcount").setValue(ServerValue.increment(1));
+                                                            checkifCounted = true;
+                                                        }
+
+
                                                     }
 
                                                 }
@@ -220,7 +231,7 @@ public class cart_Fragment extends Fragment {
                                                 }
                                             });
 
-                                            ref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            cartRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     Toast.makeText(getActivity(), "Đã thanh toán thành công!", Toast.LENGTH_SHORT).show();

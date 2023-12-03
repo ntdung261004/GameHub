@@ -125,7 +125,7 @@ public class pagegameActivity extends AppCompatActivity {
                             if (snapshot.exists()) {
                                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                                     DatabaseReference gameref = FirebaseDatabase.getInstance().getReference("game");
-                                    gameref.addValueEventListener(new ValueEventListener() {
+                                    gameref.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             for(DataSnapshot gamesnap : snapshot.getChildren())
