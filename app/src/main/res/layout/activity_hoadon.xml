@@ -7,8 +7,51 @@
     android:orientation="vertical"
     tools:context=".hoadonActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/game_bar"
+        android:layout_width="match_parent"
+        android:background="#424242"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/ivMenuBackbill"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:src="@mipmap/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvMenuBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="132dp"
+            android:text="BILL"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivMenuAvt"
+            app:layout_constraintStart_toEndOf="@+id/ivMenuBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivMenuAvt"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/avt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvbill"
+        android:background="#2b2b2b"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
