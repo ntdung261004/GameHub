@@ -25,7 +25,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class billAdapter extends RecyclerView.Adapter<billAdapter.gameViewHolder>{
@@ -50,15 +53,18 @@ public class billAdapter extends RecyclerView.Adapter<billAdapter.gameViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull billAdapter.gameViewHolder holder, int position) {
-        hoadon hdinex = listHoadon.get(position);
-        Glide.with(context).load(hdinex.getNguoidung().getAvatar()).into(holder.avtuser);
-        Glide.with(context).load(hdinex.getGame().getImg()).into(holder.bannergame);
-        holder.tvtennd.setText(hdinex.getNguoidung().getTennd());
-        holder.tvusername.setText(hdinex.getNguoidung().getTendangnhap());
-        holder.tvtengame.setText(hdinex.getGame().getTengame());
-        holder.tvmagame.setText(hdinex.getGame().getMagame());
-        holder.tvngaybill.setText(hdinex.getNgaymua());
-        holder.tvthanhtien.setText((int)hdinex.getGame().getGiaban()+"");
+        if(listHoadon != null)
+        {
+            hoadon hdinex = listHoadon.get(position);
+            Glide.with(context).load(hdinex.getNguoidung().getAvatar()).into(holder.avtuser);
+            Glide.with(context).load(hdinex.getGame().getImg()).into(holder.bannergame);
+            holder.tvtennd.setText(hdinex.getNguoidung().getTennd());
+            holder.tvusername.setText(hdinex.getNguoidung().getTendangnhap());
+            holder.tvtengame.setText(hdinex.getGame().getTengame());
+            holder.tvmagame.setText(hdinex.getGame().getMagame());
+            holder.tvngaybill.setText(hdinex.getNgaymua());
+            holder.tvthanhtien.setText((int)hdinex.getGame().getGiaban()+"");
+        }
 
 
     }
@@ -92,18 +98,48 @@ public class billAdapter extends RecyclerView.Adapter<billAdapter.gameViewHolder
         }
     }
 
-    public void getBillList(ArrayList<hoadon> billList)
+
+    public void getBillListByDate(ArrayList<hoadon> billList, String datefrom, String dateto)
     {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         DatabaseReference billRef = FirebaseDatabase.getInstance().getReference("hoadon");
         billRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 billList.clear();
+                float tongdoanhthu = 0;
+                int doanhso = 0;
                 for(DataSnapshot billsnap : snapshot.getChildren())
                 {
+                    Boolean check = true;
+                    Date tgianbill = new Date();
+                    Date from = new Date();
+                    Date to  = new Date();
                     hoadon hoadon1 = billsnap.getValue(hoadon.class);
-                    billList.add(hoadon1);
+                    try {
+                        tgianbill = format.parse(hoadon1.getNgaymua());
+                        if(!datefrom.equals("")) from = format.parse(datefrom);
+                        if(!dateto.equals("")) to = format.parse(dateto);
+                    } catch (ParseException e) {
+                    }
+
+                    if(!datefrom.equals("")){
+                        if(tgianbill.compareTo(from) < 0) check = false;
+                    }
+                    if(!dateto.equals("")){
+                        if(tgianbill.compareTo(to) > 0) check = false;
+                    }
+
+                    if(check){
+                        billList.add(hoadon1);
+                        doanhso++;
+                        tongdoanhthu += hoadon1.getGame().getGiaban();
+                    }
+
                 }
+                DatabaseReference tempRef = FirebaseDatabase.getInstance().getReference("TempData");
+                tempRef.child("doanhso").setValue(doanhso);
+                tempRef.child("doanhthu").setValue(tongdoanhthu);
                 notifyDataSetChanged();
             }
 

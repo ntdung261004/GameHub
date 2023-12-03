@@ -110,8 +110,9 @@ public class gameAdapter2 extends RecyclerView.Adapter<gameAdapter2.gameViewHold
     {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference("game");
+        Query query = myRef.limitToFirst(10);
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 

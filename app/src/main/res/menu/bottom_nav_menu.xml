@@ -7,7 +7,7 @@
     <item
         android:title=""
         android:id="@+id/wl"
-        android:icon="@drawable/wishlist" />
+        android:icon="@drawable/library" />
     <item
         android:title=""
         android:id="@+id/c"
