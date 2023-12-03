@@ -76,7 +76,7 @@ public class cart_Fragment extends Fragment {
         tvtenusercart = view.findViewById(R.id.tvtenusercart);
         btbuy = view.findViewById(R.id.btbuycart);
         rcvcart = view.findViewById(R.id.rcvcart);
-        listgame = new ArrayList<game>();
+        listgame = new ArrayList<>();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         gameCartAdapter cartAdapter = new gameCartAdapter(listgame, getActivity());

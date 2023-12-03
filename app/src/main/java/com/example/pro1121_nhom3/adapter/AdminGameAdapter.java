@@ -34,12 +34,6 @@ import java.util.Map;
 public class AdminGameAdapter extends FirebaseRecyclerAdapter<game, AdminGameAdapter.admingameViewHolder>{
 
 
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
 
     private Context c;
     public AdminGameAdapter(@NonNull FirebaseRecyclerOptions<game> options, Context c) {
@@ -57,7 +51,7 @@ public class AdminGameAdapter extends FirebaseRecyclerAdapter<game, AdminGameAda
         }
 
         holder.tvAdminTengame.setText(model.getTengame());
-//        holder.tvAdminLoaigame.setText(model.getLoaigame().getTenloai());
+        holder.tvAdminLoaigame.setText(model.getLoaigame().getTenloai());
         holder.tvAdminNph.setText(model.getNph());
         holder.tvAdminGiaban.setText(model.getGiaban() + "đ");
 
@@ -65,10 +59,10 @@ public class AdminGameAdapter extends FirebaseRecyclerAdapter<game, AdminGameAda
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(holder.tvAdminTengame.getContext());
-                builder.setTitle("Are you sure?");
-                builder.setMessage("Deleted Game can't be UNDO");
+                builder.setTitle("Xoá game");
+                builder.setMessage("Hành động này không thể hoàn tác");
 
-                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         FirebaseDatabase.getInstance().getReference().child("game")

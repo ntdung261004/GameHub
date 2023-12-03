@@ -1,6 +1,7 @@
 package com.example.pro1121_nhom3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,8 @@ public class hoadonActivity extends AppCompatActivity {
         billAdapter billadapter = new billAdapter(hdList, this);
         billadapter.getBillList(hdList);
         rcvbill.setAdapter(billadapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        rcvbill.addItemDecoration(dividerItemDecoration);
 
     }
 }
