@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -212,13 +213,14 @@ public class cart_Fragment extends Fragment {
                                                         hoadon newhd = new hoadon(game1, nguoidung1, homnay);
                                                         hoadonRef.push().setValue(newhd);
 
-                                                        Boolean checkifCounted = false;
-                                                        if(!checkifCounted)
-                                                        {
-                                                            DatabaseReference gameRef = FirebaseDatabase.getInstance().getReference("game");
-                                                            gameRef.child(game1.getMagame()).child("sellcount").setValue(ServerValue.increment(1));
-                                                            checkifCounted = true;
-                                                        }
+                                                        final Handler handler = new Handler();
+                                                        handler.postDelayed(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                DatabaseReference gameRef = FirebaseDatabase.getInstance().getReference("game");
+                                                                gameRef.child(game1.getMagame()).child("sellcount").setValue(ServerValue.increment(1));
+                                                            }
+                                                        }, 5000);
 
 
                                                     }
