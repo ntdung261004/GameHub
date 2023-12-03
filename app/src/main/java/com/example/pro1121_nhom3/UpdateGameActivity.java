@@ -36,6 +36,7 @@ public class UpdateGameActivity extends AppCompatActivity {
     ArrayList<loaigame> loaigameList;
     public String maloai, tenloai;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
