@@ -27,8 +27,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder>{
 
@@ -63,7 +65,8 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
 
         holder.tvten.setText(gameindex.getTengame());
         Glide.with(context).load(gameindex.getImg()).into(holder.banner);
-        if(gameindex.getGiaban() !=0) holder.giaban.setText((int)gameindex.getGiaban()+" vnd");
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        if(gameindex.getGiaban() !=0) holder.giaban.setText(format.format((int)gameindex.getGiaban()));
         else holder.giaban.setText("Free to Play");
 
         holder.cardview.setOnClickListener(new View.OnClickListener() {

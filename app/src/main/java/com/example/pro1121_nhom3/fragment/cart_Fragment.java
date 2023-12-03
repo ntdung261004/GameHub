@@ -42,6 +42,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -114,12 +115,17 @@ public class cart_Fragment extends Fragment {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     float current = snapshot.getValue(Float.class);
-                                    tvwallet.setText(current+"");
+
+                                    // Định dạng số dư ví thành định dạng tiền tệ VND
+                                    NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+                                    String walletInVND = format.format(current);
+
+                                    tvwallet.setText(walletInVND);
                                 }
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
-
+                                    // Handle error
                                 }
                             });
 
@@ -128,18 +134,21 @@ public class cart_Fragment extends Fragment {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     float tong = 0;
-                                    for(DataSnapshot gamesnap1 : snapshot.getChildren())
-                                    {
+                                    for(DataSnapshot gamesnap1 : snapshot.getChildren()) {
                                         game game1 = gamesnap1.getValue(game.class);
                                         tong += game1.getGiaban();
                                     }
-                                    tvtongtien.setText(tong+"");
 
+                                    // Định dạng tổng tiền thành định dạng tiền tệ VND
+                                    NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+                                    String totalInVND = format.format(tong);
+
+                                    tvtongtien.setText(totalInVND);
                                 }
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
-
+                                    // Handle error
                                 }
                             });
                         }
@@ -170,8 +179,10 @@ public class cart_Fragment extends Fragment {
                 builder.setPositiveButton("THANH TOÁN", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        float uwallet = Float.parseFloat(tvwallet.getText().toString());
-                        float utotal = Float.parseFloat(tvtongtien.getText().toString());
+                        String walletString = tvwallet.getText().toString().replaceAll("[^0-9]", "");
+                        String totalString = tvtongtien.getText().toString().replaceAll("[^0-9]", "");
+                        float uwallet = Float.parseFloat(walletString);
+                        float utotal = Float.parseFloat(totalString);
 
                         if(utotal > uwallet)
                         {
@@ -204,7 +215,6 @@ public class cart_Fragment extends Fragment {
                                                         game game1 = cartgamesnap1.getValue(game.class);
                                                         game1.setMagame(cartgamesnap1.getKey());
                                                         ref2.child(game1.getMagame()).setValue(game1);
-
                                                         Date c = Calendar.getInstance().getTime();
                                                         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                                                         String homnay = df.format(c);

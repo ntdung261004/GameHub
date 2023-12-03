@@ -1,10 +1,7 @@
 package com.example.pro1121_nhom3.fragment;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,7 +26,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.pro1121_nhom3.LoginActivity;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.WalletActivity;
 import com.example.pro1121_nhom3.changespassword;
@@ -45,12 +41,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class profile_Fragment extends Fragment {
 
     private TextView tvtenuser, edtemail, wallet, edtpassword, tvlikelist;
     private EditText edttennguoidung;
     private Button btnUpdate;
-    private ImageButton btnWallet,btnout;
+    private ImageButton btnWallet;
     private ImageView avatar;
 
     public profile_Fragment() {
@@ -70,21 +69,6 @@ public class profile_Fragment extends Fragment {
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnWallet = view.findViewById(R.id.btnWallet);
         avatar = view.findViewById(R.id.avtuser);
-        btnout=view.findViewById(R.id.btnout);
-        btnout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Clear saved credentials
-                clearSavedCredentials();
-
-                // Navigate back to LoginActivity
-                Intent intent = new Intent(requireActivity(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                requireActivity().finish();
-            }
-        });
-
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
@@ -95,27 +79,42 @@ public class profile_Fragment extends Fragment {
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                            nguoidung nguoidung1 = userSnapshot.getValue(nguoidung.class);
-                            String avatarUrl = nguoidung1.getAvatar();
-                            Glide.with(requireActivity()).load(avatarUrl).into(avatar);
-                            tvtenuser.setText(nguoidung1.getTennd());
-                            wallet.setText(String.valueOf(nguoidung1.getWallet()));
-                            edtemail.setText(nguoidung1.getEmail());
-                            edttennguoidung.setText(nguoidung1.getTennd());
+                    // Kiểm tra xem fragment có đính kèm với hoạt động không
+                    if (isAdded()) {
+                        if (snapshot.exists()) {
+                            for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                                nguoidung nguoidung1 = userSnapshot.getValue(nguoidung.class);
+                                if (nguoidung1 != null) {
+                                    String avatarUrl = nguoidung1.getAvatar();
+                                    Glide.with(requireActivity()).load(avatarUrl).into(avatar);
+                                    tvtenuser.setText(nguoidung1.getTennd());
+
+                                    // Định dạng số dư ví thành định dạng tiền tệ VND
+                                    int userWallet = (int) nguoidung1.getWallet();
+                                    NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+                                    String walletInVND = format.format(userWallet);
+                                    wallet.setText(walletInVND);
+
+                                    edtemail.setText(nguoidung1.getEmail());
+                                    edttennguoidung.setText(nguoidung1.getTennd());
+                                }
+                            }
                         }
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // Handle the error
-                    Toast.makeText(requireContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    // Xử lý lỗi
+                    // Kiểm tra xem fragment có đính kèm với hoạt động không trước khi hiển thị thông báo
+                    if (isAdded()) {
+                        Toast.makeText(requireContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
-        }
 
+
+        }
         edtpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,12 +195,7 @@ public class profile_Fragment extends Fragment {
 
         return view;
     }
-    private void clearSavedCredentials() {
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();  // Clear all saved preferences
-        editor.apply();
-    }
+
     private void showChangePasswordConfirmationDialog() {
         new AlertDialog.Builder(requireActivity())
                 .setTitle("Xác nhận thay đổi mật khẩu")
@@ -320,8 +314,8 @@ public class profile_Fragment extends Fragment {
             }
         } else if (requestCode == 1 && resultCode == AppCompatActivity.RESULT_OK) {
             if (data != null) {
-                int updatedWallet = data.getIntExtra("UPDATED_WALLET", 0);
-                wallet.setText(String.valueOf(updatedWallet));
+                String updatedWallet = data.getStringExtra("UPDATED_WALLET");
+                wallet.setText(updatedWallet);
             }
         }
     }

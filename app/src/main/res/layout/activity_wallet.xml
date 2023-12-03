@@ -36,15 +36,7 @@
             android:textSize="20dp"
             android:gravity="center"
             android:layout_marginTop="20dp"></TextView>
-        <TextView
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="VND"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_marginTop="20dp"></TextView>
     </LinearLayout>
     <EditText
         android:id="@+id/nhaptien"

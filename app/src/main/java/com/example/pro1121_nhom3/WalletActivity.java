@@ -3,6 +3,8 @@ package com.example.pro1121_nhom3;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,12 +25,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class WalletActivity extends AppCompatActivity {
 
     private TextView sodu;
     private EditText nhaptien;
     private CardView momo_cardview, atm_cardview, visa_cardview;
     ImageView btnBack;
+    String walletInVND;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,7 @@ public class WalletActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         atm_cardview = findViewById(R.id.atm_cardview);
         visa_cardview = findViewById(R.id.visa_cardview);
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +60,7 @@ public class WalletActivity extends AppCompatActivity {
         momo_cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleCustomAmount(); // Xử lý số tiền nhập tùy ý
+                handleCustomAmount();
             }
         });
         visa_cardview.setOnClickListener(new View.OnClickListener() {
@@ -99,16 +106,17 @@ public class WalletActivity extends AppCompatActivity {
     }
 
     private void updateWalletUI(int userWallet) {
-        // Cập nhật giao diện người dùng với số tiền ví
-        sodu.setText(String.valueOf(userWallet));
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        String walletInVND = format.format(userWallet);
+        sodu.setText(walletInVND);
     }
 
     private void handleCustomAmount() {
         // Lấy số tiền từ EditText
         String inputAmount = nhaptien.getText().toString();
 
-        if (!inputAmount.isEmpty()) {
-            double enteredAmount = Double.parseDouble(inputAmount);
+        if (!inputAmount.isEmpty() && inputAmount.matches("[0-9,]+")) {
+            double enteredAmount = Double.parseDouble(inputAmount.replace(",", ""));
 
             // Tạo AlertDialog để xác nhận nạp tiền
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -121,13 +129,18 @@ public class WalletActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     // Lấy số dư hiện tại từ TextView
                     String currentBalanceString = sodu.getText().toString();
+                    currentBalanceString = currentBalanceString.replaceAll("[^0-9]", "");
                     double currentBalance = Double.parseDouble(currentBalanceString);
 
                     // Cộng thêm số tiền nhập vào số dư
                     double updatedBalance = currentBalance + enteredAmount;
 
+                    // Định dạng số dư ví thành định dạng tiền tệ VND
+                    NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+                    String walletInVND = format.format(updatedBalance);
+
                     // Cập nhật TextView và giá trị ví trên Firebase Realtime Database
-                    sodu.setText(String.valueOf(updatedBalance));
+                    sodu.setText(walletInVND);
                     updateWalletInFirebase(updatedBalance);
 
                     // Hiển thị thông báo nạp tiền thành công
@@ -139,7 +152,7 @@ public class WalletActivity extends AppCompatActivity {
             builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // Đóng AlertDialog nếu người dùng chọn "Không"
+                    // Đóng hộp thoại và không thay đổi gì
                     dialog.dismiss();
                 }
             });
@@ -171,11 +184,12 @@ public class WalletActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     // Lấy giá trị ví mới từ Firebase
-                                    int updatedWallet = dataSnapshot.child("wallet").getValue(Integer.class);
-
+                                    double updatedWallet = dataSnapshot.child("wallet").getValue(Double.class);
+                                    NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+                                    String walletInVND = format.format(updatedWallet);
                                     // Gửi kết quả trở lại cho Fragment
                                     Intent resultIntent = new Intent();
-                                    resultIntent.putExtra("UPDATED_WALLET", updatedWallet);
+                                    resultIntent.putExtra("UPDATED_WALLET", walletInVND);
                                     setResult(RESULT_OK, resultIntent);
                                 }
 
@@ -193,6 +207,7 @@ public class WalletActivity extends AppCompatActivity {
                     // Xử lý lỗi nếu có
                 }
             });
+
         }
     }
 }

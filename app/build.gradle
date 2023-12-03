@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.example.pro1121_nhom3'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.pro1121_nhom3"

@@ -26,9 +26,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class gameFilterAdapter extends RecyclerView.Adapter<gameFilterAdapter.gameViewHolder> {
     private List<game> listGame;
@@ -56,11 +58,12 @@ public class gameFilterAdapter extends RecyclerView.Adapter<gameFilterAdapter.ga
         Glide.with(context).load(gameindex.getImg()).into(holder.banner);
         holder.tvtengame.setText(gameindex.getTengame());
         holder.tvloaigame.setText(gameindex.getLoaigame().getTenloai());
-        if(gameindex.getGiaban()==0)
-        {
+
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        if(gameindex.getGiaban()==0){
             holder.tvgiaban.setText("Free to Play");
         }else{
-            holder.tvgiaban.setText((int)gameindex.getGiaban()+" VND");
+            holder.tvgiaban.setText(format.format((int)gameindex.getGiaban()));
         }
 
         holder.cvitem.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +78,7 @@ public class gameFilterAdapter extends RecyclerView.Adapter<gameFilterAdapter.ga
         });
 
     }
+
 
 
     @Override

@@ -190,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                             intent = new Intent(LoginActivity.this, MainActivity.class);
                             // Truyền dữ liệu cần thiết nếu có
                             intent.putExtra("userName", userSnapshot.child("tennd").getValue(String.class));
-                            intent.putExtra("userWallet", userSnapshot.child("wallet").getValue(Integer.class));
+                            intent.putExtra("userWallet", userSnapshot.child("wallet").getValue(Long.class)); // Sửa ở đây
                         }
                         intent.putExtra("userEmail", userEmail);
                         startActivity(intent);
@@ -198,6 +198,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
