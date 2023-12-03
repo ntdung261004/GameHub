@@ -23,16 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class gameCartAdapter extends RecyclerView.Adapter<gameCartAdapter.gameViewHolder> {
+public class gameLikedListAdapter extends RecyclerView.Adapter<gameLikedListAdapter.gameViewHolder>{
     private List<game> listGame;
     private Context context;
 
-    public gameCartAdapter(List<game> listGame, Context context)
+    public gameLikedListAdapter(List<game> listGame, Context context)
     {
         this.listGame = listGame;
         this.context = context;
@@ -41,14 +39,14 @@ public class gameCartAdapter extends RecyclerView.Adapter<gameCartAdapter.gameVi
 
     @NonNull
     @Override
-    public gameCartAdapter.gameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public gameLikedListAdapter.gameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
         View view = inflater.inflate(R.layout.itemcart, parent, false);
-        return new gameViewHolder(view);
+        return new gameLikedListAdapter.gameViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull gameCartAdapter.gameViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull gameLikedListAdapter.gameViewHolder holder, int position) {
         game gameindex = listGame.get(position);
         if(gameindex == null)
         {
@@ -56,9 +54,7 @@ public class gameCartAdapter extends RecyclerView.Adapter<gameCartAdapter.gameVi
         }
         Glide.with(context).load(gameindex.getImg()).into(holder.imgCart);
         holder.tvtengame.setText(gameindex.getTengame());
-
-        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-        holder.tvgiaban.setText(format.format(gameindex.getGiaban()));
+        holder.tvgiaban.setText(gameindex.getGiaban()+"");
 
         holder.icdelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +72,7 @@ public class gameCartAdapter extends RecyclerView.Adapter<gameCartAdapter.gameVi
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
                                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                                    DatabaseReference ref = userSnapshot.child("cart").getRef();
+                                    DatabaseReference ref = userSnapshot.child("like_list").getRef();
                                     ref.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -84,10 +80,9 @@ public class gameCartAdapter extends RecyclerView.Adapter<gameCartAdapter.gameVi
                                             {
                                                 if(gameindex.getMagame().equals(gamesnap1.getKey()))
                                                 {
-                                                    DatabaseReference deleteRef = userSnapshot.child("cart").child(gamesnap1.getKey()).getRef();
+                                                    DatabaseReference deleteRef = userSnapshot.child("like_list").child(gamesnap1.getKey()).getRef();
                                                     deleteRef.removeValue();
                                                 }
-
                                             }
 
                                             notifyDataSetChanged();
@@ -139,7 +134,7 @@ public class gameCartAdapter extends RecyclerView.Adapter<gameCartAdapter.gameVi
         }
     }
 
-    public void getCartList(ArrayList<game> listGame)
+    public void getLikedList(ArrayList<game> listGame)
     {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null)
@@ -154,7 +149,7 @@ public class gameCartAdapter extends RecyclerView.Adapter<gameCartAdapter.gameVi
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
                         for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                            DatabaseReference ref = userSnapshot.child("cart").getRef();
+                            DatabaseReference ref = userSnapshot.child("like_list").getRef();
                             ref.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -187,6 +182,4 @@ public class gameCartAdapter extends RecyclerView.Adapter<gameCartAdapter.gameVi
         }
 
     }
-
-
 }

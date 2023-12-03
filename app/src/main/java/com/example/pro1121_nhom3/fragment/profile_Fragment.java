@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,7 @@ import com.bumptech.glide.Glide;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.WalletActivity;
 import com.example.pro1121_nhom3.changespassword;
+import com.example.pro1121_nhom3.likedListActivity;
 import com.example.pro1121_nhom3.model.nguoidung;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +46,7 @@ import java.util.Locale;
 
 public class profile_Fragment extends Fragment {
 
-    private TextView tvtenuser, edtemail, wallet, edtpassword;
+    private TextView tvtenuser, edtemail, wallet, edtpassword, tvlikelist;
     private EditText edttennguoidung;
     private Button btnUpdate;
     private ImageButton btnWallet;
@@ -55,6 +59,7 @@ public class profile_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_, container, false);
 
+        tvlikelist = view.findViewById(R.id.tvlikelistprf);
         tvtenuser = view.findViewById(R.id.tvtenuserbill);
         wallet = view.findViewById(R.id.wallet);
         edtemail = view.findViewById(R.id.edtemail);
@@ -173,6 +178,18 @@ public class profile_Fragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(requireActivity(), WalletActivity.class);
                 startActivityForResult(intent, 1);
+            }
+        });
+
+        SpannableString spannableString = new SpannableString(tvlikelist.getText());
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        spannableString.setSpan(underlineSpan,0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvlikelist.setText(spannableString);
+
+        tvlikelist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), likedListActivity.class));
             }
         });
 
