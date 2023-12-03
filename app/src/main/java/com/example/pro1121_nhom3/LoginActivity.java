@@ -1,10 +1,12 @@
 package com.example.pro1121_nhom3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,9 +29,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etuser;
     private Button btlogin;
+    private CheckBox checkboxrem;
     private FirebaseAuth mAuth;
-    private TextView txtregister,txtForgotPassword;
-    private TextInputLayout edtPasswordLayout,edtPasswordLayout1;
+    private TextView txtregister, txtForgotPassword;
+    private TextInputLayout edtPasswordLayout, edtPasswordLayout1;
     private TextInputEditText etpass;
 
     @Override
@@ -41,12 +44,28 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         edtPasswordLayout = findViewById(R.id.edtPasswordLayout);
         edtPasswordLayout1 = findViewById(R.id.edtPasswordLayout1);
-        // Map UI elements
+        checkboxrem = findViewById(R.id.checkboxrem);
         etuser = findViewById(R.id.edtUsername);
         etpass = findViewById(R.id.edtPassword);
+
+        // Restore saved credentials
+        SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("remember", false)) {
+            String savedEmail = sharedPreferences.getString("email", "");
+            String savedKey = sharedPreferences.getString("key", "");
+            String savedPassword = sharedPreferences.getString("password", "");
+            boolean isLoginWithEmail = sharedPreferences.getBoolean("isLoginWithEmail", false);
+
+            etuser.setText(isLoginWithEmail ? savedEmail : savedKey);
+            etpass.setText(savedPassword);
+            checkboxrem.setChecked(true);
+        }
+
+        // Map UI elements
         btlogin = findViewById(R.id.btlogin);
         txtregister = findViewById(R.id.txtregister);
-        txtForgotPassword=findViewById(R.id.txtForgotPassword);
+        txtForgotPassword = findViewById(R.id.txtForgotPassword);
+
         // Set OnClickListener for the login button
         btlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
+
         // Xử lý sự kiện khi nhấn nút đăng ký
         txtregister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     // Method to handle login
     private void login() {
         String input = etuser.getText().toString().trim();
@@ -87,6 +109,11 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        // Save credentials if the checkbox is checked
+                        if (checkboxrem.isChecked()) {
+                            // Save with login type as email
+                            saveCredentials(input, "", pass, true);
+                        }
                         fetchUserData(input);
                     } else {
                         Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
@@ -98,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
             loginWithKey(input, pass);
         }
     }
+
     // Method to check if the input is a valid email
     private boolean isValidEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
@@ -119,6 +147,11 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                        // Save credentials if the checkbox is checked
+                                        if (checkboxrem.isChecked()) {
+                                            // Save with login type as key
+                                            saveCredentials(userEmail, key, password, false);
+                                        }
                                         fetchUserData(userEmail);
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
@@ -126,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
                 } else {
-
+                    // Handle the case where the key does not exist
                 }
             }
 
@@ -138,7 +171,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // Method to fetch user data from Realtime Database
-    // Trong phương thức fetchUserData
     private void fetchUserData(String userEmail) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
         Query query = databaseReference.orderByChild("email").equalTo(userEmail);
@@ -172,5 +204,17 @@ public class LoginActivity extends AppCompatActivity {
                 // Handle database error
             }
         });
+    }
+
+    // Method to save login credentials and login type
+    private void saveCredentials(String email, String key, String password, boolean isLoginWithEmail) {
+        SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("remember", true);
+        editor.putBoolean("isLoginWithEmail", isLoginWithEmail);
+        editor.putString("email", email);
+        editor.putString("key", key);
+        editor.putString("password", password);
+        editor.apply();
     }
 }
