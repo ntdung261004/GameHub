@@ -28,7 +28,10 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.squareup.picasso.Picasso;
+
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class AdminGameAdapter extends FirebaseRecyclerAdapter<game, AdminGameAdapter.admingameViewHolder>{
@@ -55,7 +58,10 @@ public class AdminGameAdapter extends FirebaseRecyclerAdapter<game, AdminGameAda
         holder.tvAdminTengame.setText(model.getTengame());
         holder.tvAdminLoaigame.setText(model.getLoaigame().getTenloai());
         holder.tvAdminNph.setText(model.getNph());
-        holder.tvAdminGiaban.setText(model.getGiaban() + "đ");
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        String giabanFormatted = format.format(model.getGiaban());
+        holder.tvAdminGiaban.setText(giabanFormatted);
+
 
         holder.ivXoa.setOnClickListener(new View.OnClickListener() {
             @Override

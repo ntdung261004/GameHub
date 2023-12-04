@@ -23,10 +23,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class hoadonActivity extends AppCompatActivity {
 
@@ -62,7 +64,11 @@ public class hoadonActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 tvdoanhso.setText(snapshot.child("doanhso").getValue(int.class)+"");
-                tvdoanhthu.setText(snapshot.child("doanhthu").getValue(int.class)+"");
+                NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+                int doanhthu = snapshot.child("doanhthu").getValue(int.class);
+                String doanhthuFormatted = format.format(doanhthu);
+                tvdoanhthu.setText(doanhthuFormatted);
+
             }
 
             @Override
