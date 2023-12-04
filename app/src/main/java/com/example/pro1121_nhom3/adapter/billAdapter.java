@@ -25,11 +25,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class billAdapter extends RecyclerView.Adapter<billAdapter.gameViewHolder>{
     private List<hoadon> listHoadon;
@@ -63,7 +65,10 @@ public class billAdapter extends RecyclerView.Adapter<billAdapter.gameViewHolder
             holder.tvtengame.setText(hdinex.getGame().getTengame());
             holder.tvmagame.setText(hdinex.getGame().getMagame());
             holder.tvngaybill.setText(hdinex.getNgaymua());
-            holder.tvthanhtien.setText((int)hdinex.getGame().getGiaban()+"");
+            NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+            String thanhtienFormatted = format.format((int)hdinex.getGame().getGiaban());
+            holder.tvthanhtien.setText(thanhtienFormatted);
+
         }
 
 
