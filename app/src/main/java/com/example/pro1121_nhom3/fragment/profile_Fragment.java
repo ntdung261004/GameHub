@@ -1,7 +1,10 @@
 package com.example.pro1121_nhom3.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.pro1121_nhom3.LoginActivity;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.WalletActivity;
 import com.example.pro1121_nhom3.changespassword;
@@ -49,12 +53,11 @@ public class profile_Fragment extends Fragment {
     private TextView tvtenuser, edtemail, wallet, edtpassword, tvlikelist;
     private EditText edttennguoidung;
     private Button btnUpdate;
-    private ImageButton btnWallet;
+    private ImageButton btnWallet,btnout;
     private ImageView avatar;
 
     public profile_Fragment() {
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_, container, false);
@@ -69,7 +72,20 @@ public class profile_Fragment extends Fragment {
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnWallet = view.findViewById(R.id.btnWallet);
         avatar = view.findViewById(R.id.avtuser);
+        btnout=view.findViewById(R.id.btnout);
+        btnout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Clear saved credentials
+                clearSavedCredentials();
 
+                // Navigate back to LoginActivity
+                Intent intent = new Intent(requireActivity(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                requireActivity().finish();
+            }
+        });
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             String userEmail = currentUser.getEmail();
@@ -121,6 +137,7 @@ public class profile_Fragment extends Fragment {
                 showChangePasswordConfirmationDialog();
             }
         });
+
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -287,7 +304,12 @@ public class profile_Fragment extends Fragment {
 
         builder.show();
     }
-
+    private void clearSavedCredentials() {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();  // Clear all saved preferences
+        editor.apply();
+    }
     private void pickImageFromGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");

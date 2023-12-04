@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize Firebase Authentication
+        // Khởi tạo Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
         edtPasswordLayout = findViewById(R.id.edtPasswordLayout);
         edtPasswordLayout1 = findViewById(R.id.edtPasswordLayout1);
@@ -48,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         etuser = findViewById(R.id.edtUsername);
         etpass = findViewById(R.id.edtPassword);
 
-        // Restore saved credentials
+        // Khôi phục thông tin đăng nhập đã lưu
         SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         if (sharedPreferences.getBoolean("remember", false)) {
             String savedEmail = sharedPreferences.getString("email", "");
@@ -62,12 +63,12 @@ public class LoginActivity extends AppCompatActivity {
             login();
         }
 
-        // Map UI elements
+        // Ánh xạ các phần tử giao diện
         btlogin = findViewById(R.id.btlogin);
         txtregister = findViewById(R.id.txtregister);
         txtForgotPassword = findViewById(R.id.txtForgotPassword);
 
-        // Set OnClickListener for the login button
+        // Đặt OnClickListener cho nút đăng nhập
         btlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    // Method to handle login
+    // Phương thức xử lý đăng nhập
     private void login() {
         String input = etuser.getText().toString().trim();
         String pass = etpass.getText().toString().trim();
@@ -102,37 +103,56 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Check if the input is a valid email
+        // Kiểm tra xem input có phải là một email hợp lệ không
         if (isValidEmail(input)) {
-            // Login with email
-            mAuth.signInWithEmailAndPassword(input, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            // Kiểm tra xem email có tồn tại không
+            mAuth.fetchSignInMethodsForEmail(input).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                 @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
+                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                        // Save credentials if the checkbox is checked
-                        if (checkboxrem.isChecked()) {
-                            // Save with login type as email
-                            saveCredentials(input, "", pass, true);
+                        SignInMethodQueryResult result = task.getResult();
+                        if (result.getSignInMethods().size() > 0) {
+                            // Email tồn tại, thử đăng nhập
+                            mAuth.signInWithEmailAndPassword(input, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                        // Lưu thông tin đăng nhập nếu checkbox được chọn
+                                        if (checkboxrem.isChecked()) {
+                                            // Lưu với loại đăng nhập là email
+                                            saveCredentials(input, "", pass, true);
+                                        }
+                                        fetchUserData(input);
+                                    } else {
+                                        // Xử lý mật khẩu sai
+                                        Toast.makeText(LoginActivity.this, "Sai mật khẩu", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        } else {
+                            // Email không tồn tại
+                            Toast.makeText(LoginActivity.this, "Email không tồn tại", Toast.LENGTH_SHORT).show();
                         }
-                        fetchUserData(input);
                     } else {
+                        // Xử lý lỗi
                         Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         } else {
-            // Login with key
+            // Đăng nhập bằng key
             loginWithKey(input, pass);
         }
     }
 
-    // Method to check if the input is a valid email
+
+    // Phương thức kiểm tra xem input có phải là một email hợp lệ không
     private boolean isValidEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    // Method to login with key
+    // Phương thức đăng nhập bằng key
     private void loginWithKey(String key, String password) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
 
@@ -148,31 +168,33 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                        // Save credentials if the checkbox is checked
+                                        // Lưu thông tin đăng nhập nếu checkbox được chọn
                                         if (checkboxrem.isChecked()) {
-                                            // Save with login type as key
+                                            // Lưu với loại đăng nhập là key
                                             saveCredentials(userEmail, key, password, false);
                                         }
                                         fetchUserData(userEmail);
                                     } else {
-                                        Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
+                                        // Xử lý mật khẩu sai
+                                        Toast.makeText(LoginActivity.this, "Sai mật khẩu", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                 } else {
-                    // Handle the case where the key does not exist
+                    // Xử lý trường hợp key không tồn tại
                     Toast.makeText(LoginActivity.this, "Tên đăng nhập không tồn tại!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle database error
+                // Xử lý lỗi database
             }
         });
     }
 
-    // Method to fetch user data from Realtime Database
+
+    // Phương thức lấy dữ liệu người dùng từ Realtime Database
     private void fetchUserData(String userEmail) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("nguoidung");
         Query query = databaseReference.orderByChild("email").equalTo(userEmail);
@@ -183,7 +205,7 @@ public class LoginActivity extends AppCompatActivity {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         Intent intent;
                         if (userSnapshot.child("role").getValue(Integer.class) == 2) {
-                            // Redirect to AdminActivity
+                            // Chuyển hướng đến AdminActivity
                             intent = new Intent(LoginActivity.this, AdminActivity.class);
                             startActivity(intent);
                             finish();
@@ -201,16 +223,14 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
 
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle database error
+                // Xử lý lỗi database
             }
         });
     }
 
-    // Method to save login credentials and login type
+    // Phương thức lưu thông tin đăng nhập và loại đăng nhập
     private void saveCredentials(String email, String key, String password, boolean isLoginWithEmail) {
         SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
