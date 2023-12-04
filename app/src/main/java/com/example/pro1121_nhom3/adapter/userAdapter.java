@@ -1,7 +1,9 @@
 package com.example.pro1121_nhom3.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -65,6 +68,31 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userViewHolder
         {
             holder.backgrounduser.setBackgroundColor(Color.rgb(100,100,255));
         }
+
+        holder.backgrounduser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(c);
+                builder.setTitle("Xoá game");
+                builder.setMessage("Hành động này không thể hoàn tác");
+
+                builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseDatabase.getInstance().getReference().child("nguoidung")
+                                .child(user.getTendangnhap()).removeValue();
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(c, "Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.show();
+            }
+        });
 
 
     }
