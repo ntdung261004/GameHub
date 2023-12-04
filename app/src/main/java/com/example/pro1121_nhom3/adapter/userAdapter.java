@@ -73,7 +73,7 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userViewHolder
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(c);
-                builder.setTitle("Xoá game");
+                builder.setTitle("Xoá User");
                 builder.setMessage("Hành động này không thể hoàn tác");
 
                 builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {

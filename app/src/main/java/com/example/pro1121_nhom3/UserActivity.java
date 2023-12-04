@@ -44,8 +44,10 @@ public class UserActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listUser.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     nguoidung nd = dataSnapshot.getValue(nguoidung.class);
+                    nd.setTendangnhap(dataSnapshot.getKey());
                     listUser.add(nd);
                 }
                 user_adapter.notifyDataSetChanged();
