@@ -2,17 +2,32 @@ package com.example.pro1121_nhom3.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.pro1121_nhom3.AdminActivity;
+import com.example.pro1121_nhom3.LoginActivity;
+import com.example.pro1121_nhom3.MainActivity;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.model.nguoidung;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -38,10 +53,20 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userViewHolder
     public void onBindViewHolder(@NonNull userViewHolder holder, int position) {
 
         nguoidung user = listUser.get(position);
-
-
+        Glide.with(c).load(user.getAvatar()).into(holder.imgUser);
         holder.tvUserName.setText(user.getTennd());
         holder.tvUserWallet.setText(user.getWallet() + "đ");
+
+        if(user.getRole() == 2)
+        {
+            holder.backgrounduser.setBackgroundColor(Color.rgb(255,100,100));
+        }
+        if(user.getRole() == 3)
+        {
+            holder.backgrounduser.setBackgroundColor(Color.rgb(100,100,255));
+        }
+
+
     }
 
     @Override
@@ -55,14 +80,14 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userViewHolder
 
     public class userViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgUser;
-        private TextView tvUserName, tvUserWallet, tvUserWishlist, tvUserGame;
+        private TextView tvUserName, tvUserWallet;
+        private LinearLayout backgrounduser;
         public userViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgUser = itemView.findViewById(R.id.game_img);
+            imgUser = itemView.findViewById(R.id.user_img);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvUserWallet = itemView.findViewById(R.id.tvUserWallet);
-            tvUserWishlist = itemView.findViewById(R.id.tvUserWishlist);
-            tvUserGame = itemView.findViewById(R.id.tvUserGame);
+            backgrounduser = itemView.findViewById(R.id.backgrounduser);
         }
     }
 }

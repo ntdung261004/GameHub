@@ -14,27 +14,31 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
         <LinearLayout
             android:id="@+id/linerUser"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/ivAdminUser"
-                android:layout_width="200dp"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/user"
-                >
-            </ImageView>
+                android:layout_marginRight="30dp"
+                android:src="@drawable/user"></ImageView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="USER"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="40sp"
+
                 android:textStyle="bold">
 
             </TextView>
@@ -42,15 +46,17 @@
 
         <LinearLayout
             android:id="@+id/linerbill"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/ivAdminBill"
-                android:layout_width="200dp"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_marginRight="30dp"
                 android:src="@drawable/bill">
 
             </ImageView>
@@ -60,40 +66,59 @@
                 android:layout_height="wrap_content"
                 android:text="BILL"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="40sp"
                 android:textStyle="bold">
 
             </TextView>
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
         <LinearLayout
             android:id="@+id/linerGAME"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/ivAdminGame"
-                android:layout_width="200dp"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/icongamee"
-                >
-            </ImageView>
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icongamee"></ImageView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GAME"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="40sp"
                 android:textStyle="bold">
 
             </TextView>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btaddnvadmin"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:text="ADD EMPLOYE" />
+
+        <Button
+            android:id="@+id/btdoimkadmin"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:text="CHANGE PASSWORD" />
+
+        <Button
+            android:id="@+id/btlogout"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log out" />
+
     </LinearLayout>
+
 </LinearLayout>
