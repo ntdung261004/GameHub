@@ -6,21 +6,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class AdminActivity extends AppCompatActivity {
 
-    ImageView ivAdminGame, ivAdminBill, ivAdminUser;
+    LinearLayout luser, lbill, lgame, lpass, lempl, llogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        ivAdminUser = findViewById(R.id.ivAdminUser);
-        ivAdminGame = findViewById(R.id.ivAdminGame);
-        ivAdminBill = findViewById(R.id.ivAdminBill);
+        luser = findViewById(R.id.linerUser);
+        lbill = findViewById(R.id.linerbill);
+        lgame = findViewById(R.id.linerGAME);
+        lpass = findViewById(R.id.linerDoiMK);
+        lempl = findViewById(R.id.linearAddNV);
+        llogout = findViewById(R.id.linerLogout);
 
-        ivAdminUser.setOnClickListener(new View.OnClickListener() {
+        luser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(AdminActivity.this, UserActivity.class);
@@ -28,7 +32,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        ivAdminBill.setOnClickListener(new View.OnClickListener() {
+        lbill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(AdminActivity.this, hoadonActivity.class);
@@ -36,12 +40,14 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        ivAdminGame.setOnClickListener(new View.OnClickListener() {
+        lgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(AdminActivity.this, GameActivity.class);
                 startActivity(i);
             }
         });
+
+
     }
 }
