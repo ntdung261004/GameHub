@@ -119,6 +119,7 @@
                 android:src="@drawable/key"></ImageView>
 
             <TextView
+                android:id="@+id/adminchange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CHANGE PASSWORD"
@@ -173,6 +174,7 @@
                 android:src="@drawable/icongamee"></ImageView>
 
             <TextView
+                android:id="@+id/logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="LOG OUT"

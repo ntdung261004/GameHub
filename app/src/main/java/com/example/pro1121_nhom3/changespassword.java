@@ -105,7 +105,7 @@ public class changespassword extends AppCompatActivity {
                 .setPositiveButton("Đăng nhập lại", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // TODO: Add code to navigate back to the login screen
+
                         startActivity(new Intent(changespassword.this, LoginActivity.class));
                     }
                 })
