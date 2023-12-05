@@ -33,7 +33,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="#FFFFFF"
-                android:hint="user login"
+                android:hint="Username"
                 android:paddingStart="20dp" />
 
             <EditText
@@ -43,7 +43,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="#FFFFFF"
-                android:hint="user name"
+                android:hint="Your full name"
                 android:paddingStart="20dp" />
 
             <EditText

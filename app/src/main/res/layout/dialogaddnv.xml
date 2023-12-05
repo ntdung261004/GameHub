@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:backgroundTint="#232323"
+    android:layout_margin="10dp"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:layout_gravity="center"
+            android:text="ADD EMPLOYEE" />
+
+        <EditText
+            android:id="@+id/ethotennv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/custom_edt"
+            android:textColor="@color/white"
+            android:inputType="text"
+            android:textColorHint="#676767"
+            android:layout_margin="5dp"
+            android:hint="New employee's full name" />
+
+        <EditText
+            android:id="@+id/etmailnv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/custom_edt"
+            android:textColor="@color/white"
+            android:inputType="text"
+            android:textColorHint="#676767"
+            android:layout_margin="5dp"
+            android:hint="Email" />
+
+        <EditText
+            android:id="@+id/etusernamenv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edt"
+            android:textColor="@color/white"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="#676767"
+            android:layout_margin="5dp"
+            android:hint="Username" />
+
+        <EditText
+            android:id="@+id/etpassnv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edt"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="#676767"
+            android:hint="Password" />
+
+        <Button
+            android:id="@+id/btaddnv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:backgroundTint="#5A5A5A"
+            android:text="ADD NEW EMPLOYEE" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

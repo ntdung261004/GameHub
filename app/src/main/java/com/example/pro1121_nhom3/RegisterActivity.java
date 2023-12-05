@@ -69,32 +69,31 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
         } else {
             // Thực hiện đăng ký người dùng trên Firebase
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Lưu thông tin người dùng vào Database với username làm khóa chính
-                                DatabaseReference currentUserDb = mDatabase.child(username);
-                                currentUserDb.child("avatar").setValue("https://firebasestorage.googleapis.com/v0/b/pro1121-nhom3.appspot.com/o/gamer.png?alt=media&token=1d44fceb-e564-4400-b18c-c122f9dacf7c");
-                                currentUserDb.child("email").setValue(email);
-                                currentUserDb.child("tennd").setValue(tennd);
-                                currentUserDb.child("role").setValue(1);
-                                currentUserDb.child("wallet").setValue(0);
-                                currentUserDb.child("matkhau").setValue(password);
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Lưu thông tin người dùng vào Database với username làm khóa chính
+                        DatabaseReference currentUserDb = mDatabase.child(username);
+                        currentUserDb.child("avatar").setValue("https://firebasestorage.googleapis.com/v0/b/pro1121-nhom3.appspot.com/o/gamer.png?alt=media&token=1d44fceb-e564-4400-b18c-c122f9dacf7c");
+                        currentUserDb.child("email").setValue(email);
+                        currentUserDb.child("tennd").setValue(tennd);
+                        currentUserDb.child("role").setValue(1);
+                        currentUserDb.child("wallet").setValue(0);
+                        currentUserDb.child("matkhau").setValue(password);
 
-                                // Hiển thị thông báo đăng ký thành công
-                                Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                            } else {
-                                // Hiển thị thông báo lỗi nếu đăng ký không thành công
-                                if (task.getException() != null) {
-                                    Toast.makeText(RegisterActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
-                                }
-                            }
+                        // Hiển thị thông báo đăng ký thành công
+                        Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Hiển thị thông báo lỗi nếu đăng ký không thành công
+                        if (task.getException() != null) {
+                            Toast.makeText(RegisterActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }
+                }
+            });
         }
     }
 }

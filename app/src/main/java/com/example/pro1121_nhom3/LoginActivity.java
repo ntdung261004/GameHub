@@ -204,12 +204,21 @@ public class LoginActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         Intent intent;
-                        if (userSnapshot.child("role").getValue(Integer.class) == 2) {
+                        if (userSnapshot.child("role").getValue(Integer.class) > 1) {
                             // Chuyển hướng đến AdminActivity
-                            intent = new Intent(LoginActivity.this, AdminActivity.class);
-                            startActivity(intent);
-                            finish();
-                            return;
+                            if(userSnapshot.child("role").getValue(Integer.class) == 2){
+                                intent = new Intent(LoginActivity.this, AdminActivity.class);
+                                startActivity(intent);
+                                finish();
+                                return;
+                            }else{
+                                intent = new Intent(LoginActivity.this, AdminActivity.class);
+                                intent.putExtra("nv",true);
+                                startActivity(intent);
+                                finish();
+                                return;
+                            }
+
                         } else {
                             intent = new Intent(LoginActivity.this, MainActivity.class);
                             // Truyền dữ liệu cần thiết nếu có
