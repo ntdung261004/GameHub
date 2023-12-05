@@ -125,60 +125,70 @@
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:text="Doanh số: "
                 android:textColor="#787878"
-                android:textStyle="bold"
-                android:text="Doanh số: " />
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
+                android:text="đã bán "
                 android:textColor="#BCBCBC"
-                android:text="đã bán " />
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/tvdoanhsobill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="0"
                 android:textColor="#2196F3"
-                android:textSize="16dp"
-                android:text="0" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/textView26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
+                android:text=" sản phẩm"
                 android:textColor="#BCBCBC"
-                android:text=" sản phẩm" />
+                android:textStyle="italic" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:text="Doanh thu: "
                 android:textColor="#787878"
-                android:textStyle="bold"
-                android:text="Doanh thu: " />
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvdoanhthubill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="0"
                 android:textColor="#4BEC52"
                 android:textSize="40dp"
-                android:textStyle="bold"
-                android:text="0" />
+                android:textStyle="bold" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/bttkbill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#33AF38"
+            android:drawableLeft="@drawable/tk"
+            android:textStyle="italic"
+            android:layout_gravity="right"
+            android:text="VIEW CHARTS" />
 
     </LinearLayout>
 </LinearLayout>

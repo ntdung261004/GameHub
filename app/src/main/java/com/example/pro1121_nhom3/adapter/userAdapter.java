@@ -63,10 +63,12 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userViewHolder
         if(user.getRole() == 2)
         {
             holder.backgrounduser.setBackgroundColor(Color.rgb(255,100,100));
+            holder.tvUserWallet.setVisibility(View.GONE);
         }
         if(user.getRole() == 3)
         {
-            holder.backgrounduser.setBackgroundColor(Color.rgb(100,100,255));
+            holder.backgrounduser.setBackgroundColor(Color.rgb(0, 153, 255));
+            holder.tvUserWallet.setVisibility(View.GONE);
         }
 
         holder.backgrounduser.setOnClickListener(new View.OnClickListener() {

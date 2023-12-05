@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context=".AdminActivity"
-    android:background="#9A9A9A"
+    android:background="@drawable/background"
     android:orientation="vertical"
     >
 
@@ -19,16 +19,17 @@
 
         <LinearLayout
             android:id="@+id/linerUser"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/ivAdminUser"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginRight="30dp"
                 android:src="@drawable/user"></ImageView>
 
@@ -37,8 +38,8 @@
                 android:layout_height="wrap_content"
                 android:text="USER"
                 android:textColor="@color/black"
-                android:textSize="40sp"
-
+                android:textSize="30sp"
+                android:layout_gravity="center"
                 android:textStyle="bold">
 
             </TextView>
@@ -46,16 +47,17 @@
 
         <LinearLayout
             android:id="@+id/linerbill"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/ivAdminBill"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginRight="30dp"
                 android:src="@drawable/bill">
 
@@ -66,7 +68,8 @@
                 android:layout_height="wrap_content"
                 android:text="BILL"
                 android:textColor="@color/black"
-                android:textSize="40sp"
+                android:textSize="30sp"
+                android:layout_gravity="center"
                 android:textStyle="bold">
 
             </TextView>
@@ -74,16 +77,17 @@
 
         <LinearLayout
             android:id="@+id/linerGAME"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/ivAdminGame"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icongamee"></ImageView>
 
@@ -92,32 +96,94 @@
                 android:layout_height="wrap_content"
                 android:text="GAME"
                 android:textColor="@color/black"
-                android:textSize="40sp"
+                android:textSize="30sp"
+                android:layout_gravity="center"
                 android:textStyle="bold">
 
             </TextView>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btaddnvadmin"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:text="ADD EMPLOYE" />
-
-        <Button
-            android:id="@+id/btdoimkadmin"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:text="CHANGE PASSWORD" />
-
-        <Button
-            android:id="@+id/btlogout"
-            android:layout_gravity="center"
+        <LinearLayout
+            android:id="@+id/linerDoiMK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log out" />
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/key"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CHANGE PASSWORD"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:layout_gravity="center"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearAddNV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/addnv"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADD EMPLOYEE"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:layout_gravity="center"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linerLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icongamee"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LOG OUT"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:layout_gravity="center"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
 
     </LinearLayout>
 

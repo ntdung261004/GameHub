@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,7 @@ public class hoadonActivity extends AppCompatActivity {
     ImageView btback, btquery;
     EditText etdatefrom, etdateto;
     TextView tvdoanhso, tvdoanhthu;
+    Button bttk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class hoadonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hoadon);
         rcvbill = findViewById(R.id.rcvbill);
         hdList = new ArrayList<>();
+        bttk = findViewById(R.id.bttkbill);
         btback = findViewById(R.id.ivMenuBackbill);
         etdatefrom = findViewById(R.id.etdatefrombill);
         etdateto = findViewById(R.id.etdatetobill);
@@ -88,6 +91,13 @@ public class hoadonActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 billadapter.getBillListByDate(hdList, etdatefrom.getText().toString(), etdateto.getText().toString());
+            }
+        });
+
+        bttk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(hoadonActivity.this, thongkeActivity.class));
             }
         });
 

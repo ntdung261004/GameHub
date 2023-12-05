@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".RegisterActivity"
-    android:background="@drawable/custom_nen_login">
+    android:background="@drawable/background">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,10 +18,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="120dp"
-                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:padding="10dp"
                 android:text="Registration"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -32,7 +32,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:background="#CCCCCC"
+                android:background="#FFFFFF"
                 android:hint="user login"
                 android:paddingStart="20dp" />
 
@@ -42,7 +42,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:background="#CCCCCC"
+                android:background="#FFFFFF"
                 android:hint="user name"
                 android:paddingStart="20dp" />
 
@@ -52,7 +52,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:background="#CCCCCC"
+                android:background="#FFFFFF"
                 android:hint="Gmail"
                 android:paddingStart="20dp" />
 
@@ -62,7 +62,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:background="#CCCCCC"
+                android:background="#FFFFFF"
                 android:hint="Password"
                 android:paddingStart="20dp" />
 
@@ -72,7 +72,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:background="#CCCCCC"
+                android:background="#FFFFFF"
                 android:hint="Re-enter password"
                 android:paddingStart="20dp" />
 
@@ -84,13 +84,6 @@
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#B8B8B8"
                 android:text="Sign In" />
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_margin="20dp"
-                android:src="@drawable/hinh1" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -113,8 +106,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="Login"
-                    android:textColor="#9C9C9C"
+                    android:text=" Login"
+                    android:textColor="#03A9F4"
                     android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
