@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,10 @@ import com.example.pro1121_nhom3.LoginActivity;
 import com.example.pro1121_nhom3.MainActivity;
 import com.example.pro1121_nhom3.R;
 import com.example.pro1121_nhom3.model.nguoidung;
+import com.example.pro1121_nhom3.thongkeActivity;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -60,15 +65,15 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userViewHolder
         holder.tvUserName.setText(user.getTennd());
         holder.tvUserWallet.setText(user.getWallet() + "đ");
 
-        if(user.getRole() == 2)
-        {
-            holder.backgrounduser.setBackgroundColor(Color.rgb(255,100,100));
-            holder.tvUserWallet.setVisibility(View.GONE);
-        }
-        if(user.getRole() == 3)
+
+        if(user.getRole() > 1)
         {
             holder.backgrounduser.setBackgroundColor(Color.rgb(0, 153, 255));
             holder.tvUserWallet.setVisibility(View.GONE);
+        }else{
+            holder.backgrounduser.setBackgroundColor(Color.parseColor("#444242"));
+            holder.tvUserWallet.setVisibility(View.VISIBLE);
+            holder.tvUserWallet.setText(user.getWallet() + "đ");
         }
 
         holder.backgrounduser.setOnClickListener(new View.OnClickListener() {
@@ -111,13 +116,14 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userViewHolder
     public class userViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgUser;
         private TextView tvUserName, tvUserWallet;
-        private LinearLayout backgrounduser;
+        private LinearLayout backgrounduser, lnall;
         public userViewHolder(@NonNull View itemView) {
             super(itemView);
             imgUser = itemView.findViewById(R.id.user_img);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvUserWallet = itemView.findViewById(R.id.tvUserWallet);
             backgrounduser = itemView.findViewById(R.id.backgrounduser);
+            lnall = itemView.findViewById(R.id.itemnvall);
         }
     }
 }

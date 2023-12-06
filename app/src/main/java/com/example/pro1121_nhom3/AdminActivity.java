@@ -51,6 +51,9 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(AdminActivity.this, UserActivity.class);
+                if(intent.getBooleanExtra("nv", false)){
+                    i.putExtra("nva", false);
+                }
                 startActivity(i);
             }
         });
