@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ public class changespassword extends AppCompatActivity {
 
     private EditText etOldPassword;
     private Button changePasswordButton;
+    private ImageButton imgback;
     private FirebaseAuth mAuth;
     private TextInputLayout edtPasswordLayout,edtPasswordLayout1,edtPasswordLayout2;
     private TextInputEditText  etNewPassword,etConfirmPassword;
@@ -45,7 +47,13 @@ public class changespassword extends AppCompatActivity {
         etNewPassword = findViewById(R.id.etNewPassword);
         changePasswordButton = findViewById(R.id.changePasswordButton);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
-
+        imgback=findViewById(R.id.imgback);
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

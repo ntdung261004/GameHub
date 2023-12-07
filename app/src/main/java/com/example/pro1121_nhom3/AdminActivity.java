@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AdminActivity extends AppCompatActivity {
 
-    LinearLayout luser, lbill, lgame, lpass, lempl, llogout;
+    LinearLayout luser, lbill, lgame, lpass, lempl, llogout,linerDoiMK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,26 @@ public class AdminActivity extends AppCompatActivity {
         lpass = findViewById(R.id.linerDoiMK);
         lempl = findViewById(R.id.linearAddNV);
         llogout = findViewById(R.id.linerLogout);
+        linerDoiMK=findViewById(R.id.linerDoiMK);
+        linerDoiMK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminActivity.this, changespassword.class);
+                startActivity(intent);
+            }
+        });
+        llogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearSavedCredentials();
 
+                // Navigate back to LoginActivity
+                Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+               AdminActivity.this.finish();
+            }
+        });
         Intent intent = getIntent();
         if(intent.getBooleanExtra("nv", false)) lempl.setVisibility(View.GONE);
 
@@ -147,5 +167,11 @@ public class AdminActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
+    private void clearSavedCredentials() {
+        SharedPreferences sharedPreferences = AdminActivity.this.getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();  // Clear all saved preferences
+        editor.apply();
     }
 }

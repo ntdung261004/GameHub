@@ -105,4 +105,5 @@ public class game {
     public void setNgayph(String ngayph) {
         this.ngayph = ngayph;
     }
+
 }

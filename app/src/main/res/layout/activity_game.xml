@@ -47,20 +47,42 @@
             app:srcCompat="@mipmap/avt" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:background="#2b2b2b"
-        android:id="@+id/recyclerviewgame"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/game_bar"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <SearchView
+
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_search"
+            android:ems="10"
+            android:fontFamily="@font/inter_r"
+            android:hint="Search..."
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:textColor="#707070"
+            app:iconifiedByDefault="false" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewgame"
+            android:layout_width="match_parent"
+            android:layout_height="633dp"
+            android:layout_below="@id/game_bar"
+            android:background="#2b2b2b" />
+    </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatAdd"
-        android:backgroundTint="#888888"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"/>
+        android:backgroundTint="#888888"
+        android:src="@drawable/ic_add" />
 </RelativeLayout>
