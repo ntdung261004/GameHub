@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="#2B2B2B"
     android:orientation="vertical"
     tools:context=".FilterActivity">
 
@@ -32,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="TITLE"
+                android:textColor="#AEB0B2"
                 android:textSize="40dp"
                 android:textStyle="bold" />
         </LinearLayout>
