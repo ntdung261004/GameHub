@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#424141"
     tools:context=".fragment.profile_Fragment">
 
 
@@ -13,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#424141"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="0dp"
@@ -119,7 +120,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="450dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
 

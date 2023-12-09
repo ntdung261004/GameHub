@@ -68,22 +68,10 @@
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/editTextText3"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="20dp"
-        android:background="#444242"
-        android:ems="10"
-        android:fontFamily="@font/inter_r"
-        android:inputType="text"
-        android:paddingLeft="20dp"
-        android:hint="Seach by name or tag"
-        android:textColor="#707070" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvcart"
         android:layout_marginTop="50dp"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="300dp" />
 
@@ -121,6 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:backgroundTint="#444242"
+        android:layout_marginBottom="70dp"
         android:text="Buy" />
 
 

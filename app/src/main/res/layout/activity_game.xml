@@ -49,8 +49,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
         android:orientation="vertical">
 
         <SearchView
@@ -71,7 +71,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewgame"
             android:layout_width="match_parent"
-            android:layout_height="633dp"
+            android:layout_height="match_parent"
             android:layout_below="@id/game_bar"
             android:background="#2b2b2b" />
     </LinearLayout>

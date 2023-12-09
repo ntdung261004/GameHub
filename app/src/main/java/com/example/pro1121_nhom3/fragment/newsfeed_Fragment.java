@@ -85,10 +85,10 @@ public class newsfeed_Fragment extends Fragment {
         categoryAdapter.getAllCategory(categoryList);
 
         newsAdapter = new newsAdapter(getActivity(), newsList);
+        newsAdapter.GetNewsList(newsList);
         newsSlideShow.setAdapter(newsAdapter);
         circleIndicator.setViewPager(newsSlideShow);
         newsAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
-        newsAdapter.GetNewsList(newsList);
 
         searchAdapter = new searchAdapter(searchList, getActivity());
         rcvSearch.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));

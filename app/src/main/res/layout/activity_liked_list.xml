@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#3C3F41"
     tools:context=".likedListActivity">
 
     <LinearLayout
@@ -29,6 +30,7 @@
             android:layout_marginLeft="5dp"
             android:text="Your Liked Games"
             android:textSize="35dp"
+            android:textColor="#AEB0B2"
             android:textStyle="bold" />
     </LinearLayout>
 

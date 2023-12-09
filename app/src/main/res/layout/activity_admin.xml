@@ -17,175 +17,231 @@
         android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linerUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="left"
-            android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="10dp">
 
-            <ImageView
-                android:id="@+id/ivAdminUser"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/user"></ImageView>
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/linerUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="USER"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:layout_gravity="center"
-                android:textStyle="bold">
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="left"
+                android:orientation="horizontal">
 
-            </TextView>
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/ivAdminUser"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/user"></ImageView>
 
-        <LinearLayout
-            android:id="@+id/linerbill"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="left"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="USER"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold">
 
-            <ImageView
-                android:id="@+id/ivAdminBill"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/bill">
+                </TextView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            </ImageView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="10dp" >
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/linerbill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BILL"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:layout_gravity="center"
-                android:textStyle="bold">
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="left"
+                android:orientation="horizontal">
 
-            </TextView>
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/ivAdminBill"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/bill">
 
-        <LinearLayout
-            android:id="@+id/linerGAME"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="left"
-            android:orientation="horizontal">
+                </ImageView>
 
-            <ImageView
-                android:id="@+id/ivAdminGame"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/icongamee"></ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BILL"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold">
 
-            <TextView
+                </TextView>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="10dp" >
+
+            <LinearLayout
+                android:id="@+id/linerGAME"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GAME"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:layout_gravity="center"
-                android:textStyle="bold">
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="left"
+                android:orientation="horizontal">
 
-            </TextView>
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/ivAdminGame"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/icongamee"></ImageView>
 
-        <LinearLayout
-            android:id="@+id/linerDoiMK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="left"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GAME"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/key"></ImageView>
+                </TextView>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/adminchange"
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="10dp" >
+
+            <LinearLayout
+                android:id="@+id/linerDoiMK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CHANGE PASSWORD"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:layout_gravity="center"
-                android:textStyle="bold">
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="left"
+                android:orientation="horizontal">
 
-            </TextView>
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/key"></ImageView>
 
-        <LinearLayout
-            android:id="@+id/linearAddNV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="left"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/adminchange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CHANGE PASSWORD"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/addnv"></ImageView>
+                </TextView>
+            </LinearLayout>
 
-            <TextView
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvaddNV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="10dp" >
+
+            <LinearLayout
+                android:id="@+id/linearAddNV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ADD EMPLOYEE"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:layout_gravity="center"
-                android:textStyle="bold">
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="left"
+                android:orientation="horizontal">
 
-            </TextView>
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/addnv"></ImageView>
 
-        <LinearLayout
-            android:id="@+id/linerLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ADD EMPLOYEE"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold">
+
+                </TextView>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
             android:layout_marginTop="70dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="left"
-            android:orientation="horizontal">
+            android:layout_margin="10dp" >
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/baseline_logout_24"></ImageView>
-
-            <TextView
-                android:id="@+id/logout"
+            <LinearLayout
+                android:id="@+id/linerLogout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LOG OUT"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:layout_gravity="center"
-                android:textStyle="bold">
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="left"
+                android:orientation="horizontal">
 
-            </TextView>
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/baseline_logout_24"></ImageView>
+
+                <TextView
+                    android:id="@+id/logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LOG OUT"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold">
+
+                </TextView>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
 
 
     </LinearLayout>

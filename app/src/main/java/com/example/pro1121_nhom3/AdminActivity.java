@@ -2,6 +2,7 @@ package com.example.pro1121_nhom3;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -31,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 public class AdminActivity extends AppCompatActivity {
 
     LinearLayout luser, lbill, lgame, lpass, lempl, llogout,linerDoiMK;
+    CardView cvaddnv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class AdminActivity extends AppCompatActivity {
         lgame = findViewById(R.id.linerGAME);
         lpass = findViewById(R.id.linerDoiMK);
         lempl = findViewById(R.id.linearAddNV);
+        cvaddnv = findViewById(R.id.cvaddNV);
         llogout = findViewById(R.id.linerLogout);
         linerDoiMK=findViewById(R.id.linerDoiMK);
         linerDoiMK.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +67,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
         Intent intent = getIntent();
-        if(intent.getBooleanExtra("nv", false)) lempl.setVisibility(View.GONE);
+        if(intent.getBooleanExtra("nv", false)) cvaddnv.setVisibility(View.GONE);
 
 
         luser.setOnClickListener(new View.OnClickListener() {
